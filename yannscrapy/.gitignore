@@ -1,0 +1,9 @@
+.vscode
+vendor
+config.yaml
+*.log
+.idea/vcs.xml
+.idea/misc.xml
+.idea/bigdata-asuperagent.iml
+.idea/modules.xml
+.idea/workspace.xml

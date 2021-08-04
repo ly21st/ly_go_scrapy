@@ -1,0 +1,28 @@
+# 说明：默认注释掉的表示是**非必须的配置**，且给的值都是默认值
+
+mode: debug       # debug, release, test
+port: 8080
+
+logger:
+  level: info
+  filename: superagent.log
+  max_size: 100  # MB
+  max_age: 0
+  max_backups: 30
+
+search_path:
+  - Type: default
+    path: "E:/mygit/bigdata-asuperagent"
+    excludes: ["*.gz", "gc.log"]
+    sort: desc  # asc(升序) 或 desc（降序）
+  - [type]: es
+    path: "E:/mygit/bigdata-asuperagent"
+    excludes: ["*.gz", "gc.log"]
+    sort: desc  # asc(升序) 或 desc（降序）
+  - type: flink
+    path: "E:/mygit/bigdata-asuperagent"
+    excludes: ["*.gz", "gc.log"]
+    sort: desc  # asc(升序) 或 desc（降序）
+
+
+

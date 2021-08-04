@@ -1,0 +1,198 @@
+basePath: /api/v1
+info:
+  contact: {}
+  description: This is bigdata SuperAgent.
+  title: SuperAgent API Docs
+  version: "1.0"
+paths:
+  /hello:
+    get:
+      consumes:
+      - application/json
+      description: 返回Hello World
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 打招呼接口
+      tags:
+      - Hello
+  /logcarrier:
+    get:
+      consumes:
+      - application/json
+      description: 返回目录下的文件
+      parameters:
+      - description: 日志类型
+        in: query
+        name: type
+        type: string
+      - description: 目录路径
+        in: query
+        name: path
+        type: string
+      - description: 排除文件，支持通配符
+        in: query
+        name: excludes
+        type: string
+      - description: asc(升序)或desc(降序)
+        in: query
+        name: sort
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 查询指定目录下的文件
+      tags:
+      - Logcarrier
+  /logcarrier/detail:
+    get:
+      consumes:
+      - application/json
+      description: 查询文件内容
+      parameters:
+      - description: 文件路径
+        in: query
+        name: path
+        required: true
+        type: string
+      - description: 查询最大行数
+        in: query
+        name: maxline
+        required: true
+        type: string
+      - description: 请求行号
+        in: query
+        name: reqline
+        type: integer
+      - description: up(上翻)或down(下翻)
+        in: query
+        name: direction
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 查询文件内容
+      tags:
+      - Logcarrier
+  /logcarrier/download:
+    get:
+      consumes:
+      - application/json
+      description: 下载压缩后的文件
+      parameters:
+      - description: 文件路径
+        in: query
+        name: path
+        required: true
+        type: string
+      - description: 是否压缩，值为true或false
+        in: query
+        name: compress
+        type: boolean
+      - description: 压缩类型,默认为zip
+        in: query
+        name: type
+        type: string
+      produces:
+      - application/octet-stream
+      responses:
+        "200":
+          description: ""
+      summary: 压缩文件下载
+      tags:
+      - Logcarrier
+  /logcarrier/search/dir:
+    get:
+      consumes:
+      - application/json
+      description: 搜索某个或多个文件的内容
+      parameters:
+      - description: 文件完整路径,多个文件用英文逗号分开
+        in: query
+        name: path
+        required: true
+        type: string
+      - description: 查询字符串
+        in: query
+        name: word
+        required: true
+        type: string
+      - description: 最大匹配数
+        in: query
+        name: max-match-num
+        type: integer
+      - description: asc或desc，默认desc
+        in: query
+        name: order
+        type: string
+      - description: 第一个开始搜索的文件
+        in: query
+        name: first-file
+        type: string
+      - description: 第一个搜索文件开始查询的行号
+        in: query
+        name: reqline
+        type: integer
+      - description: 忽略大小写，值为true或false，默认为true
+        in: query
+        name: ignore-case
+        type: boolean
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 搜索摸个目录下所有文件的内容
+      tags:
+      - Logcarrier
+  /logcarrier/search/files:
+    get:
+      consumes:
+      - application/json
+      description: 搜索某个或多个文件的内容
+      parameters:
+      - description: 文件完整路径,多个文件用英文逗号分开
+        in: query
+        name: path
+        required: true
+        type: string
+      - description: 查询字符串
+        in: query
+        name: word
+        required: true
+        type: string
+      - description: 最大匹配数
+        in: query
+        name: max-match-num
+        type: integer
+      - description: asc或desc，默认desc
+        in: query
+        name: order
+        type: string
+      - description: 第一个开始搜索的文件
+        in: query
+        name: first-file
+        type: string
+      - description: 第一个搜索文件开始查询的行号
+        in: query
+        name: reqline
+        type: integer
+      - description: 忽略大小写，值为true或false，默认为true
+        in: query
+        name: ignore-case
+        type: boolean
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 搜索某个或多个文件的内容
+      tags:
+      - Logcarrier
+swagger: "2.0"
