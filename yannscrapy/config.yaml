@@ -11,7 +11,9 @@ logger:
   max_size: 100  # MB
   max_age: 0
   max_backups: 30
+  FileAndLine: false
 
 
 swagger: true
+
 

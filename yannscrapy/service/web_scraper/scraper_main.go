@@ -1,22 +1,23 @@
-package main
+package web_scraper
 
 import (
 	"bytes"
-	"log"
 	"net/url"
 	"time"
 
 	"github.com/PuerkitoBio/goquery"
 	"github.com/gocolly/colly"
 	"github.com/gocolly/colly/extensions"
+
+	"yannscrapy/logger"
 )
 
-func main() {
+func Scrapy_main() {
 	urlstr := "https://news.baidu.com"
 	// urlstr := "https://www.anadf.com/"
 	u, err := url.Parse(urlstr)
 	if err != nil {
-		log.Fatal(err)
+		logger.Fatal(err)
 	}
 	c := colly.NewCollector()
 
@@ -37,17 +38,17 @@ func main() {
 		r.Headers.Set("Accept-Encoding", "gzip, deflate")
 		r.Headers.Set("Accept-Language", "zh-CN, zh;q=0.9")
 
-		log.Println("visiting", r.URL)
+		logger.Infof("visiting %v", r.URL)
 	})
 
 	c.OnHTML("title", func(e *colly.HTMLElement) {
 		// log.Println("title:", e.Text)
 		doc := e.DOM
-		log.Printf("title:%v\n", doc.Text())
+		logger.Infof("title:%v", doc.Text())
 	})
 
 	c.OnResponse(func(resp *colly.Response) {
-		log.Println("response received", resp.StatusCode)
+		logger.Infof("response received %v", resp.StatusCode)
 
 		// goquery直接读取resp.Body的内容
 		htmlDoc, err := goquery.NewDocumentFromReader(bytes.NewReader(resp.Body))
@@ -56,14 +57,14 @@ func main() {
 		// htmlDoc, err := goquery.NewDocument(resp.Request.URL.String())
 
 		if err != nil {
-			log.Fatal(err)
+			logger.Fatal(err)
 		}
 
 		// 找到抓取项 <div class="hotnews" alog-group="focustop-hotnews"> 下所有的a解析
 		htmlDoc.Find(".hotnews a").Each(func(i int, s *goquery.Selection) {
 			band, _ := s.Attr("href")
 			title := s.Text()
-			log.Printf("热点新闻 %d: %s - %s\n", i, title, band)
+			logger.Infof("热点新闻 %d: %s - %s", i, title, band)
 			// c.Visit(band)
 		})
 
@@ -71,7 +72,7 @@ func main() {
 
 	c.OnError(func(resp *colly.Response, errHttp error) {
 		err = errHttp
-		log.Printf("err=%v\n", err)
+		logger.Infof("err=%v", err)
 	})
 
 	err = c.Visit(urlstr)

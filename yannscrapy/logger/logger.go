@@ -74,9 +74,19 @@ func Init(cfg *config.LogConfig) (err error) {
 		return
 	}
 
-	core := zapcore.NewCore(encoder, writeSyncer, levelEnabler)
-	logger := zap.New(core, zap.AddCaller())
-	// logger := zap.New(core, zap.AddCallerSkip(1))
+	fileCore := zapcore.NewCore(encoder, writeSyncer, levelEnabler)
+	stdoutCore := zapcore.NewCore(encoder, os.Stdout, levelEnabler)
+	core := zapcore.NewTee(fileCore, stdoutCore)
+	// logger := zap.New(core, zap.AddCaller())
+	var logger *zap.Logger
+	if cfg.FileAndLine {
+		logger = zap.New(core, zap.AddCaller())
+	} else {
+		logger = zap.New(core, zap.AddCallerSkip(1))
+	}
+
+	// core := zapcore.NewCore(encoder, writeSyncer, levelEnabler)
+	// logger := zap.New(core, zap.AddCaller())
 
 	sugarLogger = logger.Sugar()
 
@@ -134,7 +144,7 @@ func GinLogger() gin.HandlerFunc {
 		// start := time.Now()
 		path := c.Request.URL.Path
 		query := c.Request.URL.RawQuery
-		sugarLogger.Info(fmt.Sprintf("[Begin]|%s|%s|%s|%s",
+		sugarLogger.Info(fmt.Sprintf("[Begin] | %s | %s | %s | %s",
 			c.ClientIP(),
 			c.Request.Method,
 			path,
@@ -156,7 +166,7 @@ func GinLogger() gin.HandlerFunc {
 
 		// errMsg := c.Errors.ByType(gin.ErrorTypePrivate).String()
 		// if errMsg == "" {
-		// 	sugarLogger.Info(fmt.Sprintf("[End]|%d|%v|%s|%s|%s|%s",
+		// 	sugarLogger.Info(fmt.Sprintf("[End] | %d | %v | %s | %s | %s | %s",
 		// 		c.Writer.Status(),
 		// 		cost,
 		// 		c.ClientIP(),
@@ -164,7 +174,7 @@ func GinLogger() gin.HandlerFunc {
 		// 		path,
 		// 		query))
 		// } else {
-		// 	sugarLogger.Info(fmt.Sprintf("[End]|%d|%v|%s|%s|%s|%s|%s",
+		// 	sugarLogger.Info(fmt.Sprintf("[End] | %d | %v | %s | %s | %s | %s | %s",
 		// 		c.Writer.Status(),
 		// 		cost,
 		// 		c.ClientIP(),

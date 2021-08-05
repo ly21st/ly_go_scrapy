@@ -1,6 +1,5 @@
 .vscode
 vendor
-config.yaml
 *.log
 .idea/vcs.xml
 .idea/misc.xml

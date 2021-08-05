@@ -18,11 +18,12 @@ type Config struct {
 }
 
 type LogConfig struct {
-	Level      string `yaml:"level"`
-	Filename   string `yaml:"filename"`
-	MaxSize    int    `yaml:"max_size"`
-	MaxAge     int    `yaml:"max_age"`
-	MaxBackups int    `yaml:"max_backups"`
+	Level       string `yaml:"level"`
+	Filename    string `yaml:"filename"`
+	MaxSize     int    `yaml:"max_size"`
+	MaxAge      int    `yaml:"max_age"`
+	MaxBackups  int    `yaml:"max_backups"`
+	FileAndLine bool   `yaml:"fileAndLine"`
 }
 
 var Conf = new(Config)
