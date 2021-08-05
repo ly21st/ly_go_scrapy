@@ -1,7 +1,48 @@
 # 说明：默认注释掉的表示是**非必须的配置**，且给的值都是默认值
+address: localhost
+mode: debug       # debug, release, test
+port: 8972
+downloadMaxSize: 1073741824 # 文件下载最大大小
 
-mode: release       # debug, release, test
-port: 8080
+register:
+  eureka:  # 注册到eureka
+    enable: false  # 是否注册，默认为true
+    server_addr: http://10.8.4.12:8761/eureka  # eureka server地址，可以多个，用英文逗号分隔
+    appId: logkeeper-asuperagent
+    service:
+    - type: filebeat
+      addr:
+      port: 5066
+      config: H:/go_workspace/work/filebeat-logkeeper.yml
+      baseDir: H:/go_workspace/work
+      appId:
+      version:
+  zookeeper:  # 注册到zookeeper
+    enable: true  # 是否注册，默认为true
+<<<<<<< HEAD
+    server_addr: 127.0.0.1:2181  # zookeeper地址，可以多个，用英文逗号分隔
+    appId: logkeeper-asuperagent
+    service:
+      - type: filebeat
+        addr:
+        port: 5066
+        config: H:/go_workspace/work/filebeat-logkeeper.yml
+        baseDir: H:/go_workspace/work
+        appId:
+        version:
+=======
+    server_addr: 10.9.1.94:2181  # zookeeper地址，可以多个，用英文逗号分隔
+    appId: logkeeper-asuperagent
+    service:
+    - type: filebeat
+      addr:
+      port: 5066
+      config: H:/go_workspace/work/filebeat-logkeeper.yml
+      baseDir: H:/go_workspace/work
+      appId:
+      version:
+>>>>>>> dev
+
 
 logger:
   level: info
@@ -13,13 +54,38 @@ logger:
 search_path:
 - type: default
   path: "E:/mygit/bigdata-asuperagent"
+  excludes: ["*.gz", "gc.log", "*.tar", "*.zip"]
+  # asc(升序) 或 desc（降序）
+  order: desc
+- type: logkeeper
+  path: "E:/mygit/bigdata-asuperagent"
   excludes: ["*.gz", "gc.log"]
-  sort: desc  # asc(升序) 或 desc（降序）
+  order: desc
 - type: es
   path: "E:/mygit/bigdata-asuperagent"
   excludes: ["*.gz", "gc.log"]
-  sort: desc  # asc(升序) 或 desc（降序）
+  order: desc
+- type: filebeat
+  path: "E:/mygit/bigdata-asuperagent"
+  excludes: ["*.gz", "gc.log"]
+  order: desc
+- type: zookeeper
+  path: "E:/mygit/bigdata-asuperagent"
+  excludes: ["*.gz", "gc.log"]
+  order: desc
+- type: kafka
+  path: "E:/mygit/bigdata-asuperagent"
+  excludes: ["*.gz", "gc.log"]
+  order: desc
 - type: flink
   path: "E:/mygit/bigdata-asuperagent"
   excludes: ["*.gz", "gc.log"]
-  sort: desc  # asc(升序) 或 desc（降序）
+  order: desc
+- type: skywalking
+  path: "E:/mygit/bigdata-asuperagent"
+  excludes: ["*.gz", "gc.log"]
+  order: desc
+
+
+swagger: true
+

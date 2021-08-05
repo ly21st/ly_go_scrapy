@@ -2,6 +2,7 @@ package logger
 
 import (
 	"fmt"
+	"io"
 	"net"
 	"net/http"
 	"net/http/httputil"
@@ -10,7 +11,6 @@ import (
 	"runtime"
 	"runtime/debug"
 	"strings"
-	"time"
 	"yannscrapy/config"
 
 	"github.com/gin-gonic/gin"
@@ -21,6 +21,30 @@ import (
 
 var sugarLogger *zap.SugaredLogger
 
+type VarArgFunc func(args ...interface{})
+type TemplateVarArgFunc func(template string, args ...interface{})
+
+var Info VarArgFunc
+var Infof TemplateVarArgFunc
+
+var Debug VarArgFunc
+var Debugf TemplateVarArgFunc
+
+var Warn VarArgFunc
+var Warnf TemplateVarArgFunc
+
+var Error VarArgFunc
+var Errorf TemplateVarArgFunc
+
+var DPanic VarArgFunc
+var DPanicf TemplateVarArgFunc
+
+var Panic VarArgFunc
+var Panicf TemplateVarArgFunc
+
+var Fatal VarArgFunc
+var Fatalf TemplateVarArgFunc
+
 // 初始化
 func Init(cfg *config.LogConfig) (err error) {
 	if cfg == nil {
@@ -28,7 +52,7 @@ func Init(cfg *config.LogConfig) (err error) {
 	}
 
 	if cfg.Filename == "" {
-		cfg.Filename = "superagent.log"
+		cfg.Filename = "scrapy.log"
 	}
 
 	if cfg.Level == "" {
@@ -41,6 +65,8 @@ func Init(cfg *config.LogConfig) (err error) {
 
 	// TODO: 配置logger
 	writeSyncer := getLogWriter(cfg.Filename, cfg.MaxSize, cfg.MaxBackups, cfg.MaxAge)
+	gin.DefaultWriter = io.MultiWriter(os.Stdout, writeSyncer)
+
 	encoder := getEncoder()
 	var levelEnabler = new(zapcore.Level)
 	err = levelEnabler.UnmarshalText([]byte(cfg.Level))
@@ -50,8 +76,30 @@ func Init(cfg *config.LogConfig) (err error) {
 
 	core := zapcore.NewCore(encoder, writeSyncer, levelEnabler)
 	logger := zap.New(core, zap.AddCaller())
+	// logger := zap.New(core, zap.AddCallerSkip(1))
 
 	sugarLogger = logger.Sugar()
+
+	Info = sugarLogger.Info
+	Infof = sugarLogger.Infof
+
+	Debug = sugarLogger.Debug
+	Debugf = sugarLogger.Debugf
+
+	Warn = sugarLogger.Warn
+	Warnf = sugarLogger.Warnf
+
+	Error = sugarLogger.Error
+	Errorf = sugarLogger.Errorf
+
+	DPanic = sugarLogger.DPanic
+	DPanicf = sugarLogger.DPanicf
+
+	Panic = sugarLogger.Panic
+	Panicf = sugarLogger.Panicf
+
+	Fatal = sugarLogger.Fatal
+	Fatalf = sugarLogger.Fatalf
 
 	return nil
 }
@@ -64,7 +112,8 @@ func getEncoder() zapcore.Encoder {
 	encoderConfig.EncodeLevel = zapcore.CapitalLevelEncoder
 	encoderConfig.EncodeDuration = zapcore.SecondsDurationEncoder
 	encoderConfig.EncodeCaller = zapcore.ShortCallerEncoder
-	return zapcore.NewJSONEncoder(encoderConfig)
+	// return zapcore.NewJSONEncoder(encoderConfig)
+	return zapcore.NewConsoleEncoder(encoderConfig)
 }
 
 // 日志将写到哪里去
@@ -82,22 +131,48 @@ func getLogWriter(filename string, maxSize, maxBackups, maxAge int) zapcore.Writ
 // GinLogger 接收gin框架默认的日志
 func GinLogger() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		start := time.Now()
+		// start := time.Now()
 		path := c.Request.URL.Path
 		query := c.Request.URL.RawQuery
+		sugarLogger.Info(fmt.Sprintf("[Begin]|%s|%s|%s|%s",
+			c.ClientIP(),
+			c.Request.Method,
+			path,
+			query))
+
 		c.Next()
 
-		cost := time.Since(start)
-		sugarLogger.Info(path,
-			zap.Int("status", c.Writer.Status()),
-			zap.String("method", c.Request.Method),
-			zap.String("path", path),
-			zap.String("query", query),
-			zap.String("ip", c.ClientIP()),
-			zap.String("user-agent", c.Request.UserAgent()),
-			zap.String("errors", c.Errors.ByType(gin.ErrorTypePrivate).String()),
-			zap.Duration("cost", cost),
-		)
+		// cost := time.Since(start)
+		// sugarLogger.Info(path,
+		// 	zap.Int("status", c.Writer.Status()),
+		// 	zap.String("method", c.Request.Method),
+		// 	zap.String("path", path),
+		// 	zap.String("query", query),
+		// 	zap.String("ip", c.ClientIP()),
+		// 	zap.String("user-agent", c.Request.UserAgent()),
+		// 	zap.String("errors", c.Errors.ByType(gin.ErrorTypePrivate).String()),
+		// 	zap.Duration("cost", cost),
+		// )
+
+		// errMsg := c.Errors.ByType(gin.ErrorTypePrivate).String()
+		// if errMsg == "" {
+		// 	sugarLogger.Info(fmt.Sprintf("[End]|%d|%v|%s|%s|%s|%s",
+		// 		c.Writer.Status(),
+		// 		cost,
+		// 		c.ClientIP(),
+		// 		c.Request.Method,
+		// 		path,
+		// 		query))
+		// } else {
+		// 	sugarLogger.Info(fmt.Sprintf("[End]|%d|%v|%s|%s|%s|%s|%s",
+		// 		c.Writer.Status(),
+		// 		cost,
+		// 		c.ClientIP(),
+		// 		c.Request.Method,
+		// 		path,
+		// 		query,
+		// 		c.Errors.ByType(gin.ErrorTypePrivate).String()))
+		// }
 	}
 }
 
@@ -169,60 +244,60 @@ func srcCodeMsg(skip int) string {
 	return msg
 }
 
-func Debug(args ...interface{}) {
-	sugarLogger.Debug(args...)
-}
+// func Debug(args ...interface{}) {
+// 	sugarLogger.Debug(args...)
+// }
 
-func Debugf(template string, args ...interface{}) {
-	sugarLogger.Debugf(template, args...)
-}
+// func Debugf(template string, args ...interface{}) {
+// 	sugarLogger.Debugf(template, args...)
+// }
 
-func Info(args ...interface{}) {
-	sugarLogger.Info(args...)
-}
+// func Info(args ...interface{}) {
+// 	sugarLogger.Info(args...)
+// }
 
-func Infof(template string, args ...interface{}) {
-	sugarLogger.Infof(template, args...)
-}
+// func Infof(template string, args ...interface{}) {
+// 	sugarLogger.Infof(template, args...)
+// }
 
-func Warn(args ...interface{}) {
-	sugarLogger.Warn(args...)
-}
+// func Warn(args ...interface{}) {
+// 	sugarLogger.Warn(args...)
+// }
 
-func Warnf(template string, args ...interface{}) {
-	sugarLogger.Warnf(template, args...)
-}
+// func Warnf(template string, args ...interface{}) {
+// 	sugarLogger.Warnf(template, args...)
+// }
 
-func Error(args ...interface{}) {
-	sugarLogger.Error(args...)
-}
+// func Error(args ...interface{}) {
+// 	sugarLogger.Error(args...)
+// }
 
-func Errorf(template string, args ...interface{}) {
-	msg := srcCodeMsg(2)
-	sugarLogger.Errorf(msg+template, args...)
-}
+// func Errorf(template string, args ...interface{}) {
+// 	msg := srcCodeMsg(2)
+// 	sugarLogger.Errorf(msg+template, args...)
+// }
 
-func DPanic(args ...interface{}) {
-	sugarLogger.DPanic(args...)
-}
+// func DPanic(args ...interface{}) {
+// 	sugarLogger.DPanic(args...)
+// }
 
-func DPanicf(template string, args ...interface{}) {
-	sugarLogger.DPanicf(template, args...)
-}
+// func DPanicf(template string, args ...interface{}) {
+// 	sugarLogger.DPanicf(template, args...)
+// }
 
-func Panic(args ...interface{}) {
-	sugarLogger.Panic(args...)
-}
+// func Panic(args ...interface{}) {
+// 	sugarLogger.Panic(args...)
+// }
 
-func Panicf(template string, args ...interface{}) {
-	sugarLogger.Panicf(template, args...)
-}
+// func Panicf(template string, args ...interface{}) {
+// 	sugarLogger.Panicf(template, args...)
+// }
 
-func Fatal(args ...interface{}) {
-	sugarLogger.Fatal(args...)
-}
+// func Fatal(args ...interface{}) {
+// 	sugarLogger.Fatal(args...)
+// }
 
-func Fatalf(template string, args ...interface{}) {
-	msg := srcCodeMsg(2)
-	sugarLogger.Fatalf(msg+template, args...)
-}
+// func Fatalf(template string, args ...interface{}) {
+// 	msg := srcCodeMsg(2)
+// 	sugarLogger.Fatalf(msg+template, args...)
+// }

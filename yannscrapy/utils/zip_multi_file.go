@@ -1,4 +1,4 @@
-package service
+package utils
 
 import (
 	"archive/zip"
@@ -7,10 +7,8 @@ import (
 	"path/filepath"
 )
 
-// 压缩成zip文件
-// srcFile could be a single file or a directory
-func Zip(srcFile string, destZip string) error {
-	zipFile, err := os.Create(destZip)
+func ZipMultiFile(srcFileList []string, dstZip string) error {
+	zipFile, err := os.Create(dstZip)
 	if err != nil {
 		return err
 	}
@@ -19,9 +17,26 @@ func Zip(srcFile string, destZip string) error {
 	archive := zip.NewWriter(zipFile)
 	defer archive.Close()
 
+	for _, srcFile := range srcFileList {
+		if srcFile == " " || srcFile == "" {
+			continue
+		}
+		ZipHelper(srcFile, archive)
+	}
+	return nil
+}
+
+// srcFile could be a single file or a directory
+func ZipHelper(srcFile string, archive *zip.Writer) error {
+	var err error
+
 	filepath.Walk(srcFile, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
 			return err
+		}
+
+		if info.IsDir() {
+			return nil
 		}
 
 		header, err := zip.FileInfoHeader(info)
@@ -32,25 +47,20 @@ func Zip(srcFile string, destZip string) error {
 		//header.Name = strings.TrimPrefix(path, filepath.Dir(srcFile)+"/")
 		header.Name = filepath.Base(path)
 		// header.Name = path
-		if info.IsDir() {
-			header.Name += "/"
-		} else {
-			header.Method = zip.Deflate
-		}
+		header.Method = zip.Deflate
 
 		writer, err := archive.CreateHeader(header)
 		if err != nil {
 			return err
 		}
 
-		if ! info.IsDir() {
-			file, err := os.Open(path)
-			if err != nil {
-				return err
-			}
-			defer file.Close()
-			_, err = io.Copy(writer, file)
+		file, err := os.Open(path)
+		if err != nil {
+			return err
 		}
+		defer file.Close()
+		_, err = io.Copy(writer, file)
+
 		return err
 	})
 

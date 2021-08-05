@@ -1,18 +1,20 @@
 package config
 
 import (
-	"gopkg.in/yaml.v2"
-	"log"
 	"os"
+
+	"gopkg.in/yaml.v2"
 )
 
 // TODO: 待完善
 
 type Config struct {
-	Mode       string `yaml:"mode"`
-	Port       int    `yaml:"port"`
-	*LogConfig `yaml:"logger"`
-	SearchPath []SearchPathServiceConfig  `yaml:"search_path"`
+	Address         string `yaml:"address"`
+	Mode            string `yaml:"mode"`
+	Port            int    `yaml:"port"`
+	DownloadMaxSize int    `yaml:"downloadMaxSize"`
+	*LogConfig      `yaml:"logger"`
+	Swagger         bool `yaml:"swagger"`
 }
 
 type LogConfig struct {
@@ -23,15 +25,7 @@ type LogConfig struct {
 	MaxBackups int    `yaml:"max_backups"`
 }
 
-type SearchPathServiceConfig struct {
-	Type string `yaml:"type"`
-	Path string `yaml:"path"`
-	Excludes []string `yaml:"excludes"`
-	Sort string `yaml:"sort"`
-}
-
 var Conf = new(Config)
-var SearchPathConfigMap = make(map[string]SearchPathServiceConfig)
 
 // 初始化配置
 func Init(path string) error {
@@ -42,13 +36,16 @@ func Init(path string) error {
 		yaml.NewDecoder(f).Decode(Conf)
 	}
 
-	for _, serviceConfig := range Conf.SearchPath {
-		SearchPathConfigMap[serviceConfig.Type] = serviceConfig
-	}
-
-	if _, ok := SearchPathConfigMap["default"]; !ok {
-		log.Fatal("config [search_path] error")
-	}
-
 	return nil
+}
+
+/*
+	获取配置文件
+*/
+func GetConfigFile() string {
+	var configFile = "./config.yaml"
+	if len(os.Args) > 1 {
+		configFile = os.Args[1]
+	}
+	return configFile
 }
