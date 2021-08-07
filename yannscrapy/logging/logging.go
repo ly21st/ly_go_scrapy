@@ -1,18 +1,13 @@
-package logger
+package logging
 
 import (
 	"fmt"
 	"io"
 	"log"
-	"net"
-	"net/http"
-	"net/http/httputil"
 	"os"
 	"path/filepath"
 	"runtime"
-	"runtime/debug"
 	"strings"
-	"yannscrapy/config"
 
 	"github.com/gin-gonic/gin"
 	"github.com/natefinch/lumberjack"
@@ -46,48 +41,16 @@ var Panicf TemplateVarArgFunc
 var Fatal VarArgFunc
 var Fatalf TemplateVarArgFunc
 
-var FileAndLine = true
+var FileAndLine = false
 var FileName = "app.log"
 var MaxSize = 100
 var MaxBackups = 30
 var MaxAge = 0
 var Level = "info"
 
-// 初始化
-func Init(cfg *config.LogConfig) (err error) {
-	if cfg == nil {
-		cfg = new(config.LogConfig)
-	}
-
-	if cfg.Filename == "" {
-		cfg.Filename = "scrapy.log"
-	}
-
-	if cfg.Level == "" {
-		cfg.Level = "Info"
-	}
-
-	if cfg.MaxBackups == 0 {
-		cfg.MaxBackups = 30
-	}
-
-	FileAndLine = cfg.FileAndLine
-	FileName = cfg.Filename
-	MaxSize = cfg.MaxSize
-	MaxBackups = cfg.MaxBackups
-	MaxAge = cfg.MaxAge
-	Level = cfg.Level
-
-	commonInit()
-	return nil
-}
 
 // 初始化
-func init() {
-	commonInit()
-}
-
-func commonInit()  {
+func init()  {
 	writeSyncer := getLogWriter(FileName, MaxSize, MaxBackups, MaxAge)
 	gin.DefaultWriter = io.MultiWriter(os.Stdout, writeSyncer)
 
@@ -161,100 +124,6 @@ func getLogWriter(filename string, maxSize, maxBackups, maxAge int) zapcore.Writ
 	return zapcore.AddSync(lumberJackLogger)
 }
 
-// GinLogger 接收gin框架默认的日志
-func GinLogger() gin.HandlerFunc {
-	return func(c *gin.Context) {
-		// start := time.Now()
-		path := c.Request.URL.Path
-		query := c.Request.URL.RawQuery
-		sugarLogger.Info(fmt.Sprintf("[Begin] | %s | %s | %s | %s",
-			c.ClientIP(),
-			c.Request.Method,
-			path,
-			query))
-
-		c.Next()
-
-		// cost := time.Since(start)
-		// sugarLogger.Info(path,
-		// 	zap.Int("status", c.Writer.Status()),
-		// 	zap.String("method", c.Request.Method),
-		// 	zap.String("path", path),
-		// 	zap.String("query", query),
-		// 	zap.String("ip", c.ClientIP()),
-		// 	zap.String("user-agent", c.Request.UserAgent()),
-		// 	zap.String("errors", c.Errors.ByType(gin.ErrorTypePrivate).String()),
-		// 	zap.Duration("cost", cost),
-		// )
-
-		// errMsg := c.Errors.ByType(gin.ErrorTypePrivate).String()
-		// if errMsg == "" {
-		// 	sugarLogger.Info(fmt.Sprintf("[End] | %d | %v | %s | %s | %s | %s",
-		// 		c.Writer.Status(),
-		// 		cost,
-		// 		c.ClientIP(),
-		// 		c.Request.Method,
-		// 		path,
-		// 		query))
-		// } else {
-		// 	sugarLogger.Info(fmt.Sprintf("[End] | %d | %v | %s | %s | %s | %s | %s",
-		// 		c.Writer.Status(),
-		// 		cost,
-		// 		c.ClientIP(),
-		// 		c.Request.Method,
-		// 		path,
-		// 		query,
-		// 		c.Errors.ByType(gin.ErrorTypePrivate).String()))
-		// }
-	}
-}
-
-// GinRecovery recover掉项目可能出现的panic，并使用zap记录相关日志
-func GinRecovery(stack bool) gin.HandlerFunc {
-	return func(c *gin.Context) {
-		defer func() {
-			if err := recover(); err != nil {
-				// Check for a broken connection, as it is not really a
-				// condition that warrants a panic stack trace.
-				var brokenPipe bool
-				if ne, ok := err.(*net.OpError); ok {
-					if se, ok := ne.Err.(*os.SyscallError); ok {
-						if strings.Contains(strings.ToLower(se.Error()), "broken pipe") || strings.Contains(strings.ToLower(se.Error()), "connection reset by peer") {
-							brokenPipe = true
-						}
-					}
-				}
-
-				httpRequest, _ := httputil.DumpRequest(c.Request, false)
-				if brokenPipe {
-					sugarLogger.Error(c.Request.URL.Path,
-						zap.Any("error", err),
-						zap.String("request", string(httpRequest)),
-					)
-					// If the connection is dead, we can't write a status to it.
-					c.Error(err.(error)) // nolint: errcheck
-					c.Abort()
-					return
-				}
-
-				if stack {
-					sugarLogger.Error("[Recovery from panic]",
-						zap.Any("error", err),
-						zap.String("request", string(httpRequest)),
-						zap.String("stack", string(debug.Stack())),
-					)
-				} else {
-					sugarLogger.Error("[Recovery from panic]",
-						zap.Any("error", err),
-						zap.String("request", string(httpRequest)),
-					)
-				}
-				c.AbortWithStatus(http.StatusInternalServerError)
-			}
-		}()
-		c.Next()
-	}
-}
 
 func srcCodeMsg(skip int) string {
 	if skip == 0 {

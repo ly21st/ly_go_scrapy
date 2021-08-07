@@ -9,33 +9,35 @@ import (
 )
 
 /**
-读取yml文件配置
+读取object对象
 */
-func ReadYml(root interface{}, key string) (interface{}, error) {
+func ReadObject(root interface{}, key string) (interface{}, error) {
 	switch root.(type) {
 	case map[interface{}]interface{}:
-		keyArr := strings.Split(key, ".")
-		if len(keyArr) == 0 {
-			return root, nil
-		}
-		if (len(keyArr) == 1) && keyArr[0] == "" {
-			return root, nil
-		}
-		m, ok := root.(map[interface{}]interface{})
-		if !ok {
-			msg := fmt.Sprintf("type:%T error", root)
-			logp.Infof(msg)
-			return nil, errors.New(msg)
-		}
-		value, ok := m[keyArr[0]]
-		if !ok {
-			return nil, nil
-		}
-		if len(keyArr) == 1 {
-			return value, nil
-		} else {
-			key = strings.Join(keyArr[1:], ".")
-			return ReadYml(value, key)
+		{
+			keyArr := strings.Split(key, ".")
+			if len(keyArr) == 0 {
+				return root, nil
+			}
+			if (len(keyArr) == 1) && keyArr[0] == "" {
+				return root, nil
+			}
+			m, ok := root.(map[interface{}]interface{})
+			if !ok {
+				msg := fmt.Sprintf("type:%T error", root)
+				logp.Infof(msg)
+				return nil, errors.New(msg)
+			}
+			value, ok := m[keyArr[0]]
+			if !ok {
+				return nil, nil
+			}
+			if len(keyArr) == 1 {
+				return value, nil
+			} else {
+				key = strings.Join(keyArr[1:], ".")
+				return ReadObject(value, key)
+			}
 		}
 	default:
 		msg := fmt.Sprintf("unknown type:%T", root)
@@ -45,8 +47,45 @@ func ReadYml(root interface{}, key string) (interface{}, error) {
 
 }
 
+func ReadJsonObject(root interface{}, key string) (interface{}, error) {
+	switch root.(type) {
+	case map[string]interface{}:
+		{
+			keyArr := strings.Split(key, ".")
+			if len(keyArr) == 0 {
+				return root, nil
+			}
+			if (len(keyArr) == 1) && keyArr[0] == "" {
+				return root, nil
+			}
+			m, ok := root.(map[string]interface{})
+			if !ok {
+				msg := fmt.Sprintf("type:%T error", root)
+				logp.Infof(msg)
+				return nil, errors.New(msg)
+			}
+			value, ok := m[keyArr[0]]
+			if !ok {
+				return nil, nil
+			}
+			if len(keyArr) == 1 {
+				return value, nil
+			} else {
+				key = strings.Join(keyArr[1:], ".")
+				return ReadJsonObject(value, key)
+			}
+		}
+	default:
+		msg := fmt.Sprintf("unknown type:%T", root)
+		logp.Infof(msg)
+		return nil, errors.New(msg)
+	}
+
+}
+
+
 /**
-把yml文件转换成对象
+把链式key对象转换成单个key的对象
 */
 func BuildGoObject(root interface{}) (err error) {
 	switch root.(type) {

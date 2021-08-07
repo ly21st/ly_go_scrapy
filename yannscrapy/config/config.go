@@ -6,7 +6,6 @@ import (
 	"gopkg.in/yaml.v2"
 )
 
-// TODO: 待完善
 
 type Config struct {
 	Address         string `yaml:"address"`

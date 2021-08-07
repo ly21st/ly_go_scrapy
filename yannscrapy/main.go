@@ -5,8 +5,7 @@ import (
 	"fmt"
 	"yannscrapy/config"
 	"yannscrapy/logger"
-
-	"yannscrapy/service/web_scraper"
+	"yannscrapy/resource"
 )
 
 var ver = flag.Bool("v", false, "版本号: 1.1.0")
@@ -35,7 +34,7 @@ func main() {
 		panic(err)
 	}
 
-	// resource.InitRouter()
+	resource.InitRouter()
 
-	web_scraper.Scrapy_main()
+	// web_scraper.Scrapy_main()
 }

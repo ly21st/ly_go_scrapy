@@ -7,7 +7,7 @@ downloadMaxSize: 1073741824 # 文件下载最大大小
 
 logger:
   level: info
-  filename: superagent.log
+  filename: scrapy.log
   max_size: 100  # MB
   max_age: 0
   max_backups: 30
