@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"crypto/tls"
 	"errors"
 	"fmt"
 	"net"
@@ -13,6 +14,7 @@ import (
 
 type HttpRequest struct {
 	Timeout time.Duration
+	InsecureVerify bool
 }
 
 const (
@@ -91,14 +93,19 @@ func (httpRequest *HttpRequest) Request(method, url string, args ...interface{})
 	case 2:
 		header = args[1].(map[string]string)
 	}
-	header["content-type"] = "application/json"
+	_, ok := header["content-type"]
+	if !ok {
+		header["content-type"] = "application/json"
+	}
 
 	var res *resty.Response
 	var err error
 	if httpRequest.Timeout == 0 {
 		httpRequest.Timeout = DefaultTimeout
 	}
-	req := resty.New().SetTimeout(time.Second * httpRequest.Timeout).R().SetHeaders(header)
+
+	insecureSkipVerify := !httpRequest.InsecureVerify
+	req := resty.New().SetTLSClientConfig(&tls.Config{ InsecureSkipVerify: insecureSkipVerify }).SetTimeout(time.Second * httpRequest.Timeout).R().SetHeaders(header)
 	switch method {
 	case http.MethodGet:
 		res, err = req.Get(url)

@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"crypto/tls"
 	"encoding/json"
 	"errors"
 	"net/http"
@@ -50,7 +51,22 @@ func CheckProxyIp(proxyAddr string,
 		Proxy:                 http.ProxyURL(proxy),
 		MaxIdleConnsPerHost:   maxIdleConnsPerHost,
 		ResponseHeaderTimeout: time.Second * time.Duration(responseHeaderTimeout),
+		TLSClientConfig: &tls.Config {
+			InsecureSkipVerify: true,
+		},
 	}
+
+	// 跳过https证书方法2
+	//netTransport := &http.Transport{
+	//	Proxy:                 http.ProxyURL(proxy),
+	//	MaxIdleConnsPerHost:   maxIdleConnsPerHost,
+	//	ResponseHeaderTimeout: time.Second * time.Duration(responseHeaderTimeout),
+	//	TLSClientConfig: &tls.Config {
+	//		VerifyPeerCertificate: func(rawCerts [][]byte, verifiedChains [][]*x509.Certificate) error {
+	//			return nil
+	//		},
+	//	},
+	//}
 	// 创建连接客户端
 	httpClient := &http.Client{
 		Timeout:   time.Second * clientTimeout,
