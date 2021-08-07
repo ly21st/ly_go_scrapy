@@ -114,7 +114,7 @@ func (httpRequest *HttpRequest) Request(method, url string, args ...interface{})
 	if err != nil {
 		return nil, err
 	}
-	if res.StatusCode() >= 300 {
+	if res.StatusCode() >= 400 {
 		return nil, errors.New(fmt.Sprintf("Request failed, Http status code: %d, body: %s", res.StatusCode(), string(res.Body())))
 	}
 

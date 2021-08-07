@@ -48,7 +48,7 @@ func CheckProxyIp(proxyAddr string,
 	//设置网络传输
 	netTransport := &http.Transport{
 		Proxy:                 http.ProxyURL(proxy),
-		MaxIdleConnsPerHost:   10,
+		MaxIdleConnsPerHost:   maxIdleConnsPerHost,
 		ResponseHeaderTimeout: time.Second * time.Duration(responseHeaderTimeout),
 	}
 	// 创建连接客户端
@@ -84,7 +84,7 @@ func DefaultCheckProxyIp(proxyAddr string) (Speed int, Status int) {
 		0)
 }
 
-func GetProxyips(url string) ([]string, error) {
+func GetProxyIps(url string) ([]string, error) {
 	httpRequest := new(HttpRequest)
 	httpRequest.Timeout = 60
 	response, err := httpRequest.Request(http.MethodGet, url)

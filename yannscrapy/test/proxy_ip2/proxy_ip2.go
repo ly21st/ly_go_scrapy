@@ -7,7 +7,7 @@ import (
 
 func main() {
 	url := "https://ip.jiangxianli.com/api/proxy_ips"
-	ipList, err := utils.GetProxyips(url)
+	ipList, err := utils.GetProxyIps(url)
 	if err != nil {
 		logging.Error(err)
 	}
