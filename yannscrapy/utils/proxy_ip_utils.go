@@ -4,6 +4,7 @@ import (
 	"crypto/tls"
 	"encoding/json"
 	"errors"
+	"math/rand"
 	"net/http"
 	"net/url"
 	"os"
@@ -25,7 +26,7 @@ func CheckProxyIp(proxyAddr string,
 				responseHeaderTimeout time.Duration,
 				clientTimeout time.Duration) (Speed int, Status int) {
 	if maxIdleConnsPerHost == 0 {
-		maxIdleConnsPerHost = 10
+		maxIdleConnsPerHost = 5
 	}
 
 	if responseHeaderTimeout == 0 {
@@ -33,7 +34,7 @@ func CheckProxyIp(proxyAddr string,
 	}
 
 	if clientTimeout == 0 {
-		clientTimeout = 10
+		clientTimeout = 5
 	}
 
 	//检测代理iP访问地址
@@ -91,6 +92,9 @@ func CheckProxyIp(proxyAddr string,
 }
 
 
+/**
+默认方式检查代理ip
+ */
 func DefaultCheckProxyIp(proxyAddr string) (Speed int, Status int) {
 	return CheckProxyIp(proxyAddr,
 		"https://icanhazip.com",
@@ -100,9 +104,12 @@ func DefaultCheckProxyIp(proxyAddr string) (Speed int, Status int) {
 		0)
 }
 
+/**
+获取代理ip
+ */
 func GetProxyIps(url string) ([]string, error) {
 	httpRequest := new(HttpRequest)
-	httpRequest.Timeout = 60
+	httpRequest.Timeout = 30
 	response, err := httpRequest.Request(http.MethodGet, url)
 	if err != nil {
 		logging.Fatalf("request failed:%v\n", err)
@@ -173,4 +180,50 @@ func GetProxyIps(url string) ([]string, error) {
 	}
 
 	return ipList, nil
+}
+
+
+func GetAllHealthProxyIps(url string) ([]string, error){
+	var result = make([]string, 0)
+	var err error
+
+	ipList, err := GetProxyIps(url)
+	if err != nil {
+		logging.Error(err)
+		return result, err
+	}
+
+	for _, proxyAddr := range ipList {
+		var speed, status = DefaultCheckProxyIp(proxyAddr)
+		if status == 200 {
+			logging.Infof("%s %d ms %d", proxyAddr, speed, status)
+			result = append(result, proxyAddr)
+		} else {
+			logging.Infof("代理%s不可用", proxyAddr)
+		}
+	}
+
+	return result, nil
+}
+
+func GetDefaultAllHealthProxyIps() ([]string, error){
+	url := "https://ip.jiangxianli.com/api/proxy_ips"
+	return GetAllHealthProxyIps(url)
+}
+
+
+func GetHealthProxyIp(url string) (string, error) {
+	ipList, err := GetAllHealthProxyIps(url)
+	if err != nil {
+		logging.Error(err)
+		return "", err
+	}
+
+	return ipList[rand.Intn(len(ipList))], nil
+}
+
+
+func GetDefaultHealthProxyIp() (string, error) {
+	url := "https://ip.jiangxianli.com/api/proxy_ips"
+	return GetHealthProxyIp(url)
 }

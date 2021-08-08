@@ -3,10 +3,7 @@ vendor
 *.log
 .idea/vcs.xml
 .idea/misc.xml
-.idea/bigdata-asuperagent.iml
 .idea/modules.xml
 .idea/workspace.xml
 config2.yaml
 config3.yaml
-asuperagent.exe
-asuperagent

@@ -46,8 +46,8 @@ var Panicf TemplateVarArgFunc
 var Fatal VarArgFunc
 var Fatalf TemplateVarArgFunc
 
-var FileAndLine = true
-var FileName = "app.log"
+var FileAndLine = false
+var FileName = "scrapy.log"
 var MaxSize = 100
 var MaxBackups = 30
 var MaxAge = 0

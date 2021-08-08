@@ -43,6 +43,86 @@ var doc = `{
                     }
                 }
             }
+        },
+        "/ticket/user": {
+            "post": {
+                "description": "返回ok",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User management"
+                ],
+                "summary": "添加用户",
+                "parameters": [
+                    {
+                        "description": "{` + "`" + `userId` + "`" + `: xxx, ` + "`" + `password` + "`" + `: xxx}",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                }
+            },
+            "delete": {
+                "description": "返回ok",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User management"
+                ],
+                "summary": "删除用户",
+                "parameters": [
+                    {
+                        "description": "{` + "`" + `userId` + "`" + `: xxx}",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/ticket/user-list": {
+            "get": {
+                "description": "返回ok",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User management"
+                ],
+                "summary": "用户列表",
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                }
+            }
         }
     }
 }`
@@ -62,8 +142,8 @@ var SwaggerInfo = swaggerInfo{
 	Host:        "",
 	BasePath:    "/api/v1",
 	Schemes:     []string{},
-	Title:       "SuperAgent API Docs",
-	Description: "This is bigdata SuperAgent.",
+	Title:       "yannscrapy API Docs",
+	Description: "This is yannscrapy.",
 }
 
 type s struct{}

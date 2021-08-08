@@ -10,9 +10,9 @@ import (
 
 var ver = flag.Bool("v", false, "版本号: 1.1.0")
 
-// @title SuperAgent API Docs
+// @title yannscrapy API Docs
 // @version 1.0
-// @description This is bigdata SuperAgent.
+// @description This is yannscrapy.
 // @BasePath /api/v1
 func main() {
 
@@ -36,5 +36,5 @@ func main() {
 
 	resource.InitRouter()
 
-	// web_scraper.Scrapy_main()
+	//web_scraper.Scrapy_main()
 }

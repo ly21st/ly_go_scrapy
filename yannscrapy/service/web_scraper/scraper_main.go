@@ -2,15 +2,20 @@ package web_scraper
 
 import (
 	"bytes"
-	"net/url"
-	"time"
-
 	"github.com/PuerkitoBio/goquery"
 	"github.com/gocolly/colly"
 	"github.com/gocolly/colly/extensions"
-
+	"math/rand"
+	"net/http"
+	"net/url"
+	"strings"
+	"time"
 	"yannscrapy/logger"
+	"yannscrapy/logging"
+	"yannscrapy/utils"
 )
+
+
 
 func Scrapy_main() {
 	urlstr := "https://news.baidu.com"
@@ -23,6 +28,8 @@ func Scrapy_main() {
 
 	extensions.RandomUserAgent(c)
 	extensions.Referer(c)
+
+	c.SetProxyFunc(randomProxySwitcher)
 
 	// 超时设定
 	c.SetRequestTimeout(100 * time.Second)
@@ -76,4 +83,38 @@ func Scrapy_main() {
 	})
 
 	err = c.Visit(urlstr)
+}
+
+func randomProxySwitcher(_ *http.Request) (*url.URL, error) {
+	// return proxies[random.Intn(len(proxies))], nil
+	//var proxies []*url.URL = []*url.URL{
+	//	&url.URL{Host: "127.0.0.1:8080"},
+	//	&url.URL{Host: "127.0.0.1:8081"},
+	//}
+
+	//var proxies []*url.URL = []*url.URL{
+	//	&url.URL{Host: "175.143.37.162:80"},
+	//}
+
+	var proxies []*url.URL = make([]*url.URL, 0)
+	ipList, err := utils.GetDefaultAllHealthProxyIps()
+	if err != nil {
+		logging.Error(err)
+		return nil, err
+	}
+	for _, ip := range ipList {
+		var proxyUrl *url.URL
+		logger.Infof("ip=%s", ip)
+		if strings.HasPrefix(ip,"http://") {
+			proxyUrl = &url.URL{Host: ip[7:]}
+		} else if strings.HasPrefix(ip, "https://") {
+			proxyUrl = &url.URL{Host: ip[8:]}
+		} else {
+			proxyUrl = &url.URL{Host: ip}
+		}
+		proxies = append(proxies, proxyUrl)
+	}
+
+	logger.Infof("proxies=%v", proxies)
+	return proxies[rand.Intn(len(proxies))], nil
 }

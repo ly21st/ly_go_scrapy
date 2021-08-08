@@ -51,6 +51,13 @@ func addRouters(router *gin.Engine) {
 			healthGroup.GET("/", Health)
 		}
 
+		grabbingTicketGroup := v1Group.Group("/ticket")
+		{
+			grabbingTicketGroup.GET("/user-list", GetUserList)
+			grabbingTicketGroup.POST("/user", AddUser)
+			grabbingTicketGroup.DELETE("/user", DeleteUser)
+		}
+
 	}
 
 }

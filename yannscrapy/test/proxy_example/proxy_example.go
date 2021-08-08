@@ -7,9 +7,18 @@ import (
 
 func main() {
 
-	//var speed, status = ProxyTest("http://124.205.155.151:9090")
-	//var speed, status = ProxyTest("http://05.252.161.48:8080")
+	//test1()
+	//test2()
 
+	ip, err := utils.GetDefaultHealthProxyIp()
+	if err != nil {
+		logging.Fatal(err)
+	}
+	logging.Infof("ip=%s", ip)
+
+}
+
+func test1() {
 	url := "https://ip.jiangxianli.com/api/proxy_ips"
 	ipList, err := utils.GetProxyIps(url)
 	if err != nil {
@@ -25,4 +34,16 @@ func main() {
 		}
 	}
 
+}
+
+
+func test2() {
+	url := "https://ip.jiangxianli.com/api/proxy_ips"
+	ipList, err := utils.GetAllHealthProxyIps(url)
+	if err != nil {
+		logging.Fatal(err)
+	}
+	for _, ip := range ipList {
+		logging.Infof("ip=%s", ip)
+	}
 }

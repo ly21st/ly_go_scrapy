@@ -41,7 +41,7 @@ var Panicf TemplateVarArgFunc
 var Fatal VarArgFunc
 var Fatalf TemplateVarArgFunc
 
-var FileAndLine = false
+var FileAndLine = true
 var FileName = "app.log"
 var MaxSize = 100
 var MaxBackups = 30
