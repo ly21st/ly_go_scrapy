@@ -165,6 +165,7 @@ func getLogWriter(filename string, maxSize, maxBackups, maxAge int) zapcore.Writ
 func GinLogger() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		// start := time.Now()
+		c.Header("Access-Control-Allow-Origin", "*")
 		path := c.Request.URL.Path
 		query := c.Request.URL.RawQuery
 		sugarLogger.Info(fmt.Sprintf("[Begin] | %s | %s | %s | %s",
