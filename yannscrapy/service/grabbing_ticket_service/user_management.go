@@ -7,23 +7,35 @@ import (
 	"strings"
 	"time"
 	"yannscrapy/logger"
+	"yannscrapy/logging"
 
 	"github.com/gin-gonic/gin"
+	"github.com/syndtr/goleveldb/leveldb"
 )
 
 /**
 获取用户列表
 */
 func GetUserList(c *gin.Context) {
-	//var err error
-	userMgr := GetUserMgr()
+
 	result := make([]string, 0)
-	{
-		userMgr.Mutex.Lock()
-		defer userMgr.Mutex.Unlock()
-		for key := range userMgr.UserMap {
-			result = append(result, key)
-		}
+	db, err := leveldb.OpenFile(TargetUser, nil)
+	if err != nil {
+		logger.Error(err)
+	}
+	defer db.Close()
+
+	iter := db.NewIterator(nil, nil)
+	for iter.Next() {
+		// Remember that the contents of the returned slice should not be modified, and
+		// only valid until the next call to Next.
+		key := iter.Key()
+		result = append(result, string(key))
+	}
+	iter.Release()
+	err = iter.Error()
+	if err != nil {
+		logger.Error(err)
 	}
 
 	c.JSON(200, gin.H{
@@ -32,7 +44,6 @@ func GetUserList(c *gin.Context) {
 }
 
 func AddUser(c *gin.Context) {
-	//var err error
 
 	body, err := ioutil.ReadAll(c.Request.Body)
 	if err != nil {
@@ -75,6 +86,13 @@ func AddUser(c *gin.Context) {
 		Msg:  "ok",
 	}
 	user.Ctime = time.Now()
+
+	db, err := leveldb.OpenFile(TargetUser, nil)
+	if err != nil {
+		logging.Error(err)
+	}
+	defer db.Close()
+
 	userMgr := GetUserMgr()
 	{
 		dstFile, err := os.OpenFile(userMgr.FilePath, os.O_RDWR|os.O_TRUNC|os.O_CREATE, UserFilePErmConst)
