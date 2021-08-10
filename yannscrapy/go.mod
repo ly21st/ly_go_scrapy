@@ -16,6 +16,7 @@ require (
 	github.com/swaggo/files v0.0.0-20190704085106-630677cd5c14
 	github.com/swaggo/gin-swagger v1.3.1
 	github.com/swaggo/swag v1.7.0
+	github.com/syndtr/goleveldb v1.0.0
 	github.com/temoto/robotstxt v1.1.2 // indirect
 	go.uber.org/zap v1.18.1
 	google.golang.org/appengine v1.6.7 // indirect

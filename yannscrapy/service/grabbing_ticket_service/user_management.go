@@ -2,18 +2,18 @@ package grabbing_ticket_service
 
 import (
 	"encoding/json"
-	"github.com/gin-gonic/gin"
 	"io/ioutil"
 	"os"
 	"strings"
 	"time"
 	"yannscrapy/logger"
-)
 
+	"github.com/gin-gonic/gin"
+)
 
 /**
 获取用户列表
- */
+*/
 func GetUserList(c *gin.Context) {
 	//var err error
 	userMgr := GetUserMgr()
@@ -21,7 +21,7 @@ func GetUserList(c *gin.Context) {
 	{
 		userMgr.Mutex.Lock()
 		defer userMgr.Mutex.Unlock()
-		for key, _ := range userMgr.UserMap {
+		for key := range userMgr.UserMap {
 			result = append(result, key)
 		}
 	}
@@ -31,7 +31,6 @@ func GetUserList(c *gin.Context) {
 	})
 }
 
-
 func AddUser(c *gin.Context) {
 	//var err error
 
@@ -39,8 +38,8 @@ func AddUser(c *gin.Context) {
 	if err != nil {
 		logger.Error(err)
 		rspMsg := UserRegisterRspMsg{
-			Code : "0001",
-			Msg: "read body error",
+			Code: "0001",
+			Msg:  "read body error",
 		}
 		c.JSON(500, &rspMsg)
 		return
@@ -52,8 +51,8 @@ func AddUser(c *gin.Context) {
 	if err != nil {
 		logger.Error(err)
 		rspMsg := UserRegisterRspMsg{
-			Code : "0002",
-			Msg: "request body error",
+			Code: "0002",
+			Msg:  "request body error",
 		}
 		c.JSON(400, &rspMsg)
 		return
@@ -64,8 +63,8 @@ func AddUser(c *gin.Context) {
 	if userId == "" || password == "" {
 		logger.Errorf("userId or password is empty")
 		rspMsg := UserRegisterRspMsg{
-			Code : "0002",
-			Msg: "request body error",
+			Code: "0002",
+			Msg:  "request body error",
 		}
 		c.JSON(400, &rspMsg)
 		return
@@ -73,7 +72,7 @@ func AddUser(c *gin.Context) {
 
 	rspMsg := UserRegisterRspMsg{
 		Code: "0000",
-		Msg: "ok",
+		Msg:  "ok",
 	}
 	user.Ctime = time.Now()
 	userMgr := GetUserMgr()
@@ -119,16 +118,14 @@ func AddUser(c *gin.Context) {
 	c.JSON(200, &rspMsg)
 }
 
-
-
 func DeleteUser(c *gin.Context) {
 	//var err error
 	body, err := ioutil.ReadAll(c.Request.Body)
 	if err != nil {
 		logger.Error(err)
 		rspMsg := UserRegisterRspMsg{
-			Code : "0001",
-			Msg: "read body error",
+			Code: "0001",
+			Msg:  "read body error",
 		}
 		c.JSON(500, &rspMsg)
 		return
@@ -140,8 +137,8 @@ func DeleteUser(c *gin.Context) {
 	if err != nil {
 		logger.Error(err)
 		rspMsg := UserRegisterRspMsg{
-			Code : "0002",
-			Msg: "request body error",
+			Code: "0002",
+			Msg:  "request body error",
 		}
 		c.JSON(400, &rspMsg)
 		return
@@ -151,8 +148,8 @@ func DeleteUser(c *gin.Context) {
 	if userId == "" {
 		logger.Errorf("userId is empty")
 		rspMsg := UserRegisterRspMsg{
-			Code : "0002",
-			Msg: "request body error",
+			Code: "0002",
+			Msg:  "request body error",
 		}
 		c.JSON(400, &rspMsg)
 		return
@@ -160,7 +157,7 @@ func DeleteUser(c *gin.Context) {
 
 	rspMsg := UserRegisterRspMsg{
 		Code: "0000",
-		Msg: "ok",
+		Msg:  "ok",
 	}
 	userMgr := GetUserMgr()
 	{
