@@ -25,7 +25,7 @@ func GetUserList(c *gin.Context) {
 // @Accept application/json
 // @Produce application/json
 // @Param   body     body    string     true       "{`userId`: xxx, `password`: xxx}"
-// @Success 200 {`code`:0001, `msg`: ok}
+// @Success 200
 // @Router /ticket/user [POST]
 func AddUser(c *gin.Context) {
 	grabbing_ticket_service.AddUser(c)
@@ -39,7 +39,7 @@ func AddUser(c *gin.Context) {
 // @Accept application/json
 // @Produce application/json
 // @Param   body     body    string     true       "{`userId`: xxx}"
-// @Success 200  {`code`:0001, `msg`: ok}
+// @Success 200
 // @Router /ticket/user [delete]
 func DeleteUser(c *gin.Context) {
 	grabbing_ticket_service.DeleteUser(c)

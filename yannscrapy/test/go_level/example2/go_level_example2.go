@@ -14,6 +14,9 @@ func main() {
 	defer db.Close()
 
 	data, err := db.Get([]byte("key"), nil)
+
+	logging.Errorf("err=%v", err)
+
 	logging.Infof("data=%v", data)
 
 	err = db.Put([]byte("key"), []byte("value"), nil)
