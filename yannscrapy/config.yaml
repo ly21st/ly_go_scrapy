@@ -1,5 +1,6 @@
 # 说明：默认注释掉的表示是**非必须的配置**，且给的值都是默认值
 address: localhost
+swag_address: localhost
 mode: debug       # debug, release, test
 port: 8972
 downloadMaxSize: 1073741824 # 文件下载最大大小

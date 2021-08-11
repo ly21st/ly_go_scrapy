@@ -3,7 +3,6 @@ package grabbing_ticket_service
 import (
 	"encoding/json"
 	"io/ioutil"
-	"os"
 	"strings"
 	"time"
 	"yannscrapy/logger"
@@ -74,7 +73,7 @@ func AddUser(c *gin.Context) {
 	if userId == "" || password == "" {
 		logger.Errorf("userId or password is empty")
 		rspMsg := UserRegisterRspMsg{
-			Code: "0002",
+			Code: "0003",
 			Msg:  "request body error",
 		}
 		c.JSON(400, &rspMsg)
@@ -90,46 +89,28 @@ func AddUser(c *gin.Context) {
 	db, err := leveldb.OpenFile(TargetUser, nil)
 	if err != nil {
 		logging.Error(err)
+		rspMsg.Code = "0004"
+		rspMsg.Msg = err.Error()
+		c.JSON(500, &rspMsg)
+		return
 	}
 	defer db.Close()
-
-	userMgr := GetUserMgr()
-	{
-		dstFile, err := os.OpenFile(userMgr.FilePath, os.O_RDWR|os.O_TRUNC|os.O_CREATE, UserFilePErmConst)
-		defer dstFile.Close()
-		if err != nil {
-			logger.Error(err)
-			rspMsg.Code = "0004"
-			rspMsg.Msg = err.Error()
-			c.JSON(500, &rspMsg)
-			return
-		}
-
-		userMgr.Mutex.Lock()
-		defer userMgr.Mutex.Unlock()
-		for {
-			_, ok := userMgr.UserMap[userId]
-			if ok {
-				msg := "user " + userId + " already exists"
-				logger.Errorf(msg)
-				rspMsg.Code = "0003"
-				rspMsg.Msg = msg
-				break
-			}
-
-			userMgr.UserMap[userId] = &user
-			//fileBody, err := json.Marshal(&userMgr.UserMap)
-			enc := json.NewEncoder(dstFile)
-			enc.SetIndent("", "  ")
-			// Dump json to the standard output
-			err = enc.Encode(userMgr.UserMap)
-			logger.Error(err)
-			break
-		}
+	data, err := db.Get([]byte(userId), nil)
+	if err == nil && len(data) != 0 {
+		msg := "user " + userId + " already exists"
+		logger.Errorf(msg)
+		rspMsg.Code = "0005"
+		rspMsg.Msg = msg
+		c.JSON(400, &rspMsg)
+		return
 	}
 
-	if rspMsg.Code != "0000" {
-		c.JSON(400, &rspMsg)
+	err = db.Put([]byte(userId), body,nil)
+	if err != nil {
+		logger.Error(err)
+		rspMsg.Code = "0006"
+		rspMsg.Msg = err.Error()
+		c.JSON(500, &rspMsg)
 		return
 	}
 
@@ -137,7 +118,6 @@ func AddUser(c *gin.Context) {
 }
 
 func DeleteUser(c *gin.Context) {
-	//var err error
 	body, err := ioutil.ReadAll(c.Request.Body)
 	if err != nil {
 		logger.Error(err)
@@ -166,7 +146,7 @@ func DeleteUser(c *gin.Context) {
 	if userId == "" {
 		logger.Errorf("userId is empty")
 		rspMsg := UserRegisterRspMsg{
-			Code: "0002",
+			Code: "0003",
 			Msg:  "request body error",
 		}
 		c.JSON(400, &rspMsg)
@@ -177,43 +157,33 @@ func DeleteUser(c *gin.Context) {
 		Code: "0000",
 		Msg:  "ok",
 	}
-	userMgr := GetUserMgr()
-	{
-		dstFile, err := os.OpenFile(userMgr.FilePath, os.O_RDWR|os.O_TRUNC|os.O_CREATE, UserFilePErmConst)
-		defer dstFile.Close()
-		if err != nil {
-			logger.Error(err)
-			rspMsg.Code = "0004"
-			rspMsg.Msg = err.Error()
-			c.JSON(500, &rspMsg)
-			return
-		}
+	user.Ctime = time.Now()
 
-		userMgr.Mutex.Lock()
-		defer userMgr.Mutex.Unlock()
-		for {
-			_, ok := userMgr.UserMap[userId]
-			if !ok {
-				msg := "user " + userId + " not exists"
-				logger.Errorf(msg)
-				rspMsg.Code = "0003"
-				rspMsg.Msg = msg
-				break
-			}
-
-			delete(userMgr.UserMap, userId)
-			//fileBody, err := json.Marshal(&userMgr.UserMap)
-			enc := json.NewEncoder(dstFile)
-			enc.SetIndent("", "  ")
-			// Dump json to the standard output
-			err = enc.Encode(userMgr.UserMap)
-			logger.Error(err)
-			break
-		}
+	db, err := leveldb.OpenFile(TargetUser, nil)
+	if err != nil {
+		logging.Error(err)
+		rspMsg.Code = "0004"
+		rspMsg.Msg = err.Error()
+		c.JSON(500, &rspMsg)
+		return
+	}
+	defer db.Close()
+	data, err := db.Get([]byte(userId), nil)
+	if err != nil || len(data) == 0 {
+		msg := "user " + userId + " not exists"
+		logger.Errorf(msg)
+		rspMsg.Code = "0005"
+		rspMsg.Msg = msg
+		c.JSON(400, &rspMsg)
+		return
 	}
 
-	if rspMsg.Code != "0000" {
-		c.JSON(400, &rspMsg)
+	err = db.Delete([]byte(userId),nil)
+	if err != nil {
+		logger.Error(err)
+		rspMsg.Code = "0006"
+		rspMsg.Msg = err.Error()
+		c.JSON(500, &rspMsg)
 		return
 	}
 

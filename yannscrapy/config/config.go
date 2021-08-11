@@ -6,9 +6,9 @@ import (
 	"gopkg.in/yaml.v2"
 )
 
-
 type Config struct {
 	Address         string `yaml:"address"`
+	SwagAddress     string `yaml:"swag_address"`
 	Mode            string `yaml:"mode"`
 	Port            int    `yaml:"port"`
 	DownloadMaxSize int    `yaml:"downloadMaxSize"`
