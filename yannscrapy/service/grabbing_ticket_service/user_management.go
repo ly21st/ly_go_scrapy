@@ -17,7 +17,7 @@ import (
 */
 func GetUserList(c *gin.Context) {
 
-	result := make([]string, 0)
+	result := make([]UserType, 0)
 	db, err := leveldb.OpenFile(TargetUser, nil)
 	if err != nil {
 		logger.Error(err)
@@ -28,8 +28,11 @@ func GetUserList(c *gin.Context) {
 	for iter.Next() {
 		// Remember that the contents of the returned slice should not be modified, and
 		// only valid until the next call to Next.
-		key := iter.Key()
-		result = append(result, string(key))
+
+		val := iter.Value()
+		user := UserType{}
+		json.Unmarshal(val, &user)
+		result = append(result, user)
 	}
 	iter.Release()
 	err = iter.Error()
