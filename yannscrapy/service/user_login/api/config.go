@@ -17,6 +17,6 @@ func ParserConfig() {
 	DbConfig.Port = 0
 	DbConfig.User = ""
 	DbConfig.Passwd = ""
-	DbConfig.Database = "data/login_user"
+	DbConfig.Database = "./data/login_user"
 }
 

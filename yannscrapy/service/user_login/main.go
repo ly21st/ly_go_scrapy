@@ -32,5 +32,5 @@ func main() {
 		sv1.GET("/time", controller.GetDataByTime)
 
 	}
-	router.Run(":8080")
+	router.Run(":8081")
 }

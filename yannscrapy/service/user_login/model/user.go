@@ -39,7 +39,7 @@ func (user *User) Insert() error {
 
 // 用户注册
 func Register(username, pwd string, phone int64, email string) error {
-	logger.Info(username, pwd, phone, email)
+	logger.Infof("%s %s %s %s", username, pwd, phone, email)
 
 	if CheckUser(username) {
 		logger.Errorf("user " + username + " already exists")
@@ -77,11 +77,18 @@ func LoginCheck(login LoginReq) (bool, User, error) {
 	userExist := false
 
 	var user User
-	dbErr := DB.Where("name = ?", login.Name).Find(&user).Error
+	//dbErr := DB.Where("name = ?", login.Name).Find(&user).Error
 
+	userInfo, dbErr := DB.Get([]byte(login.Name), nil)
 	if dbErr != nil {
 		return userExist, userData, dbErr
 	}
+	err := json.Unmarshal(userInfo, &user)
+	if err != nil {
+		logger.Error(err)
+		return userExist, userData, err
+	}
+
 	if login.Name == user.Name && login.Pwd == user.Pwd {
 		userExist = true
 		userData.Name = user.Name
@@ -89,7 +96,7 @@ func LoginCheck(login LoginReq) (bool, User, error) {
 	}
 
 	if !userExist {
-		return userExist, userData, fmt.Errorf("登陆信息有误")
+		return userExist, userData, fmt.Errorf("login error")
 	}
 	return userExist, userData, nil
 }
