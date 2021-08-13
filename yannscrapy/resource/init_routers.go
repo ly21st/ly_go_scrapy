@@ -74,6 +74,13 @@ func addRouters(router *gin.Engine) {
 			grabbingTicketGroup.DELETE("/user", DeleteUser)
 		}
 
+		webGroup := router.Group("/web")
+		{
+			webGroup.POST("/register", WebUserRegister)
+			webGroup.POST("/login", WebUserLogin)
+			webGroup.GET("/login", CheckToken)
+		}
+
 	}
 
 }

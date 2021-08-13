@@ -12,3 +12,9 @@ yannscrapy/data/target_user/CURRENT.bak
 yannscrapy/data/target_user/LOCK
 yannscrapy/data/target_user/LOG
 yannscrapy/data/target_user/MANIFEST-000036
+yannscrapy/data/login_user/000002.ldb
+yannscrapy/data/login_user/CURRENT
+yannscrapy/data/login_user/CURRENT.bak
+yannscrapy/data/login_user/LOCK
+yannscrapy/data/login_user/LOG
+yannscrapy/data/login_user/MANIFEST-000004

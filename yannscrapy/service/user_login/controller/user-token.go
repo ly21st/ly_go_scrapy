@@ -117,7 +117,7 @@ func generateToken(c *gin.Context, user model.User) {
 }
 
 // 测试一个需要认证的接口
-func GetDataByTime(c *gin.Context) {
+func CheckToken(c *gin.Context) {
 	claims := c.MustGet("claims").(*md.CustomClaims)
 	if claims != nil {
 		c.JSON(http.StatusOK, gin.H{
