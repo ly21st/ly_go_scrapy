@@ -1,0 +1,25 @@
+=============== Aug 12, 2021 (CST) ===============
+22:40:07.109123 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+22:40:07.251512 db@open opening
+22:40:07.253508 version@stat F·[] S·0B[] Sc·[]
+22:40:07.284401 db@janitor F·2 G·0
+22:40:07.284401 db@open done T·32.8898ms
+=============== Aug 12, 2021 (CST) ===============
+22:51:46.056588 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+22:51:46.089534 version@stat F·[] S·0B[] Sc·[]
+22:51:46.089534 db@open opening
+22:51:46.089534 journal@recovery F·1
+22:51:46.090528 journal@recovery recovering @1
+22:51:46.146347 memdb@flush created L0@2 N·1 S·149B "hahaha1,v1":"hahaha1,v1"
+22:51:46.147345 version@stat F·[1] S·149B[149B] Sc·[0.25]
+22:51:46.232126 db@janitor F·3 G·0
+22:51:46.232126 db@open done T·142.592ms
+=============== Aug 13, 2021 (CST) ===============
+21:13:16.475464 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+21:13:16.533340 version@stat F·[1] S·149B[149B] Sc·[0.25]
+21:13:16.533340 db@open opening
+21:13:16.534307 journal@recovery F·1
+21:13:16.535343 journal@recovery recovering @3
+21:13:16.536325 version@stat F·[1] S·149B[149B] Sc·[0.25]
+21:13:16.636079 db@janitor F·3 G·0
+21:13:16.636079 db@open done T·102.7391ms

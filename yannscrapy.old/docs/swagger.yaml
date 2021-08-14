@@ -1,0 +1,126 @@
+basePath: /api/v1
+info:
+  contact: {}
+  description: This is yannscrapy.
+  title: yannscrapy API Docs
+  version: "1.0"
+paths:
+  /health:
+    get:
+      consumes:
+      - application/json
+      description: 返回ok
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 健康接口
+      tags:
+      - Health
+  /ticket/user:
+    delete:
+      consumes:
+      - application/json
+      description: 返回ok
+      parameters:
+      - description: '{`userId`: xxx}'
+        in: body
+        name: body
+        required: true
+        schema:
+          type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 删除用户
+      tags:
+      - User management
+    post:
+      consumes:
+      - application/json
+      description: 返回ok
+      parameters:
+      - description: '{`userId`: xxx, `password`: xxx}'
+        in: body
+        name: body
+        required: true
+        schema:
+          type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 添加用户
+      tags:
+      - User management
+  /ticket/user-list:
+    get:
+      consumes:
+      - application/json
+      description: 返回ok
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 用户列表
+      tags:
+      - User management
+  /web/check-token:
+    get:
+      consumes:
+      - application/json
+      description: 返回ok
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 检查token有效性
+      tags:
+      - Web用户
+  /web/login:
+    post:
+      consumes:
+      - application/json
+      description: 返回ok
+      parameters:
+      - description: '{`name`: xxx, `password`: xxx}'
+        in: body
+        name: body
+        required: true
+        schema:
+          type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 用户登录
+      tags:
+      - Web用户
+  /web/register:
+    post:
+      consumes:
+      - application/json
+      description: 返回ok
+      parameters:
+      - description: '{`name`: xxx, `password`: xxx}'
+        in: body
+        name: body
+        required: true
+        schema:
+          type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 用户注册
+      tags:
+      - Web用户
+swagger: "2.0"

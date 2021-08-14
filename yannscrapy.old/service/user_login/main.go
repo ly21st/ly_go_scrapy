@@ -29,7 +29,7 @@ func main() {
 	sv1 := router.Group("/apis/v1/auth/")
 	sv1.Use(md.JWTAuth())
 	{
-		sv1.GET("/time", controller.GetDataByTime)
+		sv1.GET("/time", controller.CheckToken)
 
 	}
 	router.Run(":8081")
