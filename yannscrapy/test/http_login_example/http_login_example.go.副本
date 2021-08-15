@@ -52,9 +52,7 @@ var header = map[string]string{
 	"upgrade-insecure-requests": "1",
 	"user-agent":                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36",
 	//"cookie": `check_cookie=true; ASP.NET_SessionId=xkdt0aqt15phml43qchl3e1c; _ga=GA1.2.1652256127.1627650499; _rcmdjp_user_id=www.anadf.com-1346743333; check_cookie=true; visitorid=20210730220818358570; ADFWEB_CloseAlertAirportModal2=True; MasterLanguageType=2; ADFWEB_SessionId=; KeyWord_HEADER=; SCD=; Brand=; Cate_Sub=; Cate_S=; Cate_M=; Cate_L=; PriceUpper=; PriceLower=; Recommended=; DFonly=; NewItem=; GroupCode=; ViewDate=; IsForce=; KeisaiFlg=; LimitedQty=; VariationCode=; ShowItemOfNoAirport=False; QueryString=Search1Airport=01; AirPort=; token_2_0=UKjcx+mjju8HuXUpNoYZYTAVMbxTLm3mag/djJiVmy5ZkxbPrR0EMzNiSFMWovp4Juk5aUnjlNF3NEaprK2JZ1rZUZca+pHoeqANknicdIj2rz3HbgRAYXnRMeP4bYJhPckYAfyr1Hir8ju5jbJ46w==; _gid=GA1.2.1520344673.1628775541; JSESSIONID=9C5FEEB145BC14EF368A9BF0A6C130B6; MasterMenuAirport2=01; _rcmdjp_history_view=4020102654_cn,4010102087_cn,4020101396_cn,4010102426_cn,4020102653_cn; KeyWord=; Sort=0; token_2_2=KzG32vLVtekhYpA43oakQKTD/rKKhPsyAPcFY7gksPA2waY4iMteMhKwLr/c8KN9/xmToUxJMvgpnHFQWQedmIGkqv8b/z/BHZKFadgW99XjpABXvQ62kXOJeS/tS37sDbVc4PWdg5Lthbg4Nj+pbw==`,
-	//"cookie": `check_cookie=true; _gid=GA1.2.1248265674.1628912072; _ga=GA1.2.137268062.1628912072; ADFWEB_SessionId=; KeyWord_HEADER=; SCD=; AirPort=; Brand=; KeyWord=; Cate_Sub=; Cate_S=; Cate_M=; Cate_L=; PriceUpper=; PriceLower=; Recommended=; DFonly=; NewItem=; GroupCode=; ViewDate=; IsForce=; KeisaiFlg=; LimitedQty=; VariationCode=; ShowItemOfNoAirport=False; Sort=0; ASP.NET_SessionId=wptxx2b4gt1vy2bwx5qdewpm; JSESSIONID=2D8AC933B543DDBC74596D534B90297C; visitorid=20210815163917547860; _rcmdjp_user_id=www.anadf.com-1199729120; ADFWEB_CloseAlertAirportModal2=True; MasterMenuAirport2=01; _gat=1; token_2_2=tuoALpV7XZ85IHDiwCrYPDIRP/335sX0b8m6G20wD6tzsorkgwnDuy7MGi97F/Sc1bE1GiYor7zF6DYsVEY6IXvHuK+RWIEk00zYLJ6a4Vw1RkcqV0Oim1JSDcovJ7qIVPEK07y/GsjsCoDhd5X3OA==`,
-	"cookie": `check_cookie=true; ASP.NET_SessionId=xkdt0aqt15phml43qchl3e1c; _ga=GA1.2.1652256127.1627650499; _rcmdjp_user_id=www.anadf.com-1346743333; check_cookie=true; visitorid=20210730220818358570; ADFWEB_CloseAlertAirportModal2=True; MasterLanguageType=2; ADFWEB_SessionId=; KeyWord_HEADER=; SCD=; Brand=; Cate_Sub=; Cate_S=; Cate_M=; Cate_L=; PriceUpper=; PriceLower=; Recommended=; DFonly=; NewItem=; GroupCode=; ViewDate=; IsForce=; KeisaiFlg=; LimitedQty=; VariationCode=; ShowItemOfNoAirport=False; QueryString=Search1Airport=01; AirPort=;  token_2_2=9wb+P9Es6SsQIoACHmmj0/e1Vqp9nRXZ+gLUnGyP/OFPzYQ4MhAUoodJq9IoIsAtcM5vVY4PTcIcUfA9lO7OhWx9kfKeaV1NeCS3fBtRHXoZ0j4c1X499PxZAD8xtlN4ChoG9u5QmXxQLECF8JhUGA==`,
-
+	"cookie": `check_cookie=true; _gid=GA1.2.1248265674.1628912072; _ga=GA1.2.137268062.1628912072; ADFWEB_SessionId=; KeyWord_HEADER=; SCD=; AirPort=; Brand=; KeyWord=; Cate_Sub=; Cate_S=; Cate_M=; Cate_L=; PriceUpper=; PriceLower=; Recommended=; DFonly=; NewItem=; GroupCode=; ViewDate=; IsForce=; KeisaiFlg=; LimitedQty=; VariationCode=; ShowItemOfNoAirport=False; Sort=0; ASP.NET_SessionId=wptxx2b4gt1vy2bwx5qdewpm; JSESSIONID=2D8AC933B543DDBC74596D534B90297C; visitorid=20210815163917547860; _rcmdjp_user_id=www.anadf.com-1199729120; ADFWEB_CloseAlertAirportModal2=True; MasterMenuAirport2=01; _gat=1; token_2_2=tuoALpV7XZ85IHDiwCrYPDIRP/335sX0b8m6G20wD6tzsorkgwnDuy7MGi97F/Sc1bE1GiYor7zF6DYsVEY6IXvHuK+RWIEk00zYLJ6a4Vw1RkcqV0Oim1JSDcovJ7qIVPEK07y/GsjsCoDhd5X3OA==`,
 }
 
 
@@ -72,7 +70,7 @@ func main() {
 
 	//url = "https://www.anadf.com/cn/MemberLogin.aspx"
 
-	fmt.Printf(" get response cookies:%v\n",rsp1.Cookies())
+	fmt.Printf("cookies:%v\n",rsp1.Cookies())
 
 	//client.SetCookies(rsp1.Cookies())
 	request = client.R()
@@ -202,21 +200,16 @@ func copyRequestParam01(response *resty.Response, request *resty.Request) {
 		"__EVENTTARGET":        "",
 		"__EVENTARGUMENT":      "",
 		"__LASTFOCUS":          "",
-		//"__VIEWSTATE":          "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",
-
-		"__VIEWSTATE": "XSaR/ZwDhF8hXhAM4J9g9YeHx8QIwM+Kx7qzwFI71uiNuNYhp5wje8D5FYHvTDGyxFGEXEi42gY9+7+DUybG5f+Tg7IIRZMEG0RUioFEBycDG0zCCVNcFXz5efYzpkB6xJHcBXjmyblLiaKXaFHlMAbYtgjAnZvVIQ5jpILHJuaaEF1wnkvSMIi4wRBaKz97LFMMuKkpQ2o+6IAh5IIInv7hRQWAClALTs9TWDdkSMrLtCf4HeScxeI/1SdmBp2+N10VMWu4s2ePx20Nps+esbCJbZZ44axyB25SRA6eaNhqLcSGK5WA+Gp8drJuCbwBcgqd9CB9JGR8jn6B8URpDkbNDFcpv1ETgfq46G9kP0zpYs/RItawYMoyxvzIW1yVxTihBICPmJN0jVq8USBK/nkgZwOSpv1++lkNUlN7eOITTgP3Y8Q85/G2et1Vx9KSeSQMZMKu2kWOWwnQlu0ByZVpr2lcnc07BrDsxbjV6mEmriYlxj4UQYssP5FJNV2DdF53m2Igzng/j3VoJWKJjIPxXufLTmzr13dUgaGsNqTVYjpJtWapDpV9jzWCi6QEZtzI8CxWt4xb0jdj5zxKKvR4ryAihT2pcsBFjs2BtLqbt5ts9a74GLeJamc6P0itjNvFcWblG9U1bfsPNMNYY0mkiTzKqgNBBGd5MRB266Mds1WxI70Tbhp4pAawjRf0c6AR2u9DEoo5r+dmbKLNPy54ekpB96lpP1AsvBirZVYvypG5CX03OQ5aIruYayCqNVzD9PhjUoFVQiDW+vZOxNBUZ8qcyAZJDT4omLGqjplFPiGHcorcpMHaD546J3Oc2h00VLtX4dFCVHqy5b0JWrM/ytVnE70RFR6qY3guwyMFimRJsm41HzWSpzn1YKPzYLcbQgBRsSuz85yLJk0QyQBeuQhB7nKPAbQFOBRKZHt8+c5rl69iGmwlS5l5ax4W62IOyXClMlC9GfK5zKFMthNvdlQjZHA44/ipogkPHdMiTbhswox2CoetdMI3DQZ38lG6RE4e62wubjJV+qLGSgLj1souot23ue1T2bYe6Asfb3N+2cmXoCUK3CbJxeaK8sP1Lkf+EkEfhoKiVJ6bunYMF0BBAZnBVxnHqJnrhZO3TJ5Jiqu42t4He6N3AHzVaLyhpLPxiV49bKs6hWYlLh2iO+6l6vk8YrfNUAO38hoH+9csXjOgGQkCPZUIEE/mR9swNaWDYIAMxJjEVUAF5jhs1kvCplhgVlTu2LUY7jN0tejGPstCyGDKHmu3Z6KCv564/iTf4kPi2xLnnBNtLpz6jhV4DDnkBrUjeFnOIPSkKOMH1h38C3IlBWiJOqDoQyI8dYuq2jtdffkPCDc6MVMnLZzbaECrM2PlKxiweT8R59JeC+ESQpXjeGqDqFARqnQ+5cxEJkdZqBGj9GGZvCE4OE01FJ0Q2rXOoz+yLhWaoEKUwP2+VgUx1kEpYrbZZyo0mLZU3u0h6J+9ix0+OwlFfSzSD2E40RRCitaJQ9PEB7bvxwik3hNDvIX4kxb/rx63b9xj0YTTBE8+p5ftohCkJNgXsdkYixaT9avaDki0l2o/0DHwRYiZHpLz0XOcHLVO3Ob305sgyA5/9b87WuxhxRjS+LHWC3ieQJMO0GsJczz8FDY95+IMWqIRTMrlBtprzhfLoRei2pOaGi8G9/HQMh9pGpC6d1uOv+9tWsud3qxw555IRkTyF1ciPt9LxjzMcNXVm81yRYqI5l617b6TOePZn+ZbPGQ/ttgCVSysg6PBf9mm5Vw9Q8+4wff6tOlRxpB3fSqoJoeu+5xt9YSVwKLYyws0BdryeL2VU4CzshES4mdEK9OjbUZKnsp8KvhC5dl8Rj1IxDArHqDMnY3JRG3W4h/QTG8kJ7FQ2EctRYXARErdrjzr00EKqfvDIkOii0y4QNBnFKg9sclOhH2nu9GzD27oEjTe4Uy2yOH56gh/gI60929V45eap265/kLZEwtVw56fFSBRm2He3mYVyIAm9biRY2zGx6hkSip0d8H7uP41r6rskaplLS47/UFDdlRSZ3IK260bK+sn9IBMAtSlONTR1/o4U2V8vQSdPMv2br1fCjjF+9QgrOfKbtCx4xfiyb/F6FWW1HpSdUOcKgyCKaGEk4yd32CWdQBUUxEnwtUI2W8XsBerCZiH5TRp6siz5JAheuf3vwcUl6N0LhaA9XfS4568RaLm5cUv6C0wH6EM84uUoAlE99TJZj++wZ4VWe6mKKFy/Coswlk9T1LzJ4CE95feOiOqyYPXE2/P89ykpHpUEkeZMpTX5fGGJWco9PdMOm37MIzQqDnNLgTxK8ELWgpTXzBZIMbZtJXWm9hbv7lASsADHohHjePPJg==",
+		"__VIEWSTATE":          "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",
 
 		"__VIEWSTATEGENERATOR": "AA4F3242",
-		//"__EVENTVALIDATION":    "lCava3y/+MBfYZjO4PWwitIx9jY8hnkmm0jsUV/h13gscWJMqMMlNcgiTdd59NNtBOFg3G7HbMio57N7gtw3p0sAxECr6VyagnyUMGK35XexWMZsnwpYNyoG6aroYfZrLDma/kA2H0cjD7vr2dsZKb5Z/cz6La0pSsKOPMiQ6ALdR/o/kHR/PwB7UC59tKDrdMlJvnkOV7ftD9TcDrfSOAz9JtJ0umi8RjI+RbPYRcRlYxKOATihhBO6YlWcqDeWgotmn/TPhFOKjY+WN47b532gt4VfjxOpfi1GWIdriNpoiN6tkFEkBmYhYwtJmtDPnVHHaUDa4doWvY93pPy90cdF4UWod6jR6QuHg/jJvh7mMnSW8Y6IZdFB2KnJzn0J0Il+vECgLbWfKIWLHb1S4E/nPo88n4hNnR2Dt1nSMYKWTpFcWVG3vzCvN0TUynMviwfFHmt6vU6ItDPwO8tmD7C6svDBbsfBGpX16AoGJGlzIPqnDOjFzU8EbbqPIrxoIlshTmjnLf9aWdiqnVaROVnmO/4=",
-
-		"__EVENTVALIDATION": "Xm0b54xTOUenq8x375KAgRRH8KggLETr2VemogcYORf5xVLPxuwsDP2NssICqRW51vofkhTKrx6LmbWfON3INnbIhqLk3VlaidyJ0KGeQvM/XdIKaKMriz0i605rdk9VYy1bUkbZz+J3Q5oIKbcvw/xEN1jXW+xG1eSO2j2XqD8evgtkAXlcGqcdWJv95xSX6YDnFl5T1byW4h+kR0/kCT+grL45xIuCW2m5lquuVleB/pSnvKv5KP93Mnj4ucHn349lySSGxbyAZcVmT83HZPhr9tjiFhBAz8p1f4wQs2KaOQe2c5ZGOTme9VVl9W76cRh/nOQdZOHuykd84Sc4Kx92Ef7QeXd9K2SjnGGvthinfuT1yyWJASDmEBbgwej7waXem0Hh3F7Lq4j9Aj3tq6LQKhWhk8wTzGmifW+LQ+NlqbVJ1GA5c50qLJEhuFSvaRmEUPK3mG1+yo83dRENzOhFs4YoZW6TO2858KZdi+BN5A/B5phCT6DqRiQtkvtgnQRkVL7evap44GhFafnJpgtQXug=",
-
+		"__EVENTVALIDATION":    "lCava3y/+MBfYZjO4PWwitIx9jY8hnkmm0jsUV/h13gscWJMqMMlNcgiTdd59NNtBOFg3G7HbMio57N7gtw3p0sAxECr6VyagnyUMGK35XexWMZsnwpYNyoG6aroYfZrLDma/kA2H0cjD7vr2dsZKb5Z/cz6La0pSsKOPMiQ6ALdR/o/kHR/PwB7UC59tKDrdMlJvnkOV7ftD9TcDrfSOAz9JtJ0umi8RjI+RbPYRcRlYxKOATihhBO6YlWcqDeWgotmn/TPhFOKjY+WN47b532gt4VfjxOpfi1GWIdriNpoiN6tkFEkBmYhYwtJmtDPnVHHaUDa4doWvY93pPy90cdF4UWod6jR6QuHg/jJvh7mMnSW8Y6IZdFB2KnJzn0J0Il+vECgLbWfKIWLHb1S4E/nPo88n4hNnR2Dt1nSMYKWTpFcWVG3vzCvN0TUynMviwfFHmt6vU6ItDPwO8tmD7C6svDBbsfBGpX16AoGJGlzIPqnDOjFzU8EbbqPIrxoIlshTmjnLf9aWdiqnVaROVnmO/4=",
 
 		"ctl00$ddlAirport":                   "01",
 		"ctl00$ddlLanguage":                  "2",
 		"ctl00$txtKeyword":                   "",
-		"ctl00$ContentPlaceHolder1$txtMail":  "getway@moran.cn", //"getway@moran.cn",    //"getway@moran.cn"
-		"ctl00$ContentPlaceHolder1$TxtPASS":  "moranjiuye1",//"moranjiuye1",
+		"ctl00$ContentPlaceHolder1$txtMail":  "sdsdw@126.com", //"getway@moran.cn",    //"getway@moran.cn"
+		"ctl00$ContentPlaceHolder1$TxtPASS":  "123123ab",//"moranjiuye1",
 		"ctl00$ContentPlaceHolder1$btnLogin": "登录",
 	}
 
@@ -239,9 +232,9 @@ func PostRequest(request *resty.Request,
 		request.SetFormData(form)
 	}
 
-	fmt.Printf("post request form:%v\n",request.FormData.Encode())
+	fmt.Printf("request form:%v\n",request.FormData.Encode())
 	//fmt.Printf("reqeust:%v\n",request.Body)
-	fmt.Printf("post request header:%v\n",request.Header)
+	fmt.Printf("request header:%v\n",request.Header)
 
 	resp, err := request.Post(url)
 	if err != nil {
@@ -251,9 +244,9 @@ func PostRequest(request *resty.Request,
 
 	fmt.Printf("--------------------------------------\n")
 	fmt.Printf("status=%v\n", resp.Status())
-	fmt.Printf("------post response header-----\n")
+	fmt.Printf("------header-----\n")
 	for e, v := range resp.Header() {
-		fmt.Printf("%v:%v\n", e, v)
+		fmt.Printf("%v:%v", e, v)
 	}
 
 	ioutil.WriteFile(saveFile, resp.Body(), 0600)
@@ -293,9 +286,9 @@ func GetRequest(request *resty.Request, url string, header map[string]string, sa
 	}
 	fmt.Printf("--------------------------------------\n")
 	fmt.Printf("status=%v\n", resp.Status())
-	fmt.Printf("------get response header-----\n")
+	fmt.Printf("------header-----\n")
 	for e, v := range resp.Header() {
-		fmt.Printf("%v:%v\n", e, v)
+		fmt.Printf("%v:%v", e, v)
 	}
 
 	ioutil.WriteFile(saveFile, resp.Body(), 0600)
