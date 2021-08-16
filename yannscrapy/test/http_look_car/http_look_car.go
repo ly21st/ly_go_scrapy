@@ -20,24 +20,125 @@ func main() {
 	if err != nil {
 		fmt.Println(err)
 	}
-	url := "https://www.anadf.com/cn/MemberLogin.aspx"
+	//url := "https://www.anadf.com/cn/MemberLogin.aspx"
+	fmt.Printf("-----search item-----")
+	url := "https://www.anadf.com/cn/ItemDetail.aspx?S_CD=4020102654"
 	request := client.R()
-	header1 := CommonGetHeader()
-	rsp1, _ := GetRequest(request, url, header1, "MemberLogin.html")
-	fmt.Printf("---------------------------------------\n")
-	fmt.Printf("---------------------------------------\n")
+	header := CommonGetHeader()
+	rsp, _ := GetRequest(request, url, header, "item-4020102654.html")
 
 
+
+	fmt.Printf("---------------------------------------\n")
+	fmt.Printf("------------add car---------------------\n")
 	request = client.R()
-	copyRequestParam(rsp1, request)
-	cookieStr := CopyCookies(rsp1)
+	cookieStr := CopyCookies(rsp)
 	request.SetHeader("cookie", cookieStr)
-	header2 := CommonPostHeader()
-	PostRequest(request, url, header2, nil, "login_result.html")
+	AddCarRequestParam(rsp, request)
+	header = CommonPostHeader()
+	rsp2,_ := PostRequest(request, url, header, nil, "item-add-car.html")
+
+
+	fmt.Printf("---------------------------------------\n")
+	fmt.Printf("--------------look car----------------\n")
+	url2 := "https://www.anadf.com/cn/Cart.aspx"
+	request = client.R()
+	cookieStr = CopyCookies(rsp2)
+	request.SetHeader("cookie", cookieStr)
+	header = CommonGetHeader()
+	GetRequest(request, url2, header, "look-car.html")
+
+
+	fmt.Printf("-----get memberlogin------")
+	//url = "https://www.anadf.com/cn/MemberLogin.aspx"
+	url = "https://www.anadf.com/cn/MemberLogin.aspx?ReturnUrl=cart"
+	request = client.R()
+	request.SetHeader("cookie", cookieStr)
+	header = CommonGetHeader()
+	rsp, _ = GetRequest(request, url, header, "MemberLogin.html")
+
+
+	fmt.Printf("---------------------------------------\n")
+	fmt.Printf("------------login------------------\n")
+	request = client.R()
+	cookieStr = CopyCookies(rsp)
+	request.SetHeader("cookie", cookieStr)
+	LoginRequestParam(rsp, request)
+	header = CommonPostHeader()
+	rsp,_ = PostRequest(request, url, header, nil, "login_result.html")
+
+	fmt.Printf("\n")
+	fmt.Printf("-----customer info------")
+	url = "https://www.anadf.com/cn/ReserveEntry.aspx"
+	request = client.R()
+	cookieStr = CopyCookies(rsp)
+	request.SetHeader("cookie", cookieStr)
+	header = CommonGetHeader()
+	rsp, _ = GetRequest(request, url, header, "customer-info.html")
+
 
 }
 
-func copyRequestParam(response *resty.Response, request *resty.Request) {
+
+func AddCarRequestParam(response *resty.Response, request *resty.Request) {
+	//dom, err := goquery.NewDocumentFromReader(rsp1.RawBody())
+	//fmt.Printf("body=%v", string(rsp1.Body()))
+	dom, err := goquery.NewDocumentFromReader(strings.NewReader(string(response.Body())))
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+
+	__EVENTTARGET, _ := dom.Find("input#__EVENTTARGET").Eq(0).Attr("value")
+	fmt.Printf("__EVENTTARGET=%v\n", __EVENTTARGET)
+
+	__EVENTARGUMENT, _ := dom.Find("input#__EVENTARGUMENT").Eq(0).Attr("value")
+	fmt.Printf("__EVENTARGUMENT=%v\n", __EVENTARGUMENT)
+
+	__LASTFOCUS, _ := dom.Find("input#__LASTFOCUS").Eq(0).Attr("value")
+	fmt.Printf("__LASTFOCUS=%v\n", __LASTFOCUS)
+
+	__VIEWSTATE, _ := dom.Find("input#__VIEWSTATE").Eq(0).Attr("value")
+	fmt.Printf("__VIEWSTATE=%v\n", __VIEWSTATE)
+
+	__VIEWSTATEGENERATOR, _ := dom.Find("div input#__VIEWSTATEGENERATOR").Eq(0).Attr("value")
+	fmt.Printf("__VIEWSTATEGENERATOR=%v\n", __VIEWSTATEGENERATOR)
+
+	__EVENTVALIDATION, _ := dom.Find("div input#__EVENTVALIDATION").Eq(0).Attr("value")
+	fmt.Printf("__EVENTVALIDATION=%v\n", __EVENTVALIDATION)
+
+
+	ddlAirport, _ := dom.Find("div select[name='ctl00$ddlAirport'] option[selected=selected]").Eq(0).Attr("value")
+	fmt.Printf("ctl00$ddlAirport=%v\n", ddlAirport)
+
+	ddlLanguage, _ := dom.Find("div select[name='ctl00$ddlLanguage'] option[selected=selected]").Eq(0).Attr("value")
+	fmt.Printf("ctl00$ddlLanguage=%v\n", ddlLanguage)
+
+	txtKeyword := dom.Find("div input[name='ctl00$txtKeyword']").Eq(0).Text()
+	fmt.Printf("ctl00$txtKeyword=%v\n", txtKeyword)
+
+	form := map[string]string{
+		"__EVENTTARGET":        __EVENTTARGET,
+		"__EVENTARGUMENT":      __EVENTARGUMENT,
+		"__LASTFOCUS":          __LASTFOCUS,
+		"__VIEWSTATEGENERATOR": __VIEWSTATEGENERATOR,
+		"__VIEWSTATE":          __VIEWSTATE,
+		"__EVENTVALIDATION":    __EVENTVALIDATION,
+
+		"ctl00$ddlAirport":                  ddlAirport,
+		"ctl00$ddlLanguage":                 ddlLanguage,
+		"ctl00$txtKeyword":                  txtKeyword,
+
+		"NUM": "1",
+		"airport": "01",
+		"ctl00$ContentPlaceHolder1$ucModalSelectAirport$btnConfirm": "OK",
+	}
+
+	request.SetFormData(form)
+}
+
+
+func LoginRequestParam(response *resty.Response, request *resty.Request) {
 	//dom, err := goquery.NewDocumentFromReader(rsp1.RawBody())
 	//fmt.Printf("body=%v", string(rsp1.Body()))
 	dom, err := goquery.NewDocumentFromReader(strings.NewReader(string(response.Body())))
@@ -90,7 +191,7 @@ func copyRequestParam(response *resty.Response, request *resty.Request) {
 		"__VIEWSTATE":          __VIEWSTATE,
 		"__EVENTVALIDATION":    __EVENTVALIDATION,
 
-		"ctl00$ddlAirport":                  ddlAirport,
+		"ctl00$ddlAirport":                  "01",
 		"ctl00$ddlLanguage":                 ddlLanguage,
 		"ctl00$txtKeyword":                  txtKeyword,
 		"ctl00$ContentPlaceHolder1$txtMail": "getway@moran.cn", //   "sdsdw@126.com"
@@ -105,15 +206,6 @@ func copyRequestParam(response *resty.Response, request *resty.Request) {
 
 
 
-func SetHeader(request *resty.Request, m map[string]string) {
-	if m == nil {
-		return
-	}
-	for k, v := range m {
-		request.SetHeader(k, v)
-	}
-}
-
 func CreateClient() (*resty.Client, error) {
 	client := resty.New().SetTLSClientConfig(&tls.Config{InsecureSkipVerify: true})
 	client.GetClient().CheckRedirect = func(req *http.Request, via []*http.Request) error {
@@ -126,6 +218,7 @@ func CreateClient() (*resty.Client, error) {
 	client.GetClient().Jar = jar
 	return client, nil
 }
+
 
 func PostRequest(request *resty.Request,
 	url string,
@@ -195,6 +288,15 @@ func GetRequest(request *resty.Request, url string, header map[string]string, sa
 
 	ioutil.WriteFile(saveFile, resp.Body(), 0600)
 	return resp, nil
+}
+
+func SetHeader(request *resty.Request, m map[string]string) {
+	if m == nil {
+		return
+	}
+	for k, v := range m {
+		request.SetHeader(k, v)
+	}
 }
 
 
