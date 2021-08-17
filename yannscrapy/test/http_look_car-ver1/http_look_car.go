@@ -23,174 +23,102 @@ func main() {
 	if err != nil {
 		fmt.Println(err)
 	}
-
-	// 搜索商品
-	url := "https://www.anadf.com/cn/ItemDetail.aspx?S_CD="
-	url = url + "4020102654"
-	rsp, _, _ := SearchItem(client, url, "4020102654")
-
-	fmt.Printf("rsp=%v", rsp.Status())
-
-	//  添加商品
-	cookieStr := CopyCookies(rsp)
-	rsp, _, _ = AddItemToCar(client, url, rsp, cookieStr, "01")
-	fmt.Printf("rsp=%v", rsp.Status())
-
-	//
-	// 查看购物车
-	cookieStr = CopyCookies(rsp)
-	url = "https://www.anadf.com/cn/Cart.aspx"
-	LookCar(client, url, cookieStr)
-
-	// 查看登录页面
-	url = "https://www.anadf.com/cn/MemberLogin.aspx?ReturnUrl=cart"
-	rsp, _, _ = GetMemberLogin(client, url, cookieStr)
-
-	// 登录
-	cookieStr = CopyCookies(rsp)
-	url = "https://www.anadf.com/cn/MemberLogin.aspx?ReturnUrl=cart"
-	rsp, _, _ = Login(client, url, rsp, cookieStr)
-
-	// 查看登录后预约页
-	cookieStr = CopyCookies(rsp)
-	url = "https://www.anadf.com/cn/ReserveEntry.aspx"
-	rsp, _, _ = GetReserveEntry(client, url, cookieStr)
-
-	// 提交预约信息
-	cookieStr = CopyCookies(rsp)
-	url = "https://www.anadf.com/cn/ReserveEntry.aspx"
-	rsp, _, _ = PostReserveEntry(client, url, rsp, cookieStr,
-		"20210821", "06", "NH001", "")
-
-	//  查看预约确认
-	cookieStr = CopyCookies(rsp)
-	url = "https://www.anadf.com/cn/ReserveEntryConfirm.aspx"
-	rsp, _, _ = GetReserveEntryConfirm(client, url, cookieStr)
-
-
-	// 提交预约确认
-	//cookieStr = CopyCookies(rsp)
-	url = "https://www.anadf.com/cn/ReserveEntryConfirm.aspx"
-	PostReserveEntryConfirm(client, url, rsp, cookieStr)
-
-	endTime := time.Now()
-	fmt.Printf("end time:%v, cost:%vs\n", endTime.String(), time.Since(beginTime))
-
-}
-
-func SearchItem(client *resty.Client, url string, itemId string) (*resty.Response, int, error) {
-	fmt.Printf("\n\n")
+	//url := "https://www.anadf.com/cn/MemberLogin.aspx"
 	fmt.Printf("-----search item-----")
-
+	url := "https://www.anadf.com/cn/ItemDetail.aspx?S_CD=4020102654"
 	request := client.R()
 	header := CommonGetHeader()
-	filename := "item-" + itemId + ".html"
-	rsp, err := GetRequest(request, url, header, filename)
+	rsp, _ := GetRequest(request, url, header, "item-4020102654.html")
 
-	return rsp, rsp.StatusCode(), err
+	fmt.Printf("rsp=%v", rsp.Status())
+	//fmt.Printf("\n")
+	//fmt.Printf("\n")
+	//fmt.Printf("------------add item to car---------------------\n")
+	//request = client.R()
+	//cookieStr := CopyCookies(rsp)
+	//request.SetHeader("cookie", cookieStr)
+	//AddCarRequestParam(rsp, request)
+	//header = CommonPostHeader()
+	//rsp2, _ := PostRequest(request, url, header, nil, "item-add-car.html")
+	//
+	//fmt.Printf("\n")
+	//fmt.Printf("\n")
+	//fmt.Printf("--------------look Cart----------------\n")
+	//url2 := "https://www.anadf.com/cn/Cart.aspx"
+	//request = client.R()
+	//cookieStr = CopyCookies(rsp2)
+	//request.SetHeader("cookie", cookieStr)
+	//header = CommonGetHeader()
+	//GetRequest(request, url2, header, "Cart.html")
+	//
+	//fmt.Printf("\n")
+	//fmt.Printf("\n")
+	//fmt.Printf("-----get MemberLogin------\n")
+	////url = "https://www.anadf.com/cn/MemberLogin.aspx"
+	//url = "https://www.anadf.com/cn/MemberLogin.aspx?ReturnUrl=cart"
+	//request = client.R()
+	//request.SetHeader("cookie", cookieStr)
+	//header = CommonGetHeader()
+	//rsp, _ = GetRequest(request, url, header, "MemberLogin.html")
+	//
+	//fmt.Printf("\n")
+	//fmt.Printf("\n")
+	//fmt.Printf("------------login------------------\n")
+	//request = client.R()
+	//cookieStr = CopyCookies(rsp)
+	//request.SetHeader("cookie", cookieStr)
+	//LoginRequestParam(rsp, request)
+	//header = CommonPostHeader()
+	//rsp, _ = PostRequest(request, url, header, nil, "MemberLogin-result.html")
+	//
+	//fmt.Printf("\n")
+	//fmt.Printf("\n")
+	//fmt.Printf("-----get ReserveEntry info------\n")
+	//url = "https://www.anadf.com/cn/ReserveEntry.aspx"
+	//request = client.R()
+	//cookieStr = CopyCookies(rsp)
+	//request.SetHeader("cookie", cookieStr)
+	//header = CommonGetHeader()
+	//rsp, _ = GetRequest(request, url, header, "ReserveEntry.html")
+	//
+	//fmt.Printf("\n")
+	//fmt.Printf("\n")
+	//fmt.Printf("-----post ReserveEntry info-----\n")
+	//url = "https://www.anadf.com/cn/ReserveEntry.aspx"
+	//request = client.R()
+	//cookieStr = CopyCookies(rsp)
+	//request.SetHeader("cookie", cookieStr)
+	//PostCustomerInfoRequestParam(rsp, request)
+	//header = CommonPostHeader()
+	//rsp, _ = PostRequest(request, url, header, nil, "ReserveEntry-result.html")
+	//
+	//fmt.Printf("\n")
+	//fmt.Printf("\n")
+	//fmt.Printf("-----get ReserveEntryConfirm info-----\n")
+	//url = "https://www.anadf.com/cn/ReserveEntryConfirm.aspx"
+	//request = client.R()
+	//cookieStr = CopyCookies(rsp)
+	//request.SetHeader("cookie", cookieStr)
+	//header = CommonGetHeader()
+	//GetRequest(request, url, header, "ReserveEntryConfirm.html")
+	//
+	//fmt.Printf("\n")
+	//fmt.Printf("\n")
+	//fmt.Printf("-----post ReserveEntryConfirm-----\n")
+	//url = "https://www.anadf.com/cn/ReserveEntryConfirm.aspx"
+	//request = client.R()
+	//cookieStr = CopyCookies(rsp)
+	//request.SetHeader("cookie", cookieStr)
+	//PostReserveEntryConfirmRequestParam(rsp, request)
+	//header = CommonPostHeader()
+	//PostRequest(request, url, header, nil, "ReserveEntryConfirm.html")
+	//
+	//endTime := time.Now()
+	//fmt.Printf("begin time:%v\n", endTime.String())
+
 }
 
-func AddItemToCar(client *resty.Client, url string, lastRsp *resty.Response, cookieStr string, airPort string) (*resty.Response, int, error) {
-	fmt.Printf("\n")
-	fmt.Printf("\n")
-	fmt.Printf("------------add item to car---------------------\n")
-	request := client.R()
-	request.SetHeader("cookie", cookieStr)
-	AddCarRequestParam(lastRsp, request, airPort)
-	header := CommonPostHeader()
-	rsp, err := PostRequest(request, url, header, nil, "item-add-car.html")
-	return rsp, rsp.StatusCode(), err
-}
-
-func LookCar(client *resty.Client, url string, cookieStr string) (*resty.Response, int, error) {
-	fmt.Printf("\n")
-	fmt.Printf("\n")
-	fmt.Printf("--------------look Cart----------------\n")
-	request := client.R()
-	request.SetHeader("cookie", cookieStr)
-	header := CommonGetHeader()
-	rsp, err := GetRequest(request, url, header, "Cart.html")
-	return rsp, rsp.StatusCode(), err
-}
-
-func GetMemberLogin(client *resty.Client, url string, cookieStr string) (*resty.Response, int, error) {
-	fmt.Printf("\n")
-	fmt.Printf("\n")
-	fmt.Printf("-----get MemberLogin------\n")
-	request := client.R()
-	request.SetHeader("cookie", cookieStr)
-	header := CommonGetHeader()
-	rsp, err := GetRequest(request, url, header, "MemberLogin.html")
-	return rsp, rsp.StatusCode(), err
-}
-
-func Login(client *resty.Client, url string, lastRsp *resty.Response, cookieStr string) (*resty.Response, int, error) {
-	fmt.Printf("\n")
-	fmt.Printf("\n")
-	fmt.Printf("------------login------------------\n")
-	request := client.R()
-	request.SetHeader("cookie", cookieStr)
-	LoginRequestParam(lastRsp, request)
-	header := CommonPostHeader()
-	rsp, err := PostRequest(request, url, header, nil, "MemberLogin-result.html")
-	return rsp, rsp.StatusCode(), err
-}
-
-func GetReserveEntry(client *resty.Client, url string, cookieStr string) (*resty.Response, int, error) {
-	fmt.Printf("\n")
-	fmt.Printf("\n")
-	fmt.Printf("-----get ReserveEntry info------\n")
-	request := client.R()
-	request.SetHeader("cookie", cookieStr)
-	header := CommonGetHeader()
-	rsp, err := GetRequest(request, url, header, "ReserveEntry.html")
-	return rsp, rsp.StatusCode(), err
-}
-
-func PostReserveEntry(client *resty.Client, url string, lastRsp *resty.Response, cookieStr string,
-	departureDate string,
-	ddlStrDateTime string,
-	flightNumber string,
-	txtVisitorName string) (*resty.Response, int, error) {
-	fmt.Printf("\n")
-	fmt.Printf("\n")
-	fmt.Printf("-----post ReserveEntry info-----\n")
-	request := client.R()
-	request.SetHeader("cookie", cookieStr)
-	PostCustomerInfoRequestParam(lastRsp, request,
-		departureDate,
-		ddlStrDateTime,
-		flightNumber,
-		txtVisitorName)
-	header := CommonPostHeader()
-	rsp, err := PostRequest(request, url, header, nil, "ReserveEntry-result.html")
-	return rsp, rsp.StatusCode(), err
-}
-
-func GetReserveEntryConfirm(client *resty.Client, url string, cookieStr string) (*resty.Response, int, error) {
-	fmt.Printf("\n")
-	fmt.Printf("\n")
-	fmt.Printf("-----get ReserveEntryConfirm info-----\n")
-	request := client.R()
-	request.SetHeader("cookie", cookieStr)
-	header := CommonGetHeader()
-	rsp, err := GetRequest(request, url, header, "ReserveEntryConfirm.html")
-	return rsp, rsp.StatusCode(), err
-}
-
-func PostReserveEntryConfirm(client *resty.Client, url string, lastRsp *resty.Response, cookieStr string) (*resty.Response, int, error) {
-	fmt.Printf("\n")
-	fmt.Printf("\n")
-	fmt.Printf("-----post ReserveEntryConfirm-----\n")
-	request := client.R()
-	request.SetHeader("cookie", cookieStr)
-	PostReserveEntryConfirmRequestParam(lastRsp, request)
-	header := CommonPostHeader()
-	rsp, err := PostRequest(request, url, header, nil, "ReserveEntryConfirm.html")
-	return rsp, rsp.StatusCode(), err
-}
-
-func AddCarRequestParam(response *resty.Response, request *resty.Request, airPort string) {
+func AddCarRequestParam(response *resty.Response, request *resty.Request) {
 	//dom, err := goquery.NewDocumentFromReader(rsp1.RawBody())
 	//fmt.Printf("body=%v", string(rsp1.Body()))
 	dom, err := goquery.NewDocumentFromReader(strings.NewReader(string(response.Body())))
@@ -238,25 +166,9 @@ func AddCarRequestParam(response *resty.Response, request *resty.Request, airPor
 		"ctl00$ddlLanguage": ddlLanguage,
 		"ctl00$txtKeyword":  txtKeyword,
 
-		"NUM":     airPort,
+		"NUM":     "1",
 		"airport": "01",
 		"ctl00$ContentPlaceHolder1$ucModalSelectAirport$btnConfirm": "OK",
-
-
-		//"ctl00$ScriptManager1": "ctl00$ContentPlaceHolder1$UpdatePanel_javascript|ctl00$ContentPlaceHolder1$BtnAddCart",
-		//"ctl00$ddlAirport": airPort,
-		//"ctl00$ddlLanguage": "2"
-		//"ctl00$txtKeyword": txtKeyword,
-		//"NUM": "1"
-		//"__EVENTTARGET": "ctl00$ContentPlaceHolder1$BtnAddCart",
-		//"__EVENTARGUMENT":"",
-		//"__LASTFOCUS":"",
-		//"__VIEWSTATE":"",
-		//
-		//"__VIEWSTATEGENERATOR": "E2F80F2D",
-		//"__EVENTVALIDATION": "",
-		//"__ASYNCPOST": "true",
-
 	}
 
 	request.SetFormData(form)
@@ -328,11 +240,7 @@ func LoginRequestParam(response *resty.Response, request *resty.Request) {
 	request.SetFormData(form)
 }
 
-func PostCustomerInfoRequestParam(response *resty.Response, request *resty.Request,
-	departureDate string,
-	ddlStrDateTime string,
-	flightNumber string,
-	txtVisitorName string) {
+func PostCustomerInfoRequestParam(response *resty.Response, request *resty.Request) {
 	//dom, err := goquery.NewDocumentFromReader(rsp1.RawBody())
 	//fmt.Printf("body=%v", string(rsp1.Body()))
 	dom, err := goquery.NewDocumentFromReader(strings.NewReader(string(response.Body())))
@@ -347,8 +255,8 @@ func PostCustomerInfoRequestParam(response *resty.Response, request *resty.Reque
 	__EVENTARGUMENT, _ := dom.Find("input#__EVENTARGUMENT").Eq(0).Attr("value")
 	fmt.Printf("__EVENTARGUMENT=%v\n", __EVENTARGUMENT)
 
-	//__LASTFOCUS, _ := dom.Find("input#__LASTFOCUS").Eq(0).Attr("value")
-	//fmt.Printf("__LASTFOCUS=%v\n", __LASTFOCUS)
+	__LASTFOCUS, _ := dom.Find("input#__LASTFOCUS").Eq(0).Attr("value")
+	fmt.Printf("__LASTFOCUS=%v\n", __LASTFOCUS)
 
 	__VIEWSTATE, _ := dom.Find("input#__VIEWSTATE").Eq(0).Attr("value")
 	fmt.Printf("__VIEWSTATE=%v\n", __VIEWSTATE)
@@ -365,17 +273,27 @@ func PostCustomerInfoRequestParam(response *resty.Response, request *resty.Reque
 	form := map[string]string{
 		"__EVENTTARGET":        __EVENTTARGET,
 		"__EVENTARGUMENT":      __EVENTARGUMENT,
-		//"__LASTFOCUS":          __LASTFOCUS,
+		"__LASTFOCUS":          __LASTFOCUS,
 		"__VIEWSTATEGENERATOR": __VIEWSTATEGENERATOR,
 		"__VIEWSTATE":          __VIEWSTATE,
 		"__EVENTVALIDATION":    __EVENTVALIDATION,
 
 		"ctl00$txtKeyword": txtKeyword,
-		"departureDate": departureDate,
-		"ctl00$ContentPlaceHolder1$ddlStrDateTime": ddlStrDateTime,
-		"flightNumber": flightNumber,
-		"ctl00$ContentPlaceHolder1$txtVisitorName": txtVisitorName,
+
+		"departureDate": "20210820",
+		"ctl00$ContentPlaceHolder1$ddlStrDateTime": "06",
+		"flightNumber": "NH001",
+		"ctl00$ContentPlaceHolder1$txtVisitorName": "",
 		"ctl00$ContentPlaceHolder1$btnConfirm":     "确认输入内容",
+
+		// "ctl00$ddlAirport":  "01",
+		// "ctl00$ddlLanguage": ddlLanguage,
+		// "ctl00$txtKeyword":                  txtKeyword,
+		// "ctl00$ContentPlaceHolder1$txtMail": "getway@moran.cn", //   "sdsdw@126.com"
+		// "ctl00$ContentPlaceHolder1$TxtPASS": "moranjiuye1",     // "123123ab"
+		// "ctl00$ContentPlaceHolder1$txtMail":  "sdsdw@126.com", //"getway@moran.cn",    //"getway@moran.cn"
+		// "ctl00$ContentPlaceHolder1$TxtPASS":  "123123ab",      //"moranjiuye1",
+		// "ctl00$ContentPlaceHolder1$btnLogin": btnLogin,
 	}
 
 	request.SetFormData(form)
