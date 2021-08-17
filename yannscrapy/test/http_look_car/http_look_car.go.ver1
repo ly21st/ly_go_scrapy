@@ -23,50 +23,73 @@ func main() {
 	if err != nil {
 		fmt.Println(err)
 	}
+	//url := "https://www.anadf.com/cn/MemberLogin.aspx"
+	fmt.Printf("-----search item-----")
+	url := "https://www.anadf.com/cn/ItemDetail.aspx?S_CD=4020102654"
+	request := client.R()
+	header := CommonGetHeader()
+	rsp, _ := GetRequest(request, url, header, "item-4020102654.html")
 
-	// 搜索商品
-	url := "https://www.anadf.com/cn/ItemDetail.aspx?S_CD="
-	url += url + "4020102654"
-	rsp, _, _ := SearchItem(client, url, "4020102654")
-
-	//  添加商品
+	fmt.Printf("\n")
+	fmt.Printf("\n")
+	fmt.Printf("------------add item to car---------------------\n")
+	request = client.R()
 	cookieStr := CopyCookies(rsp)
-	rsp, _, _ = AddItemToCar(client, url, rsp, cookieStr)
+	request.SetHeader("cookie", cookieStr)
+	AddCarRequestParam(rsp, request)
+	header = CommonPostHeader()
+	rsp2, _ := PostRequest(request, url, header, nil, "item-add-car.html")
 
-	// 查看购物车
-	cookieStr = CopyCookies(rsp)
-	url = "https://www.anadf.com/cn/Cart.aspx"
-	LookCar(client, url, cookieStr)
+	fmt.Printf("\n")
+	fmt.Printf("\n")
+	fmt.Printf("--------------look Cart----------------\n")
+	url2 := "https://www.anadf.com/cn/Cart.aspx"
+	request = client.R()
+	cookieStr = CopyCookies(rsp2)
+	request.SetHeader("cookie", cookieStr)
+	header = CommonGetHeader()
+	GetRequest(request, url2, header, "Cart.html")
 
-	// 查看登录页面
+	fmt.Printf("\n")
+	fmt.Printf("\n")
+	fmt.Printf("-----get MemberLogin------\n")
+	//url = "https://www.anadf.com/cn/MemberLogin.aspx"
 	url = "https://www.anadf.com/cn/MemberLogin.aspx?ReturnUrl=cart"
-	rsp, _, _ = GetMemberLogin(client, url, cookieStr)
+	request = client.R()
+	request.SetHeader("cookie", cookieStr)
+	header = CommonGetHeader()
+	rsp, _ = GetRequest(request, url, header, "MemberLogin.html")
 
-	// 登录
+	fmt.Printf("\n")
+	fmt.Printf("\n")
+	fmt.Printf("------------login------------------\n")
+	request = client.R()
 	cookieStr = CopyCookies(rsp)
-	url = "https://www.anadf.com/cn/MemberLogin.aspx?ReturnUrl=cart"
-	rsp, _, _ = Login(client, url, rsp, cookieStr)
+	request.SetHeader("cookie", cookieStr)
+	LoginRequestParam(rsp, request)
+	header = CommonPostHeader()
+	rsp, _ = PostRequest(request, url, header, nil, "MemberLogin-result.html")
 
-	// 查看登录后预约页
-	cookieStr = CopyCookies(rsp)
+	fmt.Printf("\n")
+	fmt.Printf("\n")
+	fmt.Printf("-----get ReserveEntry info------\n")
 	url = "https://www.anadf.com/cn/ReserveEntry.aspx"
-	rsp, _, _ = GetReserveEntry(client, url, cookieStr)
-
-	// 提交预约信息
+	request = client.R()
 	cookieStr = CopyCookies(rsp)
-	url = "https://www.anadf.com/cn/ReserveEntry.aspx"
-	rsp, _, _ = PostReserveEntry(client, url, rsp, cookieStr)
+	request.SetHeader("cookie", cookieStr)
+	header = CommonGetHeader()
+	rsp, _ = GetRequest(request, url, header, "ReserveEntry.html")
 
-	// fmt.Printf("\n")
-	// fmt.Printf("\n")
-	// fmt.Printf("-----post ReserveEntry info-----\n")
-	// url = "https://www.anadf.com/cn/ReserveEntry.aspx"
-	// request = client.R()
-	// cookieStr = CopyCookies(rsp)
-	// request.SetHeader("cookie", cookieStr)
-	// PostCustomerInfoRequestParam(rsp, request)
-	// header = CommonPostHeader()
-	// rsp, _ = PostRequest(request, url, header, nil, "ReserveEntry-result.html")
+	fmt.Printf("\n")
+	fmt.Printf("\n")
+	fmt.Printf("-----post ReserveEntry info-----\n")
+	url = "https://www.anadf.com/cn/ReserveEntry.aspx"
+	request = client.R()
+	cookieStr = CopyCookies(rsp)
+	request.SetHeader("cookie", cookieStr)
+	PostCustomerInfoRequestParam(rsp, request)
+	header = CommonPostHeader()
+	rsp, _ = PostRequest(request, url, header, nil, "ReserveEntry-result.html")
 
 	fmt.Printf("\n")
 	fmt.Printf("\n")
@@ -92,87 +115,6 @@ func main() {
 	endTime := time.Now()
 	fmt.Printf("begin time:%v\n", endTime.String())
 
-}
-
-func SearchItem(client *resty.Client, url string, itemId string) (*resty.Response, int, error) {
-	fmt.Printf("\n\n")
-	fmt.Printf("-----search item-----")
-
-	request := client.R()
-	header := CommonGetHeader()
-	filename := "item-" + itemId + ".html"
-	rsp, err := GetRequest(request, url, header, filename)
-
-	return rsp, rsp.StatusCode(), err
-}
-
-func AddItemToCar(client *resty.Client, url string, lastRsp *resty.Response, cookieStr string) (*resty.Response, int, error) {
-	fmt.Printf("\n")
-	fmt.Printf("\n")
-	fmt.Printf("------------add item to car---------------------\n")
-	request := client.R()
-	request.SetHeader("cookie", cookieStr)
-	AddCarRequestParam(lastRsp, request)
-	header := CommonPostHeader()
-	rsp, err := PostRequest(request, url, header, nil, "item-add-car.html")
-	return rsp, rsp.StatusCode(), err
-}
-
-func LookCar(client *resty.Client, url string, cookieStr string) (*resty.Response, int, error) {
-	fmt.Printf("\n")
-	fmt.Printf("\n")
-	fmt.Printf("--------------look Cart----------------\n")
-	request := client.R()
-	request.SetHeader("cookie", cookieStr)
-	header := CommonGetHeader()
-	rsp, err := GetRequest(request, url, header, "Cart.html")
-	return rsp, rsp.StatusCode(), err
-}
-
-func GetMemberLogin(client *resty.Client, url string, cookieStr string) (*resty.Response, int, error) {
-	fmt.Printf("\n")
-	fmt.Printf("\n")
-	fmt.Printf("-----get MemberLogin------\n")
-	request := client.R()
-	request.SetHeader("cookie", cookieStr)
-	header := CommonGetHeader()
-	rsp, err := GetRequest(request, url, header, "MemberLogin.html")
-	return rsp, rsp.StatusCode(), err
-}
-
-func Login(client *resty.Client, url string, lastRsp *resty.Response, cookieStr string) (*resty.Response, int, error) {
-	fmt.Printf("\n")
-	fmt.Printf("\n")
-	fmt.Printf("------------login------------------\n")
-	request := client.R()
-	request.SetHeader("cookie", cookieStr)
-	LoginRequestParam(lastRsp, request)
-	header := CommonPostHeader()
-	rsp, err := PostRequest(request, url, header, nil, "MemberLogin-result.html")
-	return rsp, rsp.StatusCode(), err
-}
-
-func GetReserveEntry(client *resty.Client, url string, cookieStr string) (*resty.Response, int, error) {
-	fmt.Printf("\n")
-	fmt.Printf("\n")
-	fmt.Printf("-----get ReserveEntry info------\n")
-	request := client.R()
-	request.SetHeader("cookie", cookieStr)
-	header := CommonGetHeader()
-	rsp, err := GetRequest(request, url, header, "ReserveEntry.html")
-	return rsp, rsp.StatusCode(), err
-}
-
-func PostReserveEntry(client *resty.Client, url string, lastRsp *resty.Response, cookieStr string) (*resty.Response, int, error) {
-	fmt.Printf("\n")
-	fmt.Printf("\n")
-	fmt.Printf("-----post ReserveEntry info-----\n")
-	request := client.R()
-	request.SetHeader("cookie", cookieStr)
-	PostCustomerInfoRequestParam(lastRsp, request)
-	header := CommonPostHeader()
-	rsp, err := PostRequest(request, url, header, nil, "ReserveEntry-result.html")
-	return rsp, rsp.StatusCode(), err
 }
 
 func AddCarRequestParam(response *resty.Response, request *resty.Request) {
