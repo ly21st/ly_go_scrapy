@@ -57,37 +57,15 @@ func main() {
 	url = "https://www.anadf.com/cn/ReserveEntry.aspx"
 	rsp, _, _ = PostReserveEntry(client, url, rsp, cookieStr)
 
-	// fmt.Printf("\n")
-	// fmt.Printf("\n")
-	// fmt.Printf("-----post ReserveEntry info-----\n")
-	// url = "https://www.anadf.com/cn/ReserveEntry.aspx"
-	// request = client.R()
-	// cookieStr = CopyCookies(rsp)
-	// request.SetHeader("cookie", cookieStr)
-	// PostCustomerInfoRequestParam(rsp, request)
-	// header = CommonPostHeader()
-	// rsp, _ = PostRequest(request, url, header, nil, "ReserveEntry-result.html")
-
-	fmt.Printf("\n")
-	fmt.Printf("\n")
-	fmt.Printf("-----get ReserveEntryConfirm info-----\n")
-	url = "https://www.anadf.com/cn/ReserveEntryConfirm.aspx"
-	request = client.R()
+	//  查看预约确认
 	cookieStr = CopyCookies(rsp)
-	request.SetHeader("cookie", cookieStr)
-	header = CommonGetHeader()
-	GetRequest(request, url, header, "ReserveEntryConfirm.html")
-
-	fmt.Printf("\n")
-	fmt.Printf("\n")
-	fmt.Printf("-----post ReserveEntryConfirm-----\n")
 	url = "https://www.anadf.com/cn/ReserveEntryConfirm.aspx"
-	request = client.R()
+	rsp, _, _ = GetReserveEntryConfirm(client, url, cookieStr)
+
+	// 提交预约确认
 	cookieStr = CopyCookies(rsp)
-	request.SetHeader("cookie", cookieStr)
-	PostReserveEntryConfirmRequestParam(rsp, request)
-	header = CommonPostHeader()
-	PostRequest(request, url, header, nil, "ReserveEntryConfirm.html")
+	url = "https://www.anadf.com/cn/ReserveEntryConfirm.aspx"
+	PostReserveEntryConfirm(client, url, rsp, cookieStr)
 
 	endTime := time.Now()
 	fmt.Printf("begin time:%v\n", endTime.String())
@@ -172,6 +150,29 @@ func PostReserveEntry(client *resty.Client, url string, lastRsp *resty.Response,
 	PostCustomerInfoRequestParam(lastRsp, request)
 	header := CommonPostHeader()
 	rsp, err := PostRequest(request, url, header, nil, "ReserveEntry-result.html")
+	return rsp, rsp.StatusCode(), err
+}
+
+func GetReserveEntryConfirm(client *resty.Client, url string, cookieStr string) (*resty.Response, int, error) {
+	fmt.Printf("\n")
+	fmt.Printf("\n")
+	fmt.Printf("-----get ReserveEntryConfirm info-----\n")
+	request := client.R()
+	request.SetHeader("cookie", cookieStr)
+	header := CommonGetHeader()
+	rsp, err := GetRequest(request, url, header, "ReserveEntryConfirm.html")
+	return rsp, rsp.StatusCode(), err
+}
+
+func PostReserveEntryConfirm(client *resty.Client, url string, lastRsp *resty.Response, cookieStr string) (*resty.Response, int, error) {
+	fmt.Printf("\n")
+	fmt.Printf("\n")
+	fmt.Printf("-----post ReserveEntryConfirm-----\n")
+	request := client.R()
+	request.SetHeader("cookie", cookieStr)
+	PostReserveEntryConfirmRequestParam(lastRsp, request)
+	header := CommonPostHeader()
+	rsp, err := PostRequest(request, url, header, nil, "ReserveEntryConfirm.html")
 	return rsp, rsp.StatusCode(), err
 }
 
