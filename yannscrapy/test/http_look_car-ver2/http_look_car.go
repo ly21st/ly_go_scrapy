@@ -3,14 +3,15 @@ package main
 import (
 	"crypto/tls"
 	"fmt"
-	"github.com/PuerkitoBio/goquery"
-	"gopkg.in/resty.v1"
 	"io/ioutil"
 	"net/http"
 	"net/http/cookiejar"
 	"os"
 	"strings"
 	"time"
+
+	"github.com/PuerkitoBio/goquery"
+	"gopkg.in/resty.v1"
 	//"yannscrapy/logging"
 )
 
@@ -30,50 +31,50 @@ func main() {
 
 	fmt.Printf("rsp=%v", rsp.Status())
 
-	////  添加商品
-	//cookieStr := CopyCookies(rsp)
-	//rsp, _, _ = AddItemToCar(client, url, rsp, cookieStr, "01")
-	//fmt.Printf("rsp=%v", rsp.Status())
+	//  添加商品
+	cookieStr := CopyCookies(rsp)
+	rsp, _, _ = AddItemToCar(client, url, rsp, cookieStr, "01")
+	fmt.Printf("rsp=%v", rsp.Status())
+
 	//
-	////
-	//// 查看购物车
+	// 查看购物车
+	cookieStr = CopyCookies(rsp)
+	url = "https://www.anadf.com/cn/Cart.aspx"
+	LookCar(client, url, cookieStr)
+
+	// 查看登录页面
+	url = "https://www.anadf.com/cn/MemberLogin.aspx?ReturnUrl=cart"
+	rsp, _, _ = GetMemberLogin(client, url, cookieStr)
+
+	// 登录
+	cookieStr = CopyCookies(rsp)
+	url = "https://www.anadf.com/cn/MemberLogin.aspx?ReturnUrl=cart"
+	rsp, _, _ = Login(client, url, rsp, cookieStr)
+
+	// 查看登录后预约页
+	cookieStr = CopyCookies(rsp)
+	url = "https://www.anadf.com/cn/ReserveEntry.aspx"
+	rsp, _, _ = GetReserveEntry(client, url, cookieStr)
+
+	// 提交预约信息
+	cookieStr = CopyCookies(rsp)
+	url = "https://www.anadf.com/cn/ReserveEntry.aspx"
+	rsp, _, _ = PostReserveEntry(client, url, rsp, cookieStr,
+		"20210821", "06", "NH001", "")
+
+	//  查看预约确认
+	cookieStr = CopyCookies(rsp)
+	url = "https://www.anadf.com/cn/ReserveEntryConfirm.aspx"
+	rsp, _, _ = GetReserveEntryConfirm(client, url, cookieStr)
+
+
+	// 提交预约确认
 	//cookieStr = CopyCookies(rsp)
-	//url = "https://www.anadf.com/cn/Cart.aspx"
-	//LookCar(client, url, cookieStr)
-	//
-	//// 查看登录页面
-	//url = "https://www.anadf.com/cn/MemberLogin.aspx?ReturnUrl=cart"
-	//rsp, _, _ = GetMemberLogin(client, url, cookieStr)
-	//
-	//// 登录
-	//cookieStr = CopyCookies(rsp)
-	//url = "https://www.anadf.com/cn/MemberLogin.aspx?ReturnUrl=cart"
-	//rsp, _, _ = Login(client, url, rsp, cookieStr)
-	//
-	//// 查看登录后预约页
-	//cookieStr = CopyCookies(rsp)
-	//url = "https://www.anadf.com/cn/ReserveEntry.aspx"
-	//rsp, _, _ = GetReserveEntry(client, url, cookieStr)
-	//
-	//// 提交预约信息
-	//cookieStr = CopyCookies(rsp)
-	//url = "https://www.anadf.com/cn/ReserveEntry.aspx"
-	//rsp, _, _ = PostReserveEntry(client, url, rsp, cookieStr,
-	//	"20210821", "06", "NH001", "")
-	//
-	////  查看预约确认
-	//cookieStr = CopyCookies(rsp)
-	//url = "https://www.anadf.com/cn/ReserveEntryConfirm.aspx"
-	//rsp, _, _ = GetReserveEntryConfirm(client, url, cookieStr)
-	//
-	//
-	//// 提交预约确认
-	////cookieStr = CopyCookies(rsp)
-	//url = "https://www.anadf.com/cn/ReserveEntryConfirm.aspx"
-	//PostReserveEntryConfirm(client, url, rsp, cookieStr)
-	//
-	//endTime := time.Now()
-	//fmt.Printf("end time:%v, cost:%vs\n", endTime.String(), time.Since(beginTime))
+	url = "https://www.anadf.com/cn/ReserveEntryConfirm.aspx"
+	PostReserveEntryConfirm(client, url, rsp, cookieStr)
+
+	endTime := time.Now()
+	fmt.Printf("end time:%v, cost:%vs\n", endTime.String(), time.Since(beginTime))
 
 }
 
@@ -241,6 +242,7 @@ func AddCarRequestParam(response *resty.Response, request *resty.Request, airPor
 		"airport": "01",
 		"ctl00$ContentPlaceHolder1$ucModalSelectAirport$btnConfirm": "OK",
 
+
 		//"ctl00$ScriptManager1": "ctl00$ContentPlaceHolder1$UpdatePanel_javascript|ctl00$ContentPlaceHolder1$BtnAddCart",
 		//"ctl00$ddlAirport": airPort,
 		//"ctl00$ddlLanguage": "2"
@@ -361,15 +363,15 @@ func PostCustomerInfoRequestParam(response *resty.Response, request *resty.Reque
 	fmt.Printf("ctl00$txtKeyword=%v\n", txtKeyword)
 
 	form := map[string]string{
-		"__EVENTTARGET":   __EVENTTARGET,
-		"__EVENTARGUMENT": __EVENTARGUMENT,
+		"__EVENTTARGET":        __EVENTTARGET,
+		"__EVENTARGUMENT":      __EVENTARGUMENT,
 		//"__LASTFOCUS":          __LASTFOCUS,
 		"__VIEWSTATEGENERATOR": __VIEWSTATEGENERATOR,
 		"__VIEWSTATE":          __VIEWSTATE,
 		"__EVENTVALIDATION":    __EVENTVALIDATION,
 
 		"ctl00$txtKeyword": txtKeyword,
-		"departureDate":    departureDate,
+		"departureDate": departureDate,
 		"ctl00$ContentPlaceHolder1$ddlStrDateTime": ddlStrDateTime,
 		"flightNumber": flightNumber,
 		"ctl00$ContentPlaceHolder1$txtVisitorName": txtVisitorName,
@@ -434,14 +436,6 @@ func CreateClient() (*resty.Client, error) {
 		panic(err)
 	}
 	client.GetClient().Jar = jar
-
-	//ip, _ := utils.GetDefaultHealthProxyIp()
-	//fmt.Printf("ip=%v", ip)
-	//proxy, err := url.Parse(ip)
-	ip := "124.121.2.160"
-	//http.ProxyURL(proxy)
-	client.SetProxy(ip)
-
 	return client, nil
 }
 
