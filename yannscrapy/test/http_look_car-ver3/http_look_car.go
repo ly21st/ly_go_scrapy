@@ -15,8 +15,6 @@ import (
 	//"yannscrapy/logging"
 )
 
-type PostParamHandle func(*resty.Response, *resty.Request, map[string]string)
-
 func main() {
 	beginTime := time.Now()
 	fmt.Printf("begin time:%v\n", beginTime.String())
@@ -26,170 +24,173 @@ func main() {
 		fmt.Println(err)
 	}
 
-	// // 查看首页
-	// url := "https://www.anadf.com/"
-	// rsp, _, _ := CommonGetRequest(client, url, "", "get home page", "home-page.html")
-	// fmt.Printf("rsp=%v", rsp.Status())
-
-	// // 更改机场
-	// cookieStr := CopyCookies(rsp)
-	// url = "https://www.anadf.com/"
-	// rsp, _, _ = CommonPostRequest(client, url, rsp, cookieStr,
-	// 	"post change airPort",
-	// 	"change-airport.html",
-	// 	ChangeAirPortRequestParam,
-	// 	map[string]string{"airPort": "01"})
-
 	// 搜索商品
 	url := "https://www.anadf.com/cn/ItemDetail.aspx?S_CD="
 	url = url + "4020102654"
-	rsp, _, _ := CommonGetRequest(client, url, "", "search item", "item-4020102654.html")
+	rsp, _, _ := SearchItem(client, url, "4020102654")
 
-	//  添加商品
-	cookieStr := CopyCookies(rsp)
-	rsp, _, _ = CommonPostRequest(client, url, rsp, cookieStr,
-		"post add item to car",
-		"add-car.html",
-		AddCarRequestParam,
-		map[string]string{"airPort": "01"})
+	fmt.Printf("rsp=%v", rsp.Status())
 
-	// 查看购物车
-	cookieStr = CopyCookies(rsp)
-	url = "https://www.anadf.com/cn/Cart.aspx"
-	CommonGetRequest(client, url, cookieStr, "look car", "look-car.html")
-
-	// 查看登录页面
-	url = "https://www.anadf.com/cn/MemberLogin.aspx?ReturnUrl=cart"
-	rsp, _, _ = CommonGetRequest(client, url, cookieStr, "get login page", "login-page.html")
-
-	// 登录
-	cookieStr = CopyCookies(rsp)
-	url = "https://www.anadf.com/cn/MemberLogin.aspx?ReturnUrl=cart"
-	rsp, _, _ = CommonPostRequest(client, url, rsp, cookieStr,
-		"post login",
-		"login-result.html",
-		LoginRequestParam,
-		map[string]string{})
-
-	// 查看登录后预约页
-	cookieStr = CopyCookies(rsp)
-	url = "https://www.anadf.com/cn/ReserveEntry.aspx"
-	rsp, _, _ = CommonGetRequest(client, url, cookieStr, "get GetReserveEntry", "GetReserveEntry.html")
-
-	// 提交预约信息
-	cookieStr = CopyCookies(rsp)
-	url = "https://www.anadf.com/cn/ReserveEntry.aspx"
-	rsp, _, _ = CommonPostRequest(client, url, rsp, cookieStr,
-		"post PostReserveEntry",
-		"PostReserveEntry.html",
-		PostCustomerInfoRequestParam,
-		map[string]string{
-			"departureDate":  "20210821",
-			"ddlStrDateTime": "07",
-			"flightNumber":   "NH001",
-			"txtVisitorName": "",
-		})
-
-	//  查看预约确认
-	cookieStr = CopyCookies(rsp)
-	url = "https://www.anadf.com/cn/ReserveEntryConfirm.aspx"
-	rsp, _, _ = CommonGetRequest(client, url, cookieStr, "GetReserveEntryConfirm", "GetReserveEntryConfirm.html")
-
-	// 提交预约确认
+	////  添加商品
+	//cookieStr := CopyCookies(rsp)
+	//rsp, _, _ = AddItemToCar(client, url, rsp, cookieStr, "01")
+	//fmt.Printf("rsp=%v", rsp.Status())
+	//
+	////
+	//// 查看购物车
 	//cookieStr = CopyCookies(rsp)
-	url = "https://www.anadf.com/cn/ReserveEntryConfirm.aspx"
-	CommonPostRequest(client, url, rsp, cookieStr,
-		"PostReserveEntryConfirm",
-		"PostReserveEntryConfirm.html",
-		PostCustomerInfoRequestParam,
-		map[string]string{})
-
-	endTime := time.Now()
-	fmt.Printf("end time:%v, cost:%vs\n", endTime.String(), time.Since(beginTime))
+	//url = "https://www.anadf.com/cn/Cart.aspx"
+	//LookCar(client, url, cookieStr)
+	//
+	//// 查看登录页面
+	//url = "https://www.anadf.com/cn/MemberLogin.aspx?ReturnUrl=cart"
+	//rsp, _, _ = GetMemberLogin(client, url, cookieStr)
+	//
+	//// 登录
+	//cookieStr = CopyCookies(rsp)
+	//url = "https://www.anadf.com/cn/MemberLogin.aspx?ReturnUrl=cart"
+	//rsp, _, _ = Login(client, url, rsp, cookieStr)
+	//
+	//// 查看登录后预约页
+	//cookieStr = CopyCookies(rsp)
+	//url = "https://www.anadf.com/cn/ReserveEntry.aspx"
+	//rsp, _, _ = GetReserveEntry(client, url, cookieStr)
+	//
+	//// 提交预约信息
+	//cookieStr = CopyCookies(rsp)
+	//url = "https://www.anadf.com/cn/ReserveEntry.aspx"
+	//rsp, _, _ = PostReserveEntry(client, url, rsp, cookieStr,
+	//	"20210821", "06", "NH001", "")
+	//
+	////  查看预约确认
+	//cookieStr = CopyCookies(rsp)
+	//url = "https://www.anadf.com/cn/ReserveEntryConfirm.aspx"
+	//rsp, _, _ = GetReserveEntryConfirm(client, url, cookieStr)
+	//
+	//
+	//// 提交预约确认
+	////cookieStr = CopyCookies(rsp)
+	//url = "https://www.anadf.com/cn/ReserveEntryConfirm.aspx"
+	//PostReserveEntryConfirm(client, url, rsp, cookieStr)
+	//
+	//endTime := time.Now()
+	//fmt.Printf("end time:%v, cost:%vs\n", endTime.String(), time.Since(beginTime))
 
 }
 
-func CommonGetRequest(client *resty.Client, url string, cookieStr string, title string, filename string) (*resty.Response, int, error) {
+func SearchItem(client *resty.Client, url string, itemId string) (*resty.Response, int, error) {
 	fmt.Printf("\n\n")
-	fmt.Printf("-----%v-----\n", title)
+	fmt.Printf("-----search item-----")
+
 	request := client.R()
-	if cookieStr != "" {
-		request.SetHeader("cookie", cookieStr)
-	}
 	header := CommonGetHeader()
+	filename := "item-" + itemId + ".html"
 	rsp, err := GetRequest(request, url, header, filename)
+
 	return rsp, rsp.StatusCode(), err
 }
 
-func CommonPostRequest(client *resty.Client, url string, lastRsp *resty.Response,
-	cookieStr string, title string, filename string, fn PostParamHandle, m map[string]string) (*resty.Response, int, error) {
-	fmt.Printf("\n\n")
-	fmt.Printf("-----%v-----\n", title)
+func AddItemToCar(client *resty.Client, url string, lastRsp *resty.Response, cookieStr string, airPort string) (*resty.Response, int, error) {
+	fmt.Printf("\n")
+	fmt.Printf("\n")
+	fmt.Printf("------------add item to car---------------------\n")
 	request := client.R()
-	if cookieStr != "" {
-		request.SetHeader("cookie", cookieStr)
-	}
+	request.SetHeader("cookie", cookieStr)
+	AddCarRequestParam(lastRsp, request, airPort)
 	header := CommonPostHeader()
-	fn(lastRsp, request, m)
-	rsp, err := PostRequest(request, url, header, nil, filename)
+	rsp, err := PostRequest(request, url, header, nil, "item-add-car.html")
 	return rsp, rsp.StatusCode(), err
 }
 
-func ChangeAirPortRequestParam(response *resty.Response, request *resty.Request,
-	m map[string]string) {
-	//dom, err := goquery.NewDocumentFromReader(rsp1.RawBody())
-	//fmt.Printf("body=%v", string(rsp1.Body()))
-	dom, err := goquery.NewDocumentFromReader(strings.NewReader(string(response.Body())))
-	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
-	}
-
-	__EVENTTARGET, _ := dom.Find("input#__EVENTTARGET").Eq(0).Attr("value")
-	fmt.Printf("__EVENTTARGET=%v\n", __EVENTTARGET)
-
-	__EVENTARGUMENT, _ := dom.Find("input#__EVENTARGUMENT").Eq(0).Attr("value")
-	fmt.Printf("__EVENTARGUMENT=%v\n", __EVENTARGUMENT)
-
-	__LASTFOCUS, _ := dom.Find("input#__LASTFOCUS").Eq(0).Attr("value")
-	fmt.Printf("__LASTFOCUS=%v\n", __LASTFOCUS)
-
-	__VIEWSTATE, _ := dom.Find("input#__VIEWSTATE").Eq(0).Attr("value")
-	fmt.Printf("__VIEWSTATE=%v\n", __VIEWSTATE)
-
-	__VIEWSTATEGENERATOR, _ := dom.Find("div input#__VIEWSTATEGENERATOR").Eq(0).Attr("value")
-	fmt.Printf("__VIEWSTATEGENERATOR=%v\n", __VIEWSTATEGENERATOR)
-
-	__EVENTVALIDATION, _ := dom.Find("div input#__EVENTVALIDATION").Eq(0).Attr("value")
-	fmt.Printf("__EVENTVALIDATION=%v\n", __EVENTVALIDATION)
-
-	ddlLanguage, _ := dom.Find("div select[name='ctl00$ddlLanguage'] option[selected=selected]").Eq(0).Attr("value")
-	fmt.Printf("ctl00$ddlLanguage=%v\n", ddlLanguage)
-
-	txtKeyword := dom.Find("div input[name='ctl00$txtKeyword']").Eq(0).Text()
-	fmt.Printf("ctl00$txtKeyword=%v\n", txtKeyword)
-
-	ChangeAirportBtnConfirm, _ := dom.Find("div input[name='ctl00$ucModalChangeAirport$btnConfirm']").Eq(0).Attr("value")
-	fmt.Printf("ctl00$ucModalChangeAirport$btnConfirm=%v\n", ChangeAirportBtnConfirm)
-
-	form := map[string]string{
-		"__EVENTTARGET":        __EVENTTARGET,
-		"__EVENTARGUMENT":      __EVENTARGUMENT,
-		"__LASTFOCUS":          __LASTFOCUS,
-		"__VIEWSTATEGENERATOR": __VIEWSTATEGENERATOR,
-		"__VIEWSTATE":          __VIEWSTATE,
-		"__EVENTVALIDATION":    __EVENTVALIDATION,
-
-		"ctl00$ddlAirport":                      m["airPort"],
-		"ctl00$ddlLanguage":                     ddlLanguage,
-		"ctl00$txtKeyword":                      txtKeyword,
-		"ctl00$ucModalChangeAirport$btnConfirm": ChangeAirportBtnConfirm,
-	}
-
-	request.SetFormData(form)
+func LookCar(client *resty.Client, url string, cookieStr string) (*resty.Response, int, error) {
+	fmt.Printf("\n")
+	fmt.Printf("\n")
+	fmt.Printf("--------------look Cart----------------\n")
+	request := client.R()
+	request.SetHeader("cookie", cookieStr)
+	header := CommonGetHeader()
+	rsp, err := GetRequest(request, url, header, "Cart.html")
+	return rsp, rsp.StatusCode(), err
 }
 
-func AddCarRequestParam(response *resty.Response, request *resty.Request, m map[string]string) {
+func GetMemberLogin(client *resty.Client, url string, cookieStr string) (*resty.Response, int, error) {
+	fmt.Printf("\n")
+	fmt.Printf("\n")
+	fmt.Printf("-----get MemberLogin------\n")
+	request := client.R()
+	request.SetHeader("cookie", cookieStr)
+	header := CommonGetHeader()
+	rsp, err := GetRequest(request, url, header, "MemberLogin.html")
+	return rsp, rsp.StatusCode(), err
+}
+
+func Login(client *resty.Client, url string, lastRsp *resty.Response, cookieStr string) (*resty.Response, int, error) {
+	fmt.Printf("\n")
+	fmt.Printf("\n")
+	fmt.Printf("------------login------------------\n")
+	request := client.R()
+	request.SetHeader("cookie", cookieStr)
+	LoginRequestParam(lastRsp, request)
+	header := CommonPostHeader()
+	rsp, err := PostRequest(request, url, header, nil, "MemberLogin-result.html")
+	return rsp, rsp.StatusCode(), err
+}
+
+func GetReserveEntry(client *resty.Client, url string, cookieStr string) (*resty.Response, int, error) {
+	fmt.Printf("\n")
+	fmt.Printf("\n")
+	fmt.Printf("-----get ReserveEntry info------\n")
+	request := client.R()
+	request.SetHeader("cookie", cookieStr)
+	header := CommonGetHeader()
+	rsp, err := GetRequest(request, url, header, "ReserveEntry.html")
+	return rsp, rsp.StatusCode(), err
+}
+
+func PostReserveEntry(client *resty.Client, url string, lastRsp *resty.Response, cookieStr string,
+	departureDate string,
+	ddlStrDateTime string,
+	flightNumber string,
+	txtVisitorName string) (*resty.Response, int, error) {
+	fmt.Printf("\n")
+	fmt.Printf("\n")
+	fmt.Printf("-----post ReserveEntry info-----\n")
+	request := client.R()
+	request.SetHeader("cookie", cookieStr)
+	PostCustomerInfoRequestParam(lastRsp, request,
+		departureDate,
+		ddlStrDateTime,
+		flightNumber,
+		txtVisitorName)
+	header := CommonPostHeader()
+	rsp, err := PostRequest(request, url, header, nil, "ReserveEntry-result.html")
+	return rsp, rsp.StatusCode(), err
+}
+
+func GetReserveEntryConfirm(client *resty.Client, url string, cookieStr string) (*resty.Response, int, error) {
+	fmt.Printf("\n")
+	fmt.Printf("\n")
+	fmt.Printf("-----get ReserveEntryConfirm info-----\n")
+	request := client.R()
+	request.SetHeader("cookie", cookieStr)
+	header := CommonGetHeader()
+	rsp, err := GetRequest(request, url, header, "ReserveEntryConfirm.html")
+	return rsp, rsp.StatusCode(), err
+}
+
+func PostReserveEntryConfirm(client *resty.Client, url string, lastRsp *resty.Response, cookieStr string) (*resty.Response, int, error) {
+	fmt.Printf("\n")
+	fmt.Printf("\n")
+	fmt.Printf("-----post ReserveEntryConfirm-----\n")
+	request := client.R()
+	request.SetHeader("cookie", cookieStr)
+	PostReserveEntryConfirmRequestParam(lastRsp, request)
+	header := CommonPostHeader()
+	rsp, err := PostRequest(request, url, header, nil, "ReserveEntryConfirm.html")
+	return rsp, rsp.StatusCode(), err
+}
+
+func AddCarRequestParam(response *resty.Response, request *resty.Request, airPort string) {
 	//dom, err := goquery.NewDocumentFromReader(rsp1.RawBody())
 	//fmt.Printf("body=%v", string(rsp1.Body()))
 	dom, err := goquery.NewDocumentFromReader(strings.NewReader(string(response.Body())))
@@ -238,7 +239,7 @@ func AddCarRequestParam(response *resty.Response, request *resty.Request, m map[
 		"ctl00$txtKeyword":  txtKeyword,
 
 		"NUM":     "1",
-		"airport": m["airPort"],
+		"airport": airPort,
 		"ctl00$ContentPlaceHolder1$ucModalSelectAirport$btnConfirm": "OK",
 
 		//"ctl00$ScriptManager1": "ctl00$ContentPlaceHolder1$UpdatePanel_javascript|ctl00$ContentPlaceHolder1$BtnAddCart",
@@ -260,7 +261,7 @@ func AddCarRequestParam(response *resty.Response, request *resty.Request, m map[
 	request.SetFormData(form)
 }
 
-func LoginRequestParam(response *resty.Response, request *resty.Request, m map[string]string) {
+func LoginRequestParam(response *resty.Response, request *resty.Request) {
 	//dom, err := goquery.NewDocumentFromReader(rsp1.RawBody())
 	//fmt.Printf("body=%v", string(rsp1.Body()))
 	dom, err := goquery.NewDocumentFromReader(strings.NewReader(string(response.Body())))
@@ -327,7 +328,10 @@ func LoginRequestParam(response *resty.Response, request *resty.Request, m map[s
 }
 
 func PostCustomerInfoRequestParam(response *resty.Response, request *resty.Request,
-	m map[string]string) {
+	departureDate string,
+	ddlStrDateTime string,
+	flightNumber string,
+	txtVisitorName string) {
 	//dom, err := goquery.NewDocumentFromReader(rsp1.RawBody())
 	//fmt.Printf("body=%v", string(rsp1.Body()))
 	dom, err := goquery.NewDocumentFromReader(strings.NewReader(string(response.Body())))
@@ -366,17 +370,17 @@ func PostCustomerInfoRequestParam(response *resty.Response, request *resty.Reque
 		"__EVENTVALIDATION":    __EVENTVALIDATION,
 
 		"ctl00$txtKeyword": txtKeyword,
-		"departureDate":    m["departureDate"],
-		"ctl00$ContentPlaceHolder1$ddlStrDateTime": m["ddlStrDateTime"],
-		"flightNumber": m["flightNumber"],
-		"ctl00$ContentPlaceHolder1$txtVisitorName": m["txtVisitorName"],
+		"departureDate":    departureDate,
+		"ctl00$ContentPlaceHolder1$ddlStrDateTime": ddlStrDateTime,
+		"flightNumber": flightNumber,
+		"ctl00$ContentPlaceHolder1$txtVisitorName": txtVisitorName,
 		"ctl00$ContentPlaceHolder1$btnConfirm":     "确认输入内容",
 	}
 
 	request.SetFormData(form)
 }
 
-func PostReserveEntryConfirmRequestParam(response *resty.Response, request *resty.Request, m map[string]string) {
+func PostReserveEntryConfirmRequestParam(response *resty.Response, request *resty.Request) {
 	//dom, err := goquery.NewDocumentFromReader(rsp1.RawBody())
 	//fmt.Printf("body=%v", string(rsp1.Body()))
 	dom, err := goquery.NewDocumentFromReader(strings.NewReader(string(response.Body())))
@@ -435,9 +439,9 @@ func CreateClient() (*resty.Client, error) {
 	//ip, _ := utils.GetDefaultHealthProxyIp()
 	//fmt.Printf("ip=%v", ip)
 	//proxy, err := url.Parse(ip)
+	ip := "124.121.2.160"
 	//http.ProxyURL(proxy)
-	// ip := "124.121.2.160"
-	// client.SetProxy(ip)
+	client.SetProxy(ip)
 
 	return client, nil
 }
@@ -458,16 +462,9 @@ func PostRequest(request *resty.Request,
 
 	fmt.Printf("--------------------------------------\n")
 	fmt.Printf("--------------------------------------\n")
+	fmt.Printf("post request form:%v\n", request.FormData.Encode())
 	//fmt.Printf("reqeust:%v\n",request.Body)
 	fmt.Printf("post request header:%v\n", request.Header)
-	for k, v := range request.Header {
-		fmt.Printf("%s: %v\n", k, v)
-	}
-	fmt.Printf("-------------------------\n")
-	fmt.Printf("post request form:%v\n", request.FormData.Encode())
-	for k, v := range request.FormData {
-		fmt.Printf("%s: %v\n", k, v)
-	}
 
 	resp, err := request.Post(url)
 	if err != nil {
@@ -477,16 +474,16 @@ func PostRequest(request *resty.Request,
 
 	fmt.Printf("--------------------------------------\n")
 	fmt.Printf("status=%v\n", resp.Status())
-	fmt.Printf("-----------post response header----------\n")
+	fmt.Printf("------post response header-----\n")
 	for e, v := range resp.Header() {
 		fmt.Printf("%v:%v\n", e, v)
 	}
-	fmt.Printf("----------post response header end----------\n")
-	fmt.Printf("----------post response cookies:\n")
+	fmt.Printf("-----post response header end-----\n")
+	fmt.Printf("-----post response cookies:\n")
 	for i, cookie := range resp.Cookies() {
 		fmt.Printf("%v,%v\n", i, cookie.String())
 	}
-	fmt.Printf("----------post response cookies end\n")
+	fmt.Printf("-----post response cookies end\n")
 
 	ioutil.WriteFile(saveFile, resp.Body(), 0600)
 	return resp, nil
@@ -500,22 +497,18 @@ func GetRequest(request *resty.Request, url string, header map[string]string, sa
 	if err != nil {
 		fmt.Println(err)
 	}
-	fmt.Printf("get request header:\n")
-	for k, v := range request.Header {
-		fmt.Printf("%s: %v\n", k, v)
-	}
 	fmt.Printf("--------------------------------------\n")
 	fmt.Printf("status=%v\n", resp.Status())
-	fmt.Printf("-----------get response header----------\n")
+	fmt.Printf("------get response header-----\n")
 	for e, v := range resp.Header() {
 		fmt.Printf("%v:%v\n", e, v)
 	}
-	fmt.Printf("----------get response header ene-------------\n")
-	fmt.Printf("----------get response cookies:\n")
+	fmt.Printf("-----get response header ene--------\n")
+	fmt.Printf("-----get response cookies:\n")
 	for i, cookie := range resp.Cookies() {
 		fmt.Printf("%v,%v\n", i, cookie.String())
 	}
-	fmt.Printf("----------get response cookies end\n")
+	fmt.Printf("-----get response cookies end\n")
 
 	ioutil.WriteFile(saveFile, resp.Body(), 0600)
 	return resp, nil
