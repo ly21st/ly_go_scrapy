@@ -235,16 +235,9 @@ func ChangeLanguageRequestParam(response *resty.Response, request *resty.Request
 		"__VIEWSTATE":          __VIEWSTATE,
 		"__EVENTVALIDATION":    __EVENTVALIDATION,
 
-
-		ctl00$ddlAirport: 01
-ctl00$ddlLanguage: 2
-ctl00$txtKeyword:
-
-
-		"ctl00$ddlAirport":                      m["airPort"],
-		"ctl00$ddlLanguage":                     ddlLanguage,
-		"ctl00$txtKeyword":                      txtKeyword,
-		"ctl00$ucModalChangeAirport$btnConfirm": ChangeAirportBtnConfirm,
+		"ctl00$ddlAirport":  m["airPort"],
+		"ctl00$ddlLanguage": m["language"],
+		"ctl00$txtKeyword":  txtKeyword,
 	}
 
 	request.SetFormData(form)
