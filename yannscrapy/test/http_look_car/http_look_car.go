@@ -26,83 +26,84 @@ func main() {
 		fmt.Println(err)
 	}
 
-	// // 查看首页
-	// url := "https://www.anadf.com/"
-	// rsp, _, _ := CommonGetRequest(client, url, "", "get home page", "home-page.html")
-	// fmt.Printf("rsp=%v", rsp.Status())
+	// 查看首页
+	url := "https://www.anadf.com/"
+	rsp, _, _ := CommonGetRequest(client, url, "", "get home page", "home-page.html")
+	fmt.Printf("rsp=%v", rsp.Status())
 
-	// // 更改机场
-	// cookieStr := CopyCookies(rsp)
-	// url = "https://www.anadf.com/"
-	// rsp, _, _ = CommonPostRequest(client, url, rsp, cookieStr,
-	// 	"post change airPort",
-	// 	"change-airport.html",
-	// 	ChangeAirPortRequestParam,
-	// 	map[string]string{"airPort": "01"})
+	// 更改机场
+	cookieStr := CopyCookies(rsp)
+	url = "https://www.anadf.com/"
+	rsp, _, _ = CommonPostRequest(client, url, rsp, cookieStr,
+		"post change airPort",
+		"change-airport.html",
+		ChangeAirPortRequestParam,
+		map[string]string{"airPort": "01"})
+	fmt.Printf("rsp=%v", rsp.Status())
 
 	// 搜索商品
-	url := "https://www.anadf.com/cn/ItemDetail.aspx?S_CD="
-	url = url + "4020102654"
-	rsp, _, _ := CommonGetRequest(client, url, "", "search item", "item-4020102654.html")
+	// url := "https://www.anadf.com/cn/ItemDetail.aspx?S_CD="
+	// url = url + "4020102654"
+	// rsp, _, _ := CommonGetRequest(client, url, "", "search item", "item-4020102654.html")
 
-	//  添加商品
-	cookieStr := CopyCookies(rsp)
-	rsp, _, _ = CommonPostRequest(client, url, rsp, cookieStr,
-		"post add item to car",
-		"add-car.html",
-		AddCarRequestParam,
-		map[string]string{"airPort": "01"})
+	// //  添加商品
+	// cookieStr := CopyCookies(rsp)
+	// rsp, _, _ = CommonPostRequest(client, url, rsp, cookieStr,
+	// 	"post add item to car",
+	// 	"add-car.html",
+	// 	AddCarRequestParam,
+	// 	map[string]string{"airPort": "01"})
 
-	// 查看购物车
-	cookieStr = CopyCookies(rsp)
-	url = "https://www.anadf.com/cn/Cart.aspx"
-	CommonGetRequest(client, url, cookieStr, "look car", "look-car.html")
+	// // 查看购物车
+	// cookieStr = CopyCookies(rsp)
+	// url = "https://www.anadf.com/cn/Cart.aspx"
+	// CommonGetRequest(client, url, cookieStr, "look car", "look-car.html")
 
-	// 查看登录页面
-	url = "https://www.anadf.com/cn/MemberLogin.aspx?ReturnUrl=cart"
-	rsp, _, _ = CommonGetRequest(client, url, cookieStr, "get login page", "login-page.html")
+	// // 查看登录页面
+	// url = "https://www.anadf.com/cn/MemberLogin.aspx?ReturnUrl=cart"
+	// rsp, _, _ = CommonGetRequest(client, url, cookieStr, "get login page", "login-page.html")
 
-	// 登录
-	cookieStr = CopyCookies(rsp)
-	url = "https://www.anadf.com/cn/MemberLogin.aspx?ReturnUrl=cart"
-	rsp, _, _ = CommonPostRequest(client, url, rsp, cookieStr,
-		"post login",
-		"login-result.html",
-		LoginRequestParam,
-		map[string]string{})
+	// // 登录
+	// cookieStr = CopyCookies(rsp)
+	// url = "https://www.anadf.com/cn/MemberLogin.aspx?ReturnUrl=cart"
+	// rsp, _, _ = CommonPostRequest(client, url, rsp, cookieStr,
+	// 	"post login",
+	// 	"login-result.html",
+	// 	LoginRequestParam,
+	// 	map[string]string{})
 
-	// 查看登录后预约页
-	cookieStr = CopyCookies(rsp)
-	url = "https://www.anadf.com/cn/ReserveEntry.aspx"
-	rsp, _, _ = CommonGetRequest(client, url, cookieStr, "get GetReserveEntry", "GetReserveEntry.html")
+	// // 查看登录后预约页
+	// cookieStr = CopyCookies(rsp)
+	// url = "https://www.anadf.com/cn/ReserveEntry.aspx"
+	// rsp, _, _ = CommonGetRequest(client, url, cookieStr, "get GetReserveEntry", "GetReserveEntry.html")
 
-	// 提交预约信息
-	cookieStr = CopyCookies(rsp)
-	url = "https://www.anadf.com/cn/ReserveEntry.aspx"
-	rsp, _, _ = CommonPostRequest(client, url, rsp, cookieStr,
-		"post PostReserveEntry",
-		"PostReserveEntry.html",
-		PostCustomerInfoRequestParam,
-		map[string]string{
-			"departureDate":  "20210821",
-			"ddlStrDateTime": "07",
-			"flightNumber":   "NH001",
-			"txtVisitorName": "",
-		})
+	// // 提交预约信息
+	// cookieStr = CopyCookies(rsp)
+	// url = "https://www.anadf.com/cn/ReserveEntry.aspx"
+	// rsp, _, _ = CommonPostRequest(client, url, rsp, cookieStr,
+	// 	"post PostReserveEntry",
+	// 	"PostReserveEntry.html",
+	// 	PostCustomerInfoRequestParam,
+	// 	map[string]string{
+	// 		"departureDate":  "20210821",
+	// 		"ddlStrDateTime": "07",
+	// 		"flightNumber":   "NH001",
+	// 		"txtVisitorName": "",
+	// 	})
 
-	//  查看预约确认
-	cookieStr = CopyCookies(rsp)
-	url = "https://www.anadf.com/cn/ReserveEntryConfirm.aspx"
-	rsp, _, _ = CommonGetRequest(client, url, cookieStr, "GetReserveEntryConfirm", "GetReserveEntryConfirm.html")
+	// //  查看预约确认
+	// cookieStr = CopyCookies(rsp)
+	// url = "https://www.anadf.com/cn/ReserveEntryConfirm.aspx"
+	// rsp, _, _ = CommonGetRequest(client, url, cookieStr, "GetReserveEntryConfirm", "GetReserveEntryConfirm.html")
 
-	// 提交预约确认
-	//cookieStr = CopyCookies(rsp)
-	url = "https://www.anadf.com/cn/ReserveEntryConfirm.aspx"
-	CommonPostRequest(client, url, rsp, cookieStr,
-		"PostReserveEntryConfirm",
-		"PostReserveEntryConfirm.html",
-		PostCustomerInfoRequestParam,
-		map[string]string{})
+	// // 提交预约确认
+	// //cookieStr = CopyCookies(rsp)
+	// url = "https://www.anadf.com/cn/ReserveEntryConfirm.aspx"
+	// CommonPostRequest(client, url, rsp, cookieStr,
+	// 	"PostReserveEntryConfirm",
+	// 	"PostReserveEntryConfirm.html",
+	// 	PostCustomerInfoRequestParam,
+	// 	map[string]string{})
 
 	endTime := time.Now()
 	fmt.Printf("end time:%v, cost:%vs\n", endTime.String(), time.Since(beginTime))
@@ -179,6 +180,66 @@ func ChangeAirPortRequestParam(response *resty.Response, request *resty.Request,
 		"__VIEWSTATEGENERATOR": __VIEWSTATEGENERATOR,
 		"__VIEWSTATE":          __VIEWSTATE,
 		"__EVENTVALIDATION":    __EVENTVALIDATION,
+
+		"ctl00$ddlAirport":                      m["airPort"],
+		"ctl00$ddlLanguage":                     ddlLanguage,
+		"ctl00$txtKeyword":                      txtKeyword,
+		"ctl00$ucModalChangeAirport$btnConfirm": ChangeAirportBtnConfirm,
+	}
+
+	request.SetFormData(form)
+}
+
+func ChangeLanguageRequestParam(response *resty.Response, request *resty.Request,
+	m map[string]string) {
+	//dom, err := goquery.NewDocumentFromReader(rsp1.RawBody())
+	//fmt.Printf("body=%v", string(rsp1.Body()))
+	dom, err := goquery.NewDocumentFromReader(strings.NewReader(string(response.Body())))
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+
+	__EVENTTARGET, _ := dom.Find("input#__EVENTTARGET").Eq(0).Attr("value")
+	fmt.Printf("__EVENTTARGET=%v\n", __EVENTTARGET)
+
+	__EVENTARGUMENT, _ := dom.Find("input#__EVENTARGUMENT").Eq(0).Attr("value")
+	fmt.Printf("__EVENTARGUMENT=%v\n", __EVENTARGUMENT)
+
+	__LASTFOCUS, _ := dom.Find("input#__LASTFOCUS").Eq(0).Attr("value")
+	fmt.Printf("__LASTFOCUS=%v\n", __LASTFOCUS)
+
+	__VIEWSTATE, _ := dom.Find("input#__VIEWSTATE").Eq(0).Attr("value")
+	fmt.Printf("__VIEWSTATE=%v\n", __VIEWSTATE)
+
+	__VIEWSTATEGENERATOR, _ := dom.Find("div input#__VIEWSTATEGENERATOR").Eq(0).Attr("value")
+	fmt.Printf("__VIEWSTATEGENERATOR=%v\n", __VIEWSTATEGENERATOR)
+
+	__EVENTVALIDATION, _ := dom.Find("div input#__EVENTVALIDATION").Eq(0).Attr("value")
+	fmt.Printf("__EVENTVALIDATION=%v\n", __EVENTVALIDATION)
+
+	ddlLanguage, _ := dom.Find("div select[name='ctl00$ddlLanguage'] option[selected=selected]").Eq(0).Attr("value")
+	fmt.Printf("ctl00$ddlLanguage=%v\n", ddlLanguage)
+
+	txtKeyword := dom.Find("div input[name='ctl00$txtKeyword']").Eq(0).Text()
+	fmt.Printf("ctl00$txtKeyword=%v\n", txtKeyword)
+
+	ChangeAirportBtnConfirm, _ := dom.Find("div input[name='ctl00$ucModalChangeAirport$btnConfirm']").Eq(0).Attr("value")
+	fmt.Printf("ctl00$ucModalChangeAirport$btnConfirm=%v\n", ChangeAirportBtnConfirm)
+
+	form := map[string]string{
+		"__EVENTTARGET":        __EVENTTARGET,
+		"__EVENTARGUMENT":      __EVENTARGUMENT,
+		"__LASTFOCUS":          __LASTFOCUS,
+		"__VIEWSTATEGENERATOR": __VIEWSTATEGENERATOR,
+		"__VIEWSTATE":          __VIEWSTATE,
+		"__EVENTVALIDATION":    __EVENTVALIDATION,
+
+
+		ctl00$ddlAirport: 01
+ctl00$ddlLanguage: 2
+ctl00$txtKeyword:
+
 
 		"ctl00$ddlAirport":                      m["airPort"],
 		"ctl00$ddlLanguage":                     ddlLanguage,

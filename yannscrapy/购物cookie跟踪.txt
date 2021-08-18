@@ -1,7 +1,22 @@
 查看首页
 
-ASP.NET_SessionId=qv4hrkvbpitnhrcmzqf5uqds; _ga=GA1.2.1732153783.1627459858; _rcmdjp_user_id=www.anadf.com-56111407; check_cookie=true; visitorid=20210728171204154398; MasterLanguageType=2; ADFWEB_CloseAlertAirportModal2=True; ADFWEB_SessionId=; _rcmdjp_history_click=4020101331_cn; KeyWord_HEADER=; SCD=; AirPort=; Brand=; Cate_Sub=; Cate_S=; Cate_M=; Cate_L=; PriceUpper=; PriceLower=; Recommended=; DFonly=; NewItem=; GroupCode=; ViewDate=; IsForce=; KeisaiFlg=; LimitedQty=; VariationCode=; ShowItemOfNoAirport=False; _gid=GA1.2.2084875500.1629080142; MasterMenuAirport2=01; KeyWord=; Sort=0; _rcmdjp_history_view=4020102653_cn,4020102654_cn,4020101331_cn; JSESSIONID=D047CB9AA6A404BF5702C86686AB0D4F; token_2_2=WTv5nQmM9ht6Gy7YAFi62OjgNhcdjC5tmQJRXecEbjGnyKPJws1EGNNN3XGghx3tbnC8+d2c8/bvXzaHCaS6T1wzWk5T1uq/oRAVRhfLDsR3EP+p+TP3wPE2ytGWPcADD2S/BpxptfGLdFPzTy0GmA==; token_2_0=pzWSXHa8AnRKx5fPCKTn1Nl8FreG6Pp8qSQNfZ3jSOjcIvNhuiwJoCBoUdzUgj9XgtjyloPFGOQIFAN2ZLzRCFKN2b1nNBrF6iYHkCG9p0Q1wqwY4IJKOXlzTxCfxbX50wWiI7d1NVVnvqWcSImeig==; _gat=1
+ASP.NET_SessionId=qv4hrkvbpitnhrcmzqf5uqds; _ga=GA1.2.1732153783.1627459858; _rcmdjp_user_id=www.anadf.com-56111407; check_cookie=true; visitorid=20210728171204154398; MasterLanguageType=2; ADFWEB_CloseAlertAirportModal2=True; ADFWEB_SessionId=; _rcmdjp_history_click=4020101331_cn; KeyWord_HEADER=; SCD=; AirPort=; Brand=; Cate_Sub=; Cate_S=; Cate_M=; Cate_L=; PriceUpper=; PriceLower=; Recommended=; DFonly=; NewItem=; GroupCode=; ViewDate=; IsForce=; KeisaiFlg=; LimitedQty=; VariationCode=; ShowItemOfNoAirport=False; _gid=GA1.2.2084875500.1629080142; KeyWord=; Sort=0; _rcmdjp_history_view=4020102653_cn,4020102654_cn,4020101331_cn; MasterMenuAirport2=22; token_2_2=VYPgopnUAaOfXlVEYqdt3uUTeUqxn80WFwrbla/h3RBLibVI1E+yWgZMG7wCWC1hCvDm8JH2FHUkD1MdQRoFr0Zp5ZVvxefQiZ19SU5GP5oA4dEFiirrj1HPGiI87W2euoZcF0bhdHEFpFFAYHrQSw==; token_2_0=7hCGdx9stikdp3i7hOk+a6JQUdXyikisRHViamcogx0HzN8S/D799hDjKOsDzEKne2eQAQv1belj7N2lpryCCV4CN3OE5kJdEkFID/yR0fQw5EC6Uv19sfmqPUP2dsbFet/9B7rCBNfTBWT5pLrB3A==; JSESSIONID=DA8F57E9AF0B1311C64F875D5B59A211
 
 
+响应cookie为空
+
+-------------------
+更改机场
+
+ASP.NET_SessionId=qv4hrkvbpitnhrcmzqf5uqds; _ga=GA1.2.1732153783.1627459858; _rcmdjp_user_id=www.anadf.com-56111407; check_cookie=true; visitorid=20210728171204154398; MasterLanguageType=2; ADFWEB_CloseAlertAirportModal2=True; ADFWEB_SessionId=; _rcmdjp_history_click=4020101331_cn; KeyWord_HEADER=; SCD=; AirPort=; Brand=; Cate_Sub=; Cate_S=; Cate_M=; Cate_L=; PriceUpper=; PriceLower=; Recommended=; DFonly=; NewItem=; GroupCode=; ViewDate=; IsForce=; KeisaiFlg=; LimitedQty=; VariationCode=; ShowItemOfNoAirport=False; _gid=GA1.2.2084875500.1629080142; KeyWord=; Sort=0; _rcmdjp_history_view=4020102653_cn,4020102654_cn,4020101331_cn; MasterMenuAirport2=22; token_2_0=7hCGdx9stikdp3i7hOk+a6JQUdXyikisRHViamcogx0HzN8S/D799hDjKOsDzEKne2eQAQv1belj7N2lpryCCV4CN3OE5kJdEkFID/yR0fQw5EC6Uv19sfmqPUP2dsbFet/9B7rCBNfTBWT5pLrB3A==; JSESSIONID=DA8F57E9AF0B1311C64F875D5B59A211; token_2_2=HxF6iCjCqcJjRrAElLcMhcPdWc3hw6BlLdd2+IR9iEAh3xp/Tt6gsmAlz84SXWUQZ3l7gf/JHB2VmR/JciVit6OCtqOE9XfEnDzoiKz5Gc06WaqGr5MJ2jnxJ7V6h220ERan4pRXeb8mFZl8C95o9Q==
 
 
+响应cookie
+MasterMenuAirport2=01; expires=Thu, 25-Nov-2021 08:57:50 GMT; path=/; secure
+
+---------------------------------------------
+更改语言
+
+ASP.NET_SessionId=qv4hrkvbpitnhrcmzqf5uqds; _ga=GA1.2.1732153783.1627459858; _rcmdjp_user_id=www.anadf.com-56111407; check_cookie=true; visitorid=20210728171204154398; MasterLanguageType=2; ADFWEB_CloseAlertAirportModal2=True; ADFWEB_SessionId=; _rcmdjp_history_click=4020101331_cn; KeyWord_HEADER=; SCD=; AirPort=; Brand=; Cate_Sub=; Cate_S=; Cate_M=; Cate_L=; PriceUpper=; PriceLower=; Recommended=; DFonly=; NewItem=; GroupCode=; ViewDate=; IsForce=; KeisaiFlg=; LimitedQty=; VariationCode=; ShowItemOfNoAirport=False; _gid=GA1.2.2084875500.1629080142; KeyWord=; Sort=0; _rcmdjp_history_view=4020102653_cn,4020102654_cn,4020101331_cn; token_2_0=7hCGdx9stikdp3i7hOk+a6JQUdXyikisRHViamcogx0HzN8S/D799hDjKOsDzEKne2eQAQv1belj7N2lpryCCV4CN3OE5kJdEkFID/yR0fQw5EC6Uv19sfmqPUP2dsbFet/9B7rCBNfTBWT5pLrB3A==; JSESSIONID=DA8F57E9AF0B1311C64F875D5B59A211; token_2_2=HxF6iCjCqcJjRrAElLcMhcPdWc3hw6BlLdd2+IR9iEAh3xp/Tt6gsmAlz84SXWUQZ3l7gf/JHB2VmR/JciVit6OCtqOE9XfEnDzoiKz5Gc06WaqGr5MJ2jnxJ7V6h220ERan4pRXeb8mFZl8C95o9Q==; MasterMenuAirport2=01
+
+MasterLanguageType=2; expires=Thu, 18-Aug-2022 09:04:36 GMT; path=/; secure
