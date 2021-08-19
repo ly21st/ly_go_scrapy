@@ -1,39 +1,26 @@
-查看首页
+登录
+check_cookie=true; ASP.NET_SessionId=qv4hrkvbpitnhrcmzqf5uqds; _ga=GA1.2.1732153783.1627459858; _rcmdjp_user_id=www.anadf.com-56111407; check_cookie=true; visitorid=20210728171204154398; MasterLanguageType=2; ADFWEB_CloseAlertAirportModal2=True; ADFWEB_SessionId=; _rcmdjp_history_click=4020101331_cn; KeyWord_HEADER=; SCD=; AirPort=; Brand=; Cate_Sub=; Cate_S=; Cate_M=; Cate_L=; PriceUpper=; PriceLower=; Recommended=; DFonly=; NewItem=; GroupCode=; ViewDate=; IsForce=; KeisaiFlg=; LimitedQty=; VariationCode=; ShowItemOfNoAirport=False; _gid=GA1.2.2084875500.1629080142; KeyWord=; Sort=0; _rcmdjp_history_view=4020102653_cn,4020102654_cn,4020101331_cn; MasterMenuAirport2=01; _gat=1; JSESSIONID=ABE0E5E894E075FACD61CF75F483AB41; token_2_0=jyAdAcnPiQ2nYE5G5tNIOYpb6HuJ8QqxhdLYEiLvbbNPR1FgSuFjPcj1X+S4F7ohqTQxZBfLrCVVA7yFnoOhbI+5W/6gjb9ZSTcPWZ997psD5RXvNXa4hgmVlfzf+z/BaPXdoxzEtwhlB+3mrwzLeg==; token_2_2=PNsylK22MkYxKmeh6q+Bdy3FF3dwwy9XU4YI+oFBxQkqMOjwqZ2IuJu3gONaYS/cN3Dvunvx4CXqy7FhEfr7jKPr70l6AzWjQ1Ijy6xvak4QI1dWwluEeMK0C5jDznUw84b9/grsStK557uZGncpvw==
 
-ASP.NET_SessionId=xkdt0aqt15phml43qchl3e1c; _ga=GA1.2.1652256127.1627650499; _rcmdjp_user_id=www.anadf.com-1346743333; check_cookie=true; visitorid=20210730220818358570; ADFWEB_CloseAlertAirportModal2=True; MasterLanguageType=2; ADFWEB_SessionId=; KeyWord_HEADER=; SCD=; Brand=; Cate_Sub=; Cate_S=; Cate_M=; Cate_L=; PriceUpper=; PriceLower=; Recommended=; DFonly=; NewItem=; GroupCode=; ViewDate=; IsForce=; KeisaiFlg=; LimitedQty=; VariationCode=; ShowItemOfNoAirport=False; QueryString=Search1Airport=01; AirPort=; _gid=GA1.2.1520344673.1628775541; KeyWord=; Sort=0; MasterMenuAirport2=01; _rcmdjp_history_view=4020102654_cn,4020101134_cn,4020102653_cn,1110100011_cn,4020101114_cn,4010200485_cn,4020100126_cn,1110100089_cn,4020101903_cn,4020101846_cn,4020102380_cn,7000071019_cn,4020102571_cn,4010201956_cn,4020102652_cn,4020101396_cn,4010102087_cn,4010102426_cn; token_2_2=mC7ryStD2K0zBY4b6FsIJN1YgJPDTUFKl3lPAxfEwOLpz4MfuMsb1ZddoTd/3hJGcp50KkJgx54m+CWvpBSULWawQ3NJDQfkYRT7q2Ppze0ssS6+dnUCeg/69VghqpDnVfJ2zzlnibDnreCA8zE2Ng==; token_2_0=AWV1h7RErIQ7VOIgqjRG0emNaPgOKaLmqpmYBf5LSjspp1iguOqMFFstZelX94gMcIf0wXaRNAoZMYT2nbhWxgR6PfEqYVy0t/LTdtTMYllqfs/78woihQjf0hlin/fOHBoG4MB2+ZeDsqqeOwB0jw==; JSESSIONID=E0B0BDE7C663D5C1F184F1E057B50902
+响应
+token_2_2=KySxVNGu5WZD/Yd4yAkXJqUR64lmtFxr63j2odTn9++NM4J1YC4AaTerBxY2NEbZy56d0u+LJspbTSQSnrKVnPpzpTkizeFIOhU0iO5y1vJ0JP1MMldLMa5qHifuHv55BQvlbiglxVPzqlOFV+S8+Q==; path=/; secure
 
+--------------------------------------------
 
-响应cookie为空
-
--------------------
-更改机场
-
-ASP.NET_SessionId=xkdt0aqt15phml43qchl3e1c; _ga=GA1.2.1652256127.1627650499; _rcmdjp_user_id=www.anadf.com-1346743333; check_cookie=true; visitorid=20210730220818358570; ADFWEB_CloseAlertAirportModal2=True; MasterLanguageType=2; ADFWEB_SessionId=; KeyWord_HEADER=; SCD=; Brand=; Cate_Sub=; Cate_S=; Cate_M=; Cate_L=; PriceUpper=; PriceLower=; Recommended=; DFonly=; NewItem=; GroupCode=; ViewDate=; IsForce=; KeisaiFlg=; LimitedQty=; VariationCode=; ShowItemOfNoAirport=False; QueryString=Search1Airport=01; AirPort=; _gid=GA1.2.1520344673.1628775541; KeyWord=; Sort=0; MasterMenuAirport2=01; _rcmdjp_history_view=4020102654_cn,4020101134_cn,4020102653_cn,1110100011_cn,4020101114_cn,4010200485_cn,4020100126_cn,1110100089_cn,4020101903_cn,4020101846_cn,4020102380_cn,7000071019_cn,4020102571_cn,4010201956_cn,4020102652_cn,4020101396_cn,4010102087_cn,4010102426_cn; token_2_2=mC7ryStD2K0zBY4b6FsIJN1YgJPDTUFKl3lPAxfEwOLpz4MfuMsb1ZddoTd/3hJGcp50KkJgx54m+CWvpBSULWawQ3NJDQfkYRT7q2Ppze0ssS6+dnUCeg/69VghqpDnVfJ2zzlnibDnreCA8zE2Ng==; token_2_0=AWV1h7RErIQ7VOIgqjRG0emNaPgOKaLmqpmYBf5LSjspp1iguOqMFFstZelX94gMcIf0wXaRNAoZMYT2nbhWxgR6PfEqYVy0t/LTdtTMYllqfs/78woihQjf0hlin/fOHBoG4MB2+ZeDsqqeOwB0jw==; JSESSIONID=E0B0BDE7C663D5C1F184F1E057B50902
-
-响应cookie
-MasterMenuAirport2=22; expires=Thu, 25-Nov-2021 12:38:21 GMT; path=/; secure
-
----------------------------------------------
-
-查看首页
-
-ASP.NET_SessionId=xkdt0aqt15phml43qchl3e1c; _ga=GA1.2.1652256127.1627650499; _rcmdjp_user_id=www.anadf.com-1346743333; check_cookie=true; visitorid=20210730220818358570; ADFWEB_CloseAlertAirportModal2=True; MasterLanguageType=2; ADFWEB_SessionId=; KeyWord_HEADER=; SCD=; Brand=; Cate_Sub=; Cate_S=; Cate_M=; Cate_L=; PriceUpper=; PriceLower=; Recommended=; DFonly=; NewItem=; GroupCode=; ViewDate=; IsForce=; KeisaiFlg=; LimitedQty=; VariationCode=; ShowItemOfNoAirport=False; QueryString=Search1Airport=01; AirPort=; _gid=GA1.2.1520344673.1628775541; KeyWord=; Sort=0; _rcmdjp_history_view=4020102654_cn,4020101134_cn,4020102653_cn,1110100011_cn,4020101114_cn,4010200485_cn,4020100126_cn,1110100089_cn,4020101903_cn,4020101846_cn,4020102380_cn,7000071019_cn,4020102571_cn,4010201956_cn,4020102652_cn,4020101396_cn,4010102087_cn,4010102426_cn; token_2_2=mC7ryStD2K0zBY4b6FsIJN1YgJPDTUFKl3lPAxfEwOLpz4MfuMsb1ZddoTd/3hJGcp50KkJgx54m+CWvpBSULWawQ3NJDQfkYRT7q2Ppze0ssS6+dnUCeg/69VghqpDnVfJ2zzlnibDnreCA8zE2Ng==; token_2_0=AWV1h7RErIQ7VOIgqjRG0emNaPgOKaLmqpmYBf5LSjspp1iguOqMFFstZelX94gMcIf0wXaRNAoZMYT2nbhWxgR6PfEqYVy0t/LTdtTMYllqfs/78woihQjf0hlin/fOHBoG4MB2+ZeDsqqeOwB0jw==; JSESSIONID=E0B0BDE7C663D5C1F184F1E057B50902; MasterMenuAirport2=22
+查看个人页
+check_cookie=true; ASP.NET_SessionId=qv4hrkvbpitnhrcmzqf5uqds; _ga=GA1.2.1732153783.1627459858; _rcmdjp_user_id=www.anadf.com-56111407; check_cookie=true; visitorid=20210728171204154398; MasterLanguageType=2; ADFWEB_CloseAlertAirportModal2=True; ADFWEB_SessionId=; _rcmdjp_history_click=4020101331_cn; KeyWord_HEADER=; SCD=; AirPort=; Brand=; Cate_Sub=; Cate_S=; Cate_M=; Cate_L=; PriceUpper=; PriceLower=; Recommended=; DFonly=; NewItem=; GroupCode=; ViewDate=; IsForce=; KeisaiFlg=; LimitedQty=; VariationCode=; ShowItemOfNoAirport=False; _gid=GA1.2.2084875500.1629080142; KeyWord=; Sort=0; _rcmdjp_history_view=4020102653_cn,4020102654_cn,4020101331_cn; MasterMenuAirport2=01; JSESSIONID=ABE0E5E894E075FACD61CF75F483AB41; token_2_0=jyAdAcnPiQ2nYE5G5tNIOYpb6HuJ8QqxhdLYEiLvbbNPR1FgSuFjPcj1X+S4F7ohqTQxZBfLrCVVA7yFnoOhbI+5W/6gjb9ZSTcPWZ997psD5RXvNXa4hgmVlfzf+z/BaPXdoxzEtwhlB+3mrwzLeg==; token_2_2=KySxVNGu5WZD/Yd4yAkXJqUR64lmtFxr63j2odTn9++NM4J1YC4AaTerBxY2NEbZy56d0u+LJspbTSQSnrKVnPpzpTkizeFIOhU0iO5y1vJ0JP1MMldLMa5qHifuHv55BQvlbiglxVPzqlOFV+S8+Q==; .ADFWEBFORMSAUTH=6A4D79E8C227BB88C2B956F3F29E0B6A285EFEE503C1B3BC1B20BFA10B8A206886C121B35C485301F5224072178895961CDCBB42BE976F82DCA5B5EF31C687A2056ED9E9F45CB198B43C0DB92AA01BB3A4945B0CB48689D5538650D612CE7D9BEBF39821
 
 
-响应cookie为空
+响应
 
--------------------------------------------------
+token_2_2=g4tGdlhChD8i2iiEEM5BveI615hz734ZpC7Wr6o0/kMBsgeXMNCJyhzYwouZRs+YbMPusE0VtVYt8pcqirtTTzv/iWfSyMq2GQdlhj5qz0ochycr+azhwv7E6jVh3o5Ne1Pk6NJ9TqNIheu5lNsGMA==; path=/; secure
 
-改变语言
+----------------------------
+查看商品
 
-ASP.NET_SessionId=xkdt0aqt15phml43qchl3e1c; _ga=GA1.2.1652256127.1627650499; _rcmdjp_user_id=www.anadf.com-1346743333; check_cookie=true; visitorid=20210730220818358570; ADFWEB_CloseAlertAirportModal2=True; MasterLanguageType=2; ADFWEB_SessionId=; KeyWord_HEADER=; SCD=; Brand=; Cate_Sub=; Cate_S=; Cate_M=; Cate_L=; PriceUpper=; PriceLower=; Recommended=; DFonly=; NewItem=; GroupCode=; ViewDate=; IsForce=; KeisaiFlg=; LimitedQty=; VariationCode=; ShowItemOfNoAirport=False; QueryString=Search1Airport=01; AirPort=; _gid=GA1.2.1520344673.1628775541; KeyWord=; Sort=0; _rcmdjp_history_view=4020102654_cn,4020101134_cn,4020102653_cn,1110100011_cn,4020101114_cn,4010200485_cn,4020100126_cn,1110100089_cn,4020101903_cn,4020101846_cn,4020102380_cn,7000071019_cn,4020102571_cn,4010201956_cn,4020102652_cn,4020101396_cn,4010102087_cn,4010102426_cn; token_2_2=mC7ryStD2K0zBY4b6FsIJN1YgJPDTUFKl3lPAxfEwOLpz4MfuMsb1ZddoTd/3hJGcp50KkJgx54m+CWvpBSULWawQ3NJDQfkYRT7q2Ppze0ssS6+dnUCeg/69VghqpDnVfJ2zzlnibDnreCA8zE2Ng==; token_2_0=AWV1h7RErIQ7VOIgqjRG0emNaPgOKaLmqpmYBf5LSjspp1iguOqMFFstZelX94gMcIf0wXaRNAoZMYT2nbhWxgR6PfEqYVy0t/LTdtTMYllqfs/78woihQjf0hlin/fOHBoG4MB2+ZeDsqqeOwB0jw==; JSESSIONID=E0B0BDE7C663D5C1F184F1E057B50902; MasterMenuAirport2=22
-
-MasterLanguageType=2; expires=Thu, 18-Aug-2022 12:46:27 GMT; path=/; secure
-
----------------------------------------
-查看首页
-check_cookie=true; ASP.NET_SessionId=xkdt0aqt15phml43qchl3e1c; _ga=GA1.2.1652256127.1627650499; _rcmdjp_user_id=www.anadf.com-1346743333; check_cookie=true; visitorid=20210730220818358570; ADFWEB_CloseAlertAirportModal2=True; MasterLanguageType=2; ADFWEB_SessionId=; KeyWord_HEADER=; SCD=; Brand=; Cate_Sub=; Cate_S=; Cate_M=; Cate_L=; PriceUpper=; PriceLower=; Recommended=; DFonly=; NewItem=; GroupCode=; ViewDate=; IsForce=; KeisaiFlg=; LimitedQty=; VariationCode=; ShowItemOfNoAirport=False; QueryString=Search1Airport=01; AirPort=; _gid=GA1.2.1520344673.1628775541; KeyWord=; Sort=0; _rcmdjp_history_view=4020102654_cn,4020101134_cn,4020102653_cn,1110100011_cn,4020101114_cn,4010200485_cn,4020100126_cn,1110100089_cn,4020101903_cn,4020101846_cn,4020102380_cn,7000071019_cn,4020102571_cn,4010201956_cn,4020102652_cn,4020101396_cn,4010102087_cn,4010102426_cn; token_2_2=mC7ryStD2K0zBY4b6FsIJN1YgJPDTUFKl3lPAxfEwOLpz4MfuMsb1ZddoTd/3hJGcp50KkJgx54m+CWvpBSULWawQ3NJDQfkYRT7q2Ppze0ssS6+dnUCeg/69VghqpDnVfJ2zzlnibDnreCA8zE2Ng==; token_2_0=AWV1h7RErIQ7VOIgqjRG0emNaPgOKaLmqpmYBf5LSjspp1iguOqMFFstZelX94gMcIf0wXaRNAoZMYT2nbhWxgR6PfEqYVy0t/LTdtTMYllqfs/78woihQjf0hlin/fOHBoG4MB2+ZeDsqqeOwB0jw==; JSESSIONID=E0B0BDE7C663D5C1F184F1E057B50902; MasterMenuAirport2=22
+check_cookie=true; ASP.NET_SessionId=qv4hrkvbpitnhrcmzqf5uqds; _ga=GA1.2.1732153783.1627459858; _rcmdjp_user_id=www.anadf.com-56111407; check_cookie=true; visitorid=20210728171204154398; MasterLanguageType=2; ADFWEB_CloseAlertAirportModal2=True; ADFWEB_SessionId=; _rcmdjp_history_click=4020101331_cn; KeyWord_HEADER=; SCD=; AirPort=; Brand=; Cate_Sub=; Cate_S=; Cate_M=; Cate_L=; PriceUpper=; PriceLower=; Recommended=; DFonly=; NewItem=; GroupCode=; ViewDate=; IsForce=; KeisaiFlg=; LimitedQty=; VariationCode=; ShowItemOfNoAirport=False; _gid=GA1.2.2084875500.1629080142; KeyWord=; Sort=0; MasterMenuAirport2=01; JSESSIONID=ABE0E5E894E075FACD61CF75F483AB41; token_2_0=jyAdAcnPiQ2nYE5G5tNIOYpb6HuJ8QqxhdLYEiLvbbNPR1FgSuFjPcj1X+S4F7ohqTQxZBfLrCVVA7yFnoOhbI+5W/6gjb9ZSTcPWZ997psD5RXvNXa4hgmVlfzf+z/BaPXdoxzEtwhlB+3mrwzLeg==; token_2_2=g4tGdlhChD8i2iiEEM5BveI615hz734ZpC7Wr6o0/kMBsgeXMNCJyhzYwouZRs+YbMPusE0VtVYt8pcqirtTTzv/iWfSyMq2GQdlhj5qz0ochycr+azhwv7E6jVh3o5Ne1Pk6NJ9TqNIheu5lNsGMA==; .ADFWEBFORMSAUTH=DBE72A4F14DF2219FAF76FDFEF42C2E4AE9505E451362B78A4C738136BF62788BCE464FF8DB9FC5454CB87518B389C751C83AD2ADAD6C1630E1EC20D21DD200AEA2BD11520CEF8D63E44160BD5D5D2DE19AD80D7C331652E429875F69EFA7BA086F1951C; _rcmdjp_history_view=4020102654_cn,4020102653_cn,4020101331_cn
 
 
-响应cookie
-ADFWEB_SessionId=; path=/; secure
+响应没有cookie
+
+
+
