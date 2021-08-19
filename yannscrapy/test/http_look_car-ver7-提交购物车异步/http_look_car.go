@@ -322,8 +322,8 @@ func AddCarRequestParam(response *resty.Response, request *resty.Request, m map[
 		"__VIEWSTATE":          m["__VIEWSTATE"],
 		"__EVENTVALIDATION":    m["__EVENTVALIDATION"],
 
-		// "ctl00$ddlAirport":  m["ctl00$ddlAirport"],
-		"ctl00$ddlAirport":  m["ctl00$ddlAirport"],
+		"ctl00$ddlAirport":  m["airport"],
+		//"ctl00$ddlAirport":  m["ctl00$ddlAirport"],
 		"ctl00$ddlLanguage": m["ctl00$ddlLanguage"],
 		"ctl00$txtKeyword":  m["ctl00$txtKeyword"],
 
