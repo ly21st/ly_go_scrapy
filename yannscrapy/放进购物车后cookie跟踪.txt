@@ -1,0 +1,30 @@
+查看购物车
+check_cookie=true; ASP.NET_SessionId=qv4hrkvbpitnhrcmzqf5uqds; _ga=GA1.2.1732153783.1627459858; _rcmdjp_user_id=www.anadf.com-56111407; check_cookie=true; visitorid=20210728171204154398; MasterLanguageType=2; ADFWEB_CloseAlertAirportModal2=True; ADFWEB_SessionId=; _rcmdjp_history_click=4020101331_cn; KeyWord_HEADER=; SCD=; AirPort=; Brand=; Cate_Sub=; Cate_S=; Cate_M=; Cate_L=; PriceUpper=; PriceLower=; Recommended=; DFonly=; NewItem=; GroupCode=; ViewDate=; IsForce=; KeisaiFlg=; LimitedQty=; VariationCode=; ShowItemOfNoAirport=False; _gid=GA1.2.2084875500.1629080142; KeyWord=; Sort=0; _rcmdjp_history_view=4020102654_cn,4020102653_cn,4020101331_cn; DateLastViewNews=20210819; token_2_0=Wo0JveyELuKOl0ZCidPkV3jDwilb7TwbFGaGvwx0O5LdqRIlCqADt8qWwm419qTw6Y9QE81bCC5o6v7ile1D336kU/O6aVyL7PQ7YMQbHeFeftVH6Yf9DfYco8SeL07XHeS6paux3+/nG/DRaLZ9dg==; MasterMenuAirport2=01; JSESSIONID=9AFD7DFFED86167530D4D2C3F0543543; .ADFWEBFORMSAUTH=A5526DFFD48D406FF4BE5BB092A771EA4ADBC824270F47D84595F4F43F3F25883EE2B1AB389C4A69D867616D422B73AFAE4276F490C58F242EADF390E2BBA97E1E0804AB20CACC613B75A7423F3CCAB7A9A0BF138DED6FBDCC16969DE25888AF51731909; token_2_2=uwMPam/3PvJl9Hng8vJzR+lH1sfCTMApDvu6FPpmV8SOt08juNxCFv+fF3lOwzT9BJCQX2pCJnvA69ocUZe8p7RIljfKyIke5pOSmkhMMsYveIZGiC6yHB4kENMFozhbUbner5shgrAu7GvuMYzErQ==
+
+
+响应
+token_2_2=48x0XiUYvbDnHTOWMwD8Dco8RkuovuvbFPJlLmf59XE2Yu/LpXTwZcrVbXo0CLfME7iREw9Q+BryK6KQ8XFZft4QIYVNmzoawM+vkoUnv0o8qhER9HYp/vxNMKdBwSGoBC1fxgYciRHnuExlfGh+WQ==; path=/; secure
+
+---------------------------------------------------
+
+查看输入顾客信息
+check_cookie=true; ASP.NET_SessionId=qv4hrkvbpitnhrcmzqf5uqds; _ga=GA1.2.1732153783.1627459858; _rcmdjp_user_id=www.anadf.com-56111407; check_cookie=true; visitorid=20210728171204154398; MasterLanguageType=2; ADFWEB_CloseAlertAirportModal2=True; ADFWEB_SessionId=; _rcmdjp_history_click=4020101331_cn; KeyWord_HEADER=; SCD=; AirPort=; Brand=; Cate_Sub=; Cate_S=; Cate_M=; Cate_L=; PriceUpper=; PriceLower=; Recommended=; DFonly=; NewItem=; GroupCode=; ViewDate=; IsForce=; KeisaiFlg=; LimitedQty=; VariationCode=; ShowItemOfNoAirport=False; _gid=GA1.2.2084875500.1629080142; KeyWord=; Sort=0; _rcmdjp_history_view=4020102654_cn,4020102653_cn,4020101331_cn; DateLastViewNews=20210819; token_2_0=Wo0JveyELuKOl0ZCidPkV3jDwilb7TwbFGaGvwx0O5LdqRIlCqADt8qWwm419qTw6Y9QE81bCC5o6v7ile1D336kU/O6aVyL7PQ7YMQbHeFeftVH6Yf9DfYco8SeL07XHeS6paux3+/nG/DRaLZ9dg==; MasterMenuAirport2=01; JSESSIONID=9AFD7DFFED86167530D4D2C3F0543543; .ADFWEBFORMSAUTH=CEC2A2ED3DBBDAE19FEB6FAB718352435724B89F778F7CBA202C7E72EA840CF3968438D1E705B8DAA8F9879002F109760992F8453C648F70DC77ADB1DE86315A199D0F8F8FFB04D7266FB98E5B5D03F19FDD0C2E72E10DA117B87952C64165AE918A1A28; token_2_2=48x0XiUYvbDnHTOWMwD8Dco8RkuovuvbFPJlLmf59XE2Yu/LpXTwZcrVbXo0CLfME7iREw9Q+BryK6KQ8XFZft4QIYVNmzoawM+vkoUnv0o8qhER9HYp/vxNMKdBwSGoBC1fxgYciRHnuExlfGh+WQ==
+
+
+响应没cookie
+
+-----------------------------
+
+确认顾客信息
+check_cookie=true; ASP.NET_SessionId=qv4hrkvbpitnhrcmzqf5uqds; _ga=GA1.2.1732153783.1627459858; _rcmdjp_user_id=www.anadf.com-56111407; check_cookie=true; visitorid=20210728171204154398; MasterLanguageType=2; ADFWEB_CloseAlertAirportModal2=True; ADFWEB_SessionId=; _rcmdjp_history_click=4020101331_cn; KeyWord_HEADER=; SCD=; AirPort=; Brand=; Cate_Sub=; Cate_S=; Cate_M=; Cate_L=; PriceUpper=; PriceLower=; Recommended=; DFonly=; NewItem=; GroupCode=; ViewDate=; IsForce=; KeisaiFlg=; LimitedQty=; VariationCode=; ShowItemOfNoAirport=False; _gid=GA1.2.2084875500.1629080142; KeyWord=; Sort=0; _rcmdjp_history_view=4020102654_cn,4020102653_cn,4020101331_cn; DateLastViewNews=20210819; token_2_0=Wo0JveyELuKOl0ZCidPkV3jDwilb7TwbFGaGvwx0O5LdqRIlCqADt8qWwm419qTw6Y9QE81bCC5o6v7ile1D336kU/O6aVyL7PQ7YMQbHeFeftVH6Yf9DfYco8SeL07XHeS6paux3+/nG/DRaLZ9dg==; MasterMenuAirport2=01; JSESSIONID=9AFD7DFFED86167530D4D2C3F0543543; .ADFWEBFORMSAUTH=CEC2A2ED3DBBDAE19FEB6FAB718352435724B89F778F7CBA202C7E72EA840CF3968438D1E705B8DAA8F9879002F109760992F8453C648F70DC77ADB1DE86315A199D0F8F8FFB04D7266FB98E5B5D03F19FDD0C2E72E10DA117B87952C64165AE918A1A28; token_2_2=48x0XiUYvbDnHTOWMwD8Dco8RkuovuvbFPJlLmf59XE2Yu/LpXTwZcrVbXo0CLfME7iREw9Q+BryK6KQ8XFZft4QIYVNmzoawM+vkoUnv0o8qhER9HYp/vxNMKdBwSGoBC1fxgYciRHnuExlfGh+WQ==
+
+响应无cookie
+
+
+--------------------------
+查看确认页
+check_cookie=true; ASP.NET_SessionId=qv4hrkvbpitnhrcmzqf5uqds; _ga=GA1.2.1732153783.1627459858; _rcmdjp_user_id=www.anadf.com-56111407; check_cookie=true; visitorid=20210728171204154398; MasterLanguageType=2; ADFWEB_CloseAlertAirportModal2=True; ADFWEB_SessionId=; _rcmdjp_history_click=4020101331_cn; KeyWord_HEADER=; SCD=; AirPort=; Brand=; Cate_Sub=; Cate_S=; Cate_M=; Cate_L=; PriceUpper=; PriceLower=; Recommended=; DFonly=; NewItem=; GroupCode=; ViewDate=; IsForce=; KeisaiFlg=; LimitedQty=; VariationCode=; ShowItemOfNoAirport=False; _gid=GA1.2.2084875500.1629080142; KeyWord=; Sort=0; _rcmdjp_history_view=4020102654_cn,4020102653_cn,4020101331_cn; DateLastViewNews=20210819; token_2_0=Wo0JveyELuKOl0ZCidPkV3jDwilb7TwbFGaGvwx0O5LdqRIlCqADt8qWwm419qTw6Y9QE81bCC5o6v7ile1D336kU/O6aVyL7PQ7YMQbHeFeftVH6Yf9DfYco8SeL07XHeS6paux3+/nG/DRaLZ9dg==; MasterMenuAirport2=01; JSESSIONID=9AFD7DFFED86167530D4D2C3F0543543; .ADFWEBFORMSAUTH=CEC2A2ED3DBBDAE19FEB6FAB718352435724B89F778F7CBA202C7E72EA840CF3968438D1E705B8DAA8F9879002F109760992F8453C648F70DC77ADB1DE86315A199D0F8F8FFB04D7266FB98E5B5D03F19FDD0C2E72E10DA117B87952C64165AE918A1A28; token_2_2=48x0XiUYvbDnHTOWMwD8Dco8RkuovuvbFPJlLmf59XE2Yu/LpXTwZcrVbXo0CLfME7iREw9Q+BryK6KQ8XFZft4QIYVNmzoawM+vkoUnv0o8qhER9HYp/vxNMKdBwSGoBC1fxgYciRHnuExlfGh+WQ==
+
+响应无cookie
+
+---------------------------

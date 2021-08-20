@@ -31,7 +31,11 @@ func main() {
 	rsp, _, _ := CommonGetRequest(client, url, "", "get login page", "login-page.html")
 
 	// 登录
-	m := map[string]string{}
+	m := map[string]string{
+		"userName": "getway@moran.cn",
+		"password": "moranjiuye1",
+	}
+
 	cookieStr := CopyCookies(rsp)
 	url = "https://www.anadf.com/cn/MemberLogin.aspx"
 	rsp, _, _ = CommonPostRequest(client, url, rsp, cookieStr,
@@ -41,26 +45,10 @@ func main() {
 		m)
 	fmt.Printf("rsp:%v\n", rsp.StatusCode())
 
-	// 查看个人页
-	//url = "https://www.anadf.com/cn/MyPage.aspx"
-	//cookieStr = CopyCookies(rsp)
-	//rsp, _, _ = CommonGetRequest(client, url, cookieStr, "get my page", "my-page.html")
-	//GetLoginData(rsp, m)
-
-	// 改变机场
-	//cookieStr = CopyCookies(rsp)
-	//url = "https://www.anadf.com/cn/MemberLogin.aspx"
-	//m["airport"] = "01"
-	//rsp, _, _ = CommonPostRequest(client, url, rsp, cookieStr,
-	//	"change airport",
-	//	"change-airport.html",
-	//	ChangeAirPortRequestParam,
-	//	m)
-	//fmt.Printf("rsp:%v\n", rsp.StatusCode())
-
 	beforeAddItemTime := time.Now()
 
 	//搜索商品
+	cookieStr = CopyCookies(rsp)
 	url = "https://www.anadf.com/cn/ItemDetail.aspx?S_CD=4020102654"
 	rsp, _, _ = CommonGetRequest(client, url, cookieStr, "search item", "item-4020102654.html")
 
@@ -77,59 +65,46 @@ func main() {
 		m)
 	fmt.Printf("%v", rsp.StatusCode())
 
-	// // 查看购物车
+	// 查看购物车
 	// cookieStr = CopyCookies(rsp)
 	// url = "https://www.anadf.com/cn/Cart.aspx"
 	// CommonGetRequest(client, url, cookieStr, "look car", "look-car.html")
 
-	// // 查看登录页面
-	// url = "https://www.anadf.com/cn/MemberLogin.aspx?ReturnUrl=cart"
-	// rsp, _, _ = CommonGetRequest(client, url, cookieStr, "get login page", "login-page.html")
+	// 查看预约页
+	cookieStr = CopyCookies(rsp)
+	url = "https://www.anadf.com/cn/ReserveEntry.aspx"
+	rsp, _, _ = CommonGetRequest(client, url, cookieStr, "get GetReserveEntry", "GetReserveEntry.html")
 
-	// // 登录
-	// cookieStr = CopyCookies(rsp)
-	// url = "https://www.anadf.com/cn/MemberLogin.aspx?ReturnUrl=cart"
-	// rsp, _, _ = CommonPostRequest(client, url, rsp, cookieStr,
-	// 	"post login",
-	// 	"login-result.html",
-	// 	LoginRequestParam,
-	// 	map[string]string{})
+	// 提交预约信息
+	GetLoginData(rsp, m)
+	m["departureDate"] = "20210823"
+	m["ddlStrDateTime"] = "07"
+	m["flightNumber"] = "NH001"
+	m["txtVisitorName"] = ""
+	cookieStr = CopyCookies(rsp)
+	url = "https://www.anadf.com/cn/ReserveEntry.aspx"
+	rsp, _, _ = CommonPostRequest(client, url, rsp, cookieStr,
+		"post PostReserveEntry",
+		"PostReserveEntry.html",
+		PostCustomerInfoRequestParam,
+		m)
 
-	// // 查看登录后预约页
-	// cookieStr = CopyCookies(rsp)
-	// url = "https://www.anadf.com/cn/ReserveEntry.aspx"
-	// rsp, _, _ = CommonGetRequest(client, url, cookieStr, "get GetReserveEntry", "GetReserveEntry.html")
+	//  查看预约确认
+	cookieStr = CopyCookies(rsp)
+	url = "https://www.anadf.com/cn/ReserveEntryConfirm.aspx"
+	rsp, _, _ = CommonGetRequest(client, url, cookieStr, "GetReserveEntryConfirm", "GetReserveEntryConfirm.html")
 
-	// // 提交预约信息
-	// cookieStr = CopyCookies(rsp)
-	// url = "https://www.anadf.com/cn/ReserveEntry.aspx"
-	// rsp, _, _ = CommonPostRequest(client, url, rsp, cookieStr,
-	// 	"post PostReserveEntry",
-	// 	"PostReserveEntry.html",
-	// 	PostCustomerInfoRequestParam,
-	// 	map[string]string{
-	// 		"departureDate":  "20210821",
-	// 		"ddlStrDateTime": "07",
-	// 		"flightNumber":   "NH001",
-	// 		"txtVisitorName": "",
-	// 	})
-
-	// //  查看预约确认
-	// cookieStr = CopyCookies(rsp)
-	// url = "https://www.anadf.com/cn/ReserveEntryConfirm.aspx"
-	// rsp, _, _ = CommonGetRequest(client, url, cookieStr, "GetReserveEntryConfirm", "GetReserveEntryConfirm.html")
-
-	// // 提交预约确认
-	// //cookieStr = CopyCookies(rsp)
-	// url = "https://www.anadf.com/cn/ReserveEntryConfirm.aspx"
-	// CommonPostRequest(client, url, rsp, cookieStr,
-	// 	"PostReserveEntryConfirm",
-	// 	"PostReserveEntryConfirm.html",
-	// 	PostCustomerInfoRequestParam,
-	// 	map[string]string{})
+	// 提交预约确认
+	GetReserveEntryConfirmData(rsp, m)
+	url = "https://www.anadf.com/cn/ReserveEntryConfirm.aspx"
+	CommonPostRequest(client, url, rsp, cookieStr,
+		"PostReserveEntryConfirm",
+		"PostReserveEntryConfirm.html",
+		PostReserveEntryConfirmRequestParam,
+		m)
 
 	endTime := time.Now()
-	fmt.Printf("end time:%v, cost:%vs, cost2:%vs\n", endTime.String(), time.Since(beginTime), time.Since(beforeAddItemTime))
+	fmt.Printf("end time:%v, cost:%v, cost2:%v\n", endTime.String(), time.Since(beginTime), time.Since(beforeAddItemTime))
 
 }
 
@@ -141,64 +116,67 @@ func GetLoginData(response *resty.Response, m map[string]string) {
 	}
 
 	__EVENTTARGET, _ := dom.Find("input#__EVENTTARGET").Eq(0).Attr("value")
-	fmt.Printf("__EVENTTARGET=%v\n", __EVENTTARGET)
-
 	m["__EVENTTARGET"] = __EVENTTARGET
 
 	__EVENTARGUMENT, _ := dom.Find("input#__EVENTARGUMENT").Eq(0).Attr("value")
-	fmt.Printf("__EVENTARGUMENT=%v\n", __EVENTARGUMENT)
-
 	m["__EVENTARGUMENT"] = __EVENTARGUMENT
 
 	__LASTFOCUS, _ := dom.Find("input#__LASTFOCUS").Eq(0).Attr("value")
-	fmt.Printf("__LASTFOCUS=%v\n", __LASTFOCUS)
-
 	m["__LASTFOCUS"] = __LASTFOCUS
 
 	__VIEWSTATE, _ := dom.Find("input#__VIEWSTATE").Eq(0).Attr("value")
-	fmt.Printf("__VIEWSTATE=%v\n", __VIEWSTATE)
-
 	m["__VIEWSTATE"] = __VIEWSTATE
 
 	__VIEWSTATEGENERATOR, _ := dom.Find("div input#__VIEWSTATEGENERATOR").Eq(0).Attr("value")
-	fmt.Printf("__VIEWSTATEGENERATOR=%v\n", __VIEWSTATEGENERATOR)
-
 	m["__VIEWSTATEGENERATOR"] = __VIEWSTATEGENERATOR
 
 	__EVENTVALIDATION, _ := dom.Find("div input#__EVENTVALIDATION").Eq(0).Attr("value")
-	fmt.Printf("__EVENTVALIDATION=%v\n", __EVENTVALIDATION)
-
 	m["__EVENTVALIDATION"] = __EVENTVALIDATION
 
 	ddlAirport, _ := dom.Find("div select[name='ctl00$ddlAirport'] option[selected=selected]").Eq(0).Attr("value")
-	fmt.Printf("ctl00$ddlAirport=%v\n", ddlAirport)
-
 	m["ctl00$ddlAirport"] = ddlAirport
 
 	ddlLanguage, _ := dom.Find("div select[name='ctl00$ddlLanguage'] option[selected=selected]").Eq(0).Attr("value")
-	fmt.Printf("ctl00$ddlLanguage=%v\n", ddlLanguage)
-
 	m["ctl00$ddlLanguage"] = ddlLanguage
 
 	txtKeyword := dom.Find("div input[name='ctl00$txtKeyword']").Eq(0).Text()
-	fmt.Printf("ctl00$txtKeyword=%v\n", txtKeyword)
-
 	m["ctl00$txtKeyword"] = txtKeyword
 
 	txtMail := dom.Find("div input[name='ctl00$ContentPlaceHolder1$txtMail']").Eq(0).Text()
-	fmt.Printf("ctl00$ContentPlaceHolder1$txtMail=%v\n", txtMail)
-
 	m["ctl00$ContentPlaceHolder1$txtMail"] = txtMail
 
 	txtPass := dom.Find("div input[name='ctl00$ContentPlaceHolder1$TxtPASS']").Eq(0).Text()
-	fmt.Printf("ctl00$ContentPlaceHolder1$TxtPASS=%v\n", txtPass)
-
 	m["ctl00$ContentPlaceHolder1$TxtPASS"] = txtPass
 
 	btnLogin, _ := dom.Find("div input[name='ctl00$ContentPlaceHolder1$btnLogin']").Eq(0).Attr("value")
-	fmt.Printf("ctl00$ContentPlaceHolder1$btnLogin=%v\n", btnLogin)
-
 	m["ctl00$ContentPlaceHolder1$btnLogin"] = btnLogin
+}
+
+func GetReserveEntryConfirmData(response *resty.Response, m map[string]string) {
+	dom, err := goquery.NewDocumentFromReader(strings.NewReader(string(response.Body())))
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+
+	__EVENTTARGET, _ := dom.Find("input#__EVENTTARGET").Eq(0).Attr("value")
+	m["__EVENTTARGET"] = __EVENTTARGET
+
+	__EVENTARGUMENT, _ := dom.Find("input#__EVENTARGUMENT").Eq(0).Attr("value")
+	m["__EVENTARGUMENT"] = __EVENTARGUMENT
+
+	__VIEWSTATE, _ := dom.Find("input#__VIEWSTATE").Eq(0).Attr("value")
+	m["__VIEWSTATE"] = __VIEWSTATE
+
+	__VIEWSTATEGENERATOR, _ := dom.Find("div input#__VIEWSTATEGENERATOR").Eq(0).Attr("value")
+	m["__VIEWSTATEGENERATOR"] = __VIEWSTATEGENERATOR
+
+	__EVENTVALIDATION, _ := dom.Find("div input#__EVENTVALIDATION").Eq(0).Attr("value")
+	m["__EVENTVALIDATION"] = __EVENTVALIDATION
+
+	txtKeyword := dom.Find("div input[name='ctl00$txtKeyword']").Eq(0).Text()
+	m["ctl00$txtKeyword"] = txtKeyword
+
 }
 
 func CommonGetRequest(client *resty.Client, url string, cookieStr string, title string, filename string) (*resty.Response, int, error) {
@@ -415,7 +393,6 @@ func AddCarRequestParam(response *resty.Response, request *resty.Request, m map[
 		"airport": m["airport"],
 		"ctl00$ContentPlaceHolder1$ucModalSelectAirport$btnConfirm": "OK",
 
-
 		// "ctl00$ddlAirport": airport,
 		// "ctl00$ddlLanguage": "2"
 		// "ctl00$txtKeyword": txtKeyword,
@@ -444,13 +421,11 @@ func LoginRequestParam(response *resty.Response, request *resty.Request, m map[s
 		"__VIEWSTATE":          m["__VIEWSTATE"],
 		"__EVENTVALIDATION":    m["__EVENTVALIDATION"],
 
-		"ctl00$ddlAirport":                  m["ctl00$ddlAirport"],
-		"ctl00$ddlLanguage":                 m["ctl00$ddlLanguage"],
-		"ctl00$txtKeyword":                  m["ctl00$txtKeyword"],
-		"ctl00$ContentPlaceHolder1$txtMail": "getway@moran.cn", //   "sdsdw@126.com"
-		"ctl00$ContentPlaceHolder1$TxtPASS": "moranjiuye1",     // "123123ab"
-		// "ctl00$ContentPlaceHolder1$txtMail":  "sdsdw@126.com", //"getway@moran.cn",    //"getway@moran.cn"
-		// "ctl00$ContentPlaceHolder1$TxtPASS":  "123123ab",      //"moranjiuye1",
+		"ctl00$ddlAirport":                   m["ctl00$ddlAirport"],
+		"ctl00$ddlLanguage":                  m["ctl00$ddlLanguage"],
+		"ctl00$txtKeyword":                   m["ctl00$txtKeyword"],
+		"ctl00$ContentPlaceHolder1$txtMail":  m["userName"],
+		"ctl00$ContentPlaceHolder1$TxtPASS":  m["password"],
 		"ctl00$ContentPlaceHolder1$btnLogin": m["ctl00$ContentPlaceHolder1$btnLogin"],
 	}
 
@@ -459,44 +434,16 @@ func LoginRequestParam(response *resty.Response, request *resty.Request, m map[s
 
 func PostCustomerInfoRequestParam(response *resty.Response, request *resty.Request,
 	m map[string]string) {
-	//dom, err := goquery.NewDocumentFromReader(rsp1.RawBody())
-	//fmt.Printf("body=%v", string(rsp1.Body()))
-	dom, err := goquery.NewDocumentFromReader(strings.NewReader(string(response.Body())))
-	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
-	}
-
-	__EVENTTARGET, _ := dom.Find("input#__EVENTTARGET").Eq(0).Attr("value")
-	fmt.Printf("__EVENTTARGET=%v\n", __EVENTTARGET)
-
-	__EVENTARGUMENT, _ := dom.Find("input#__EVENTARGUMENT").Eq(0).Attr("value")
-	fmt.Printf("__EVENTARGUMENT=%v\n", __EVENTARGUMENT)
-
-	//__LASTFOCUS, _ := dom.Find("input#__LASTFOCUS").Eq(0).Attr("value")
-	//fmt.Printf("__LASTFOCUS=%v\n", __LASTFOCUS)
-
-	__VIEWSTATE, _ := dom.Find("input#__VIEWSTATE").Eq(0).Attr("value")
-	fmt.Printf("__VIEWSTATE=%v\n", __VIEWSTATE)
-
-	__VIEWSTATEGENERATOR, _ := dom.Find("div input#__VIEWSTATEGENERATOR").Eq(0).Attr("value")
-	fmt.Printf("__VIEWSTATEGENERATOR=%v\n", __VIEWSTATEGENERATOR)
-
-	__EVENTVALIDATION, _ := dom.Find("div input#__EVENTVALIDATION").Eq(0).Attr("value")
-	fmt.Printf("__EVENTVALIDATION=%v\n", __EVENTVALIDATION)
-
-	txtKeyword := dom.Find("div input[name='ctl00$txtKeyword']").Eq(0).Text()
-	fmt.Printf("ctl00$txtKeyword=%v\n", txtKeyword)
-
 	form := map[string]string{
-		"__EVENTTARGET":   __EVENTTARGET,
-		"__EVENTARGUMENT": __EVENTARGUMENT,
-		//"__LASTFOCUS":          __LASTFOCUS,
-		"__VIEWSTATEGENERATOR": __VIEWSTATEGENERATOR,
-		"__VIEWSTATE":          __VIEWSTATE,
-		"__EVENTVALIDATION":    __EVENTVALIDATION,
 
-		"ctl00$txtKeyword": txtKeyword,
+		"__EVENTTARGET":   m["__EVENTTARGET"],
+		"__EVENTARGUMENT": m["__EVENTARGUMENT"],
+		//"__LASTFOCUS":          __LASTFOCUS,
+		"__VIEWSTATEGENERATOR": m["__VIEWSTATEGENERATOR"],
+		"__VIEWSTATE":          m["__VIEWSTATE"],
+		"__EVENTVALIDATION":    m["__EVENTVALIDATION"],
+
+		"ctl00$txtKeyword": m["ctl00$txtKeyword"],
 		"departureDate":    m["departureDate"],
 		"ctl00$ContentPlaceHolder1$ddlStrDateTime": m["ddlStrDateTime"],
 		"flightNumber": m["flightNumber"],
@@ -508,44 +455,16 @@ func PostCustomerInfoRequestParam(response *resty.Response, request *resty.Reque
 }
 
 func PostReserveEntryConfirmRequestParam(response *resty.Response, request *resty.Request, m map[string]string) {
-	//dom, err := goquery.NewDocumentFromReader(rsp1.RawBody())
-	//fmt.Printf("body=%v", string(rsp1.Body()))
-	dom, err := goquery.NewDocumentFromReader(strings.NewReader(string(response.Body())))
-	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
-	}
-
-	__EVENTTARGET, _ := dom.Find("input#__EVENTTARGET").Eq(0).Attr("value")
-	fmt.Printf("__EVENTTARGET=%v\n", __EVENTTARGET)
-
-	__EVENTARGUMENT, _ := dom.Find("input#__EVENTARGUMENT").Eq(0).Attr("value")
-	fmt.Printf("__EVENTARGUMENT=%v\n", __EVENTARGUMENT)
-
-	// __LASTFOCUS, _ := dom.Find("input#__LASTFOCUS").Eq(0).Attr("value")
-	// fmt.Printf("__LASTFOCUS=%v\n", __LASTFOCUS)
-
-	__VIEWSTATE, _ := dom.Find("input#__VIEWSTATE").Eq(0).Attr("value")
-	fmt.Printf("__VIEWSTATE=%v\n", __VIEWSTATE)
-
-	__VIEWSTATEGENERATOR, _ := dom.Find("div input#__VIEWSTATEGENERATOR").Eq(0).Attr("value")
-	fmt.Printf("__VIEWSTATEGENERATOR=%v\n", __VIEWSTATEGENERATOR)
-
-	__EVENTVALIDATION, _ := dom.Find("div input#__EVENTVALIDATION").Eq(0).Attr("value")
-	fmt.Printf("__EVENTVALIDATION=%v\n", __EVENTVALIDATION)
-
-	txtKeyword := dom.Find("div input[name='ctl00$txtKeyword']").Eq(0).Text()
-	fmt.Printf("ctl00$txtKeyword=%v\n", txtKeyword)
 
 	form := map[string]string{
-		"__EVENTTARGET":   __EVENTTARGET,
-		"__EVENTARGUMENT": __EVENTARGUMENT,
+		"__EVENTTARGET":   m["__EVENTTARGET"],
+		"__EVENTARGUMENT": m["__EVENTARGUMENT"],
 		// "__LASTFOCUS":          __LASTFOCUS,
-		"__VIEWSTATEGENERATOR": __VIEWSTATEGENERATOR,
-		"__VIEWSTATE":          __VIEWSTATE,
-		"__EVENTVALIDATION":    __EVENTVALIDATION,
+		"__VIEWSTATEGENERATOR": m["__VIEWSTATEGENERATOR"],
+		"__VIEWSTATE":          m["__VIEWSTATE"],
+		"__EVENTVALIDATION":    m["__EVENTVALIDATION"],
 
-		"ctl00$txtKeyword":                     txtKeyword,
+		"ctl00$txtKeyword":                     m["ctl00$txtKeyword"],
 		"ctl00$ContentPlaceHolder1$btnConfirm": "进行预约申请",
 	}
 
