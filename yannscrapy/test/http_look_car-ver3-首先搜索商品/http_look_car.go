@@ -31,50 +31,50 @@ func main() {
 
 	fmt.Printf("rsp=%v", rsp.Status())
 
-	////  添加商品
-	//cookieStr := CopyCookies(rsp)
-	//rsp, _, _ = AddItemToCar(client, url, rsp, cookieStr, "01")
-	//fmt.Printf("rsp=%v", rsp.Status())
+	//  添加商品
+	cookieStr := CopyCookies(rsp)
+	rsp, _, _ = AddItemToCar(client, url, rsp, cookieStr, "01")
+	fmt.Printf("rsp=%v", rsp.Status())
+
 	//
-	////
-	//// 查看购物车
+	// 查看购物车
+	cookieStr = CopyCookies(rsp)
+	url = "https://www.anadf.com/cn/Cart.aspx"
+	LookCar(client, url, cookieStr)
+
+	// 查看登录页面
+	url = "https://www.anadf.com/cn/MemberLogin.aspx?ReturnUrl=cart"
+	rsp, _, _ = GetMemberLogin(client, url, cookieStr)
+
+	// 登录
+	cookieStr = CopyCookies(rsp)
+	url = "https://www.anadf.com/cn/MemberLogin.aspx?ReturnUrl=cart"
+	rsp, _, _ = Login(client, url, rsp, cookieStr)
+
+	// 查看登录后预约页
+	cookieStr = CopyCookies(rsp)
+	url = "https://www.anadf.com/cn/ReserveEntry.aspx"
+	rsp, _, _ = GetReserveEntry(client, url, cookieStr)
+
+	// 提交预约信息
+	cookieStr = CopyCookies(rsp)
+	url = "https://www.anadf.com/cn/ReserveEntry.aspx"
+	rsp, _, _ = PostReserveEntry(client, url, rsp, cookieStr,
+		"20210821", "06", "NH001", "")
+
+	//  查看预约确认
+	cookieStr = CopyCookies(rsp)
+	url = "https://www.anadf.com/cn/ReserveEntryConfirm.aspx"
+	rsp, _, _ = GetReserveEntryConfirm(client, url, cookieStr)
+
+
+	// 提交预约确认
 	//cookieStr = CopyCookies(rsp)
-	//url = "https://www.anadf.com/cn/Cart.aspx"
-	//LookCar(client, url, cookieStr)
-	//
-	//// 查看登录页面
-	//url = "https://www.anadf.com/cn/MemberLogin.aspx?ReturnUrl=cart"
-	//rsp, _, _ = GetMemberLogin(client, url, cookieStr)
-	//
-	//// 登录
-	//cookieStr = CopyCookies(rsp)
-	//url = "https://www.anadf.com/cn/MemberLogin.aspx?ReturnUrl=cart"
-	//rsp, _, _ = Login(client, url, rsp, cookieStr)
-	//
-	//// 查看登录后预约页
-	//cookieStr = CopyCookies(rsp)
-	//url = "https://www.anadf.com/cn/ReserveEntry.aspx"
-	//rsp, _, _ = GetReserveEntry(client, url, cookieStr)
-	//
-	//// 提交预约信息
-	//cookieStr = CopyCookies(rsp)
-	//url = "https://www.anadf.com/cn/ReserveEntry.aspx"
-	//rsp, _, _ = PostReserveEntry(client, url, rsp, cookieStr,
-	//	"20210821", "06", "NH001", "")
-	//
-	////  查看预约确认
-	//cookieStr = CopyCookies(rsp)
-	//url = "https://www.anadf.com/cn/ReserveEntryConfirm.aspx"
-	//rsp, _, _ = GetReserveEntryConfirm(client, url, cookieStr)
-	//
-	//
-	//// 提交预约确认
-	////cookieStr = CopyCookies(rsp)
-	//url = "https://www.anadf.com/cn/ReserveEntryConfirm.aspx"
-	//PostReserveEntryConfirm(client, url, rsp, cookieStr)
-	//
-	//endTime := time.Now()
-	//fmt.Printf("end time:%v, cost:%vs\n", endTime.String(), time.Since(beginTime))
+	url = "https://www.anadf.com/cn/ReserveEntryConfirm.aspx"
+	PostReserveEntryConfirm(client, url, rsp, cookieStr)
+
+	endTime := time.Now()
+	fmt.Printf("end time:%v, cost:%vs\n", endTime.String(), time.Since(beginTime))
 
 }
 
@@ -439,9 +439,9 @@ func CreateClient() (*resty.Client, error) {
 	//ip, _ := utils.GetDefaultHealthProxyIp()
 	//fmt.Printf("ip=%v", ip)
 	//proxy, err := url.Parse(ip)
-	ip := "124.121.2.160"
-	//http.ProxyURL(proxy)
-	client.SetProxy(ip)
+	//ip := "124.121.2.160"
+	////http.ProxyURL(proxy)
+	//client.SetProxy(ip)
 
 	return client, nil
 }

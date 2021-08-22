@@ -3,7 +3,6 @@ package main
 import (
 	"crypto/tls"
 	"fmt"
-	"io/ioutil"
 	"net/http"
 	"net/http/cookiejar"
 	"os"
@@ -65,10 +64,10 @@ func main() {
 		m)
 	fmt.Printf("%v", rsp.StatusCode())
 
-	// 查看购物车
-	// cookieStr = CopyCookies(rsp)
-	// url = "https://www.anadf.com/cn/Cart.aspx"
-	// CommonGetRequest(client, url, cookieStr, "look car", "look-car.html")
+	//// 查看购物车
+	//cookieStr = CopyCookies(rsp)
+	//url = "https://www.anadf.com/cn/Cart.aspx"
+	//CommonGetRequest(client, url, cookieStr, "look car", "look-car.html")
 
 	// 查看预约页
 	cookieStr = CopyCookies(rsp)
@@ -77,7 +76,7 @@ func main() {
 
 	// 提交预约信息
 	GetLoginData(rsp, m)
-	m["departureDate"] = "20210823"
+	m["departureDate"] = "20210824"
 	m["ddlStrDateTime"] = "07"
 	m["flightNumber"] = "NH001"
 	m["txtVisitorName"] = ""
@@ -206,177 +205,8 @@ func CommonPostRequest(client *resty.Client, url string, lastRsp *resty.Response
 	return rsp, rsp.StatusCode(), err
 }
 
-func ChangeAirPortRequestParam(response *resty.Response, request *resty.Request,
-	m map[string]string) {
-	//dom, err := goquery.NewDocumentFromReader(rsp1.RawBody())
-	//fmt.Printf("body=%v", string(rsp1.Body()))
-	// dom, err := goquery.NewDocumentFromReader(strings.NewReader(string(response.Body())))
-	// if err != nil {
-	// 	fmt.Println(err)
-	// 	os.Exit(1)
-	// }
-
-	// __EVENTTARGET, _ := dom.Find("input#__EVENTTARGET").Eq(0).Attr("value")
-	// fmt.Printf("__EVENTTARGET=%v\n", __EVENTTARGET)
-
-	// __EVENTARGUMENT, _ := dom.Find("input#__EVENTARGUMENT").Eq(0).Attr("value")
-	// fmt.Printf("__EVENTARGUMENT=%v\n", __EVENTARGUMENT)
-
-	// __LASTFOCUS, _ := dom.Find("input#__LASTFOCUS").Eq(0).Attr("value")
-	// fmt.Printf("__LASTFOCUS=%v\n", __LASTFOCUS)
-
-	// __VIEWSTATE, _ := dom.Find("input#__VIEWSTATE").Eq(0).Attr("value")
-	// fmt.Printf("__VIEWSTATE=%v\n", __VIEWSTATE)
-
-	// __VIEWSTATEGENERATOR, _ := dom.Find("div input#__VIEWSTATEGENERATOR").Eq(0).Attr("value")
-	// fmt.Printf("__VIEWSTATEGENERATOR=%v\n", __VIEWSTATEGENERATOR)
-
-	// __EVENTVALIDATION, _ := dom.Find("div input#__EVENTVALIDATION").Eq(0).Attr("value")
-	// fmt.Printf("__EVENTVALIDATION=%v\n", __EVENTVALIDATION)
-
-	// ddlLanguage, _ := dom.Find("div select[name='ctl00$ddlLanguage'] option[selected=selected]").Eq(0).Attr("value")
-	// fmt.Printf("ctl00$ddlLanguage=%v\n", ddlLanguage)
-
-	// txtKeyword := dom.Find("div input[name='ctl00$txtKeyword']").Eq(0).Text()
-	// fmt.Printf("ctl00$txtKeyword=%v\n", txtKeyword)
-
-	// ChangeAirportBtnConfirm, _ := dom.Find("div input[name='ctl00$ucModalChangeAirport$btnConfirm']").Eq(0).Attr("value")
-	// fmt.Printf("ctl00$ucModalChangeAirport$btnConfirm=%v\n", ChangeAirportBtnConfirm)
-
-	form := map[string]string{
-		// "__EVENTTARGET":        m["__EVENTTARGET"],
-		"__EVENTTARGET":        m["__EVENTTARGET"],
-		"__EVENTARGUMENT":      m["__EVENTARGUMENT"],
-		"__LASTFOCUS":          m["__LASTFOCUS"],
-		"__VIEWSTATEGENERATOR": m["__VIEWSTATEGENERATOR"],
-		"__VIEWSTATE":          m["__VIEWSTATE"],
-		"__EVENTVALIDATION":    m["__EVENTVALIDATION"],
-
-		// "ctl00$ddlAirport": m["ctl00$ddlAirport"],
-		"ctl00$ddlAirport":  m["airport"],
-		"ctl00$ddlLanguage": m["ctl00$ddlLanguage"],
-		"ctl00$txtKeyword":  m["ctl00$txtKeyword"],
-
-		"ctl00$ucModalChangeAirport$btnConfirm": "变更机场",
-	}
-
-	request.SetFormData(form)
-}
-
-func ChangeLanguageRequestParam(response *resty.Response, request *resty.Request,
-	m map[string]string) {
-	dom, err := goquery.NewDocumentFromReader(strings.NewReader(string(response.Body())))
-	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
-	}
-
-	__EVENTTARGET, _ := dom.Find("input#__EVENTTARGET").Eq(0).Attr("value")
-	fmt.Printf("__EVENTTARGET=%v\n", __EVENTTARGET)
-
-	__EVENTARGUMENT, _ := dom.Find("input#__EVENTARGUMENT").Eq(0).Attr("value")
-	fmt.Printf("__EVENTARGUMENT=%v\n", __EVENTARGUMENT)
-
-	__LASTFOCUS, _ := dom.Find("input#__LASTFOCUS").Eq(0).Attr("value")
-	fmt.Printf("__LASTFOCUS=%v\n", __LASTFOCUS)
-
-	__VIEWSTATE, _ := dom.Find("input#__VIEWSTATE").Eq(0).Attr("value")
-	fmt.Printf("__VIEWSTATE=%v\n", __VIEWSTATE)
-
-	__VIEWSTATEGENERATOR, _ := dom.Find("div input#__VIEWSTATEGENERATOR").Eq(0).Attr("value")
-	fmt.Printf("__VIEWSTATEGENERATOR=%v\n", __VIEWSTATEGENERATOR)
-
-	__EVENTVALIDATION, _ := dom.Find("div input#__EVENTVALIDATION").Eq(0).Attr("value")
-	fmt.Printf("__EVENTVALIDATION=%v\n", __EVENTVALIDATION)
-
-	ddlLanguage, _ := dom.Find("div select[name='ctl00$ddlLanguage'] option[selected=selected]").Eq(0).Attr("value")
-	fmt.Printf("ctl00$ddlLanguage=%v\n", ddlLanguage)
-
-	txtKeyword := dom.Find("div input[name='ctl00$txtKeyword']").Eq(0).Text()
-	fmt.Printf("ctl00$txtKeyword=%v\n", txtKeyword)
-
-	ChangeAirportBtnConfirm, _ := dom.Find("div input[name='ctl00$ucModalChangeAirport$btnConfirm']").Eq(0).Attr("value")
-	fmt.Printf("ctl00$ucModalChangeAirport$btnConfirm=%v\n", ChangeAirportBtnConfirm)
-
-	form := map[string]string{
-		"__EVENTTARGET":        "ctl00$ddlLanguage",
-		"__EVENTARGUMENT":      __EVENTARGUMENT,
-		"__LASTFOCUS":          __LASTFOCUS,
-		"__VIEWSTATEGENERATOR": __VIEWSTATEGENERATOR,
-		"__VIEWSTATE":          __VIEWSTATE,
-		"__EVENTVALIDATION":    __EVENTVALIDATION,
-		"ctl00$ddlAirport":     m["airport"],
-		"ctl00$ddlLanguage":    m["language"],
-		"ctl00$txtKeyword":     txtKeyword,
-	}
-
-	request.SetFormData(form)
-}
-
 func AddCarRequestParam(response *resty.Response, request *resty.Request, m map[string]string) {
-	// dom, err := goquery.NewDocumentFromReader(strings.NewReader(string(response.Body())))
-	// if err != nil {
-	// 	fmt.Println(err)
-	// 	os.Exit(1)
-	// }
-
-	// __EVENTTARGET, _ := dom.Find("input#__EVENTTARGET").Eq(0).Attr("value")
-	// fmt.Printf("__EVENTTARGET=%v\n", __EVENTTARGET)
-
-	// m["__EVENTTARGET"] = __EVENTTARGET
-
-	// __EVENTARGUMENT, _ := dom.Find("input#__EVENTARGUMENT").Eq(0).Attr("value")
-	// fmt.Printf("__EVENTARGUMENT=%v\n", __EVENTARGUMENT)
-
-	// m["__EVENTARGUMENT"] = __EVENTARGUMENT
-
-	// __LASTFOCUS, _ := dom.Find("input#__LASTFOCUS").Eq(0).Attr("value")
-	// fmt.Printf("__LASTFOCUS=%v\n", __LASTFOCUS)
-
-	// m["__LASTFOCUS"] = __LASTFOCUS
-
-	// __VIEWSTATE, _ := dom.Find("input#__VIEWSTATE").Eq(0).Attr("value")
-	// fmt.Printf("__VIEWSTATE=%v\n", __VIEWSTATE)
-
-	// m["__VIEWSTATE"] = __VIEWSTATE
-
-	// __VIEWSTATEGENERATOR, _ := dom.Find("div input#__VIEWSTATEGENERATOR").Eq(0).Attr("value")
-	// fmt.Printf("__VIEWSTATEGENERATOR=%v\n", __VIEWSTATEGENERATOR)
-
-	// m["__VIEWSTATEGENERATOR"] = __VIEWSTATEGENERATOR
-
-	// __EVENTVALIDATION, _ := dom.Find("div input#__EVENTVALIDATION").Eq(0).Attr("value")
-	// fmt.Printf("__EVENTVALIDATION=%v\n", __EVENTVALIDATION)
-
-	// m["__EVENTVALIDATION"] = __EVENTVALIDATION
-
-	// ddlAirport, _ := dom.Find("div select[name='ctl00$ddlAirport'] option[selected=selected]").Eq(0).Attr("value")
-	// fmt.Printf("ctl00$ddlAirport=%v\n", ddlAirport)
-
-	// m["ctl00$ddlAirport"] = ddlAirport
-
-	// ddlLanguage, _ := dom.Find("div select[name='ctl00$ddlLanguage'] option[selected=selected]").Eq(0).Attr("value")
-	// fmt.Printf("ctl00$ddlLanguage=%v\n", ddlLanguage)
-
-	// m["ctl00$ddlLanguage"] = ddlLanguage
-
-	// txtKeyword := dom.Find("div input[name='ctl00$txtKeyword']").Eq(0).Text()
-	// fmt.Printf("ctl00$txtKeyword=%v\n", txtKeyword)
-
-	// m["ctl00$txtKeyword"] = txtKeyword
-
 	form := map[string]string{
-		// "__EVENTTARGET":        __EVENTTARGET,
-		// "__EVENTARGUMENT":      __EVENTARGUMENT,
-		// "__LASTFOCUS":          __LASTFOCUS,
-		// "__VIEWSTATEGENERATOR": __VIEWSTATEGENERATOR,
-		// "__VIEWSTATE":          __VIEWSTATE,
-		// "__EVENTVALIDATION":    __EVENTVALIDATION,
-
-		// "ctl00$ddlAirport":  ddlAirport,
-		// "ctl00$ddlLanguage": ddlLanguage,
-		// "ctl00$txtKeyword":  txtKeyword,
-
 		"__EVENTTARGET": m["__EVENTTARGET"],
 		//"__EVENTTARGET":        "ctl00$ContentPlaceHolder1$BtnAddCart",
 		"__EVENTARGUMENT":      m["__EVENTARGUMENT"],
@@ -392,19 +222,6 @@ func AddCarRequestParam(response *resty.Response, request *resty.Request, m map[
 		"NUM":     m["NUM"],
 		"airport": m["airport"],
 		"ctl00$ContentPlaceHolder1$ucModalSelectAirport$btnConfirm": "OK",
-
-		// "ctl00$ddlAirport": airport,
-		// "ctl00$ddlLanguage": "2"
-		// "ctl00$txtKeyword": txtKeyword,
-		// "NUM": "1"
-		// "__EVENTTARGET":   "ctl00$ContentPlaceHolder1$BtnAddCart",
-		// "__EVENTARGUMENT": "",
-		// "__LASTFOCUS":     "",
-		// "__VIEWSTATE":     "",
-
-		// "__VIEWSTATEGENERATOR": "E2F80F2D",
-		// "__EVENTVALIDATION":    "",
-		// "__ASYNCPOST":          "true",
 	}
 
 	request.SetFormData(form)
@@ -481,14 +298,6 @@ func CreateClient() (*resty.Client, error) {
 		panic(err)
 	}
 	client.GetClient().Jar = jar
-
-	//ip, _ := utils.GetDefaultHealthProxyIp()
-	//fmt.Printf("ip=%v", ip)
-	//proxy, err := url.Parse(ip)
-	//http.ProxyURL(proxy)
-	// ip := "124.121.2.160"
-	// client.SetProxy(ip)
-
 	return client, nil
 }
 
@@ -508,7 +317,6 @@ func PostRequest(request *resty.Request,
 
 	fmt.Printf("--------------------------------------\n")
 	fmt.Printf("--------------------------------------\n")
-	//fmt.Printf("reqeust:%v\n",request.Body)
 	fmt.Printf("post request header:\n")
 	for k, v := range request.Header {
 		fmt.Printf("%s: %v\n", k, v)
@@ -538,7 +346,6 @@ func PostRequest(request *resty.Request,
 	}
 	fmt.Printf("----------post response cookies end\n")
 
-	ioutil.WriteFile(saveFile, resp.Body(), 0600)
 	return resp, nil
 }
 
@@ -566,8 +373,6 @@ func GetRequest(request *resty.Request, url string, header map[string]string, sa
 		fmt.Printf("%v,%v\n", i, cookie.String())
 	}
 	fmt.Printf("----------get response cookies end\n")
-
-	ioutil.WriteFile(saveFile, resp.Body(), 0600)
 	return resp, nil
 }
 
@@ -595,17 +400,6 @@ func CopyCookies(response *resty.Response) string {
 	return cookieStr
 }
 
-func TransantCookies(cookies []*http.Cookie) string {
-	var cookieStr string
-	for _, c := range cookies {
-		if cookieStr == "" {
-			cookieStr = c.Name + "=" + c.Value
-		} else {
-			cookieStr = cookieStr + ";" + c.Name + "=" + c.Value
-		}
-	}
-	return cookieStr
-}
 
 func CommonGetHeader() map[string]string {
 	var header = map[string]string{

@@ -1,9 +1,8 @@
 package main
 
 import (
-	"yannscrapy/logging"
-
 	"github.com/syndtr/goleveldb/leveldb"
+	"yannscrapy/logging"
 )
 
 func main() {
@@ -59,4 +58,6 @@ func main() {
 	}
 	iter.Release()
 	err = iter.Error()
+
+
 }

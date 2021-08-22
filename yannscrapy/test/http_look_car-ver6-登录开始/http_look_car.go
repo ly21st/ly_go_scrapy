@@ -43,6 +43,11 @@ func main() {
 
 	beforeAddItemTime := time.Now()
 
+	url = "https://www.anadf.com/cn/MyPage.aspx"
+	rsp, _, _ = CommonGetRequest(client, url, "", "get my page", "mypage.html")
+
+	return
+
 	// 搜索商品
 	url = "https://www.anadf.com/cn/ItemDetail.aspx?S_CD=4020102654"
 	rsp, _, _ = CommonGetRequest(client, url, "", "search item", "item-4020102654.html")

@@ -60,7 +60,7 @@ func main() {
 	cookieStr = CopyCookies(rsp)
 	url = "https://www.anadf.com/cn/ReserveEntry.aspx"
 	rsp, _, _ = PostReserveEntry(client, url, rsp, cookieStr,
-		"20210821", "06", "NH001", "")
+		"20210824", "06", "NH001", "")
 
 	//  查看预约确认
 	cookieStr = CopyCookies(rsp)
