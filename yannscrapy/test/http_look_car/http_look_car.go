@@ -400,7 +400,6 @@ func CopyCookies(response *resty.Response) string {
 	return cookieStr
 }
 
-
 func CommonGetHeader() map[string]string {
 	var header = map[string]string{
 

@@ -65,6 +65,8 @@ func main() {
 		m)
 	fmt.Printf("%v", rsp.StatusCode())
 
+	return
+
 	//// 查看购物车
 	//cookieStr = CopyCookies(rsp)
 	//url = "https://www.anadf.com/cn/Cart.aspx"
@@ -594,7 +596,6 @@ func CopyCookies(response *resty.Response) string {
 
 	return cookieStr
 }
-
 
 func CommonGetHeader() map[string]string {
 	var header = map[string]string{
