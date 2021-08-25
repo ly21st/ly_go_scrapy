@@ -12,6 +12,7 @@ require (
 	github.com/fsnotify/fsnotify v1.4.9 // indirect
 	github.com/garyburd/redigo v1.6.2
 	github.com/gin-gonic/gin v1.7.3
+	github.com/go-resty/resty/v2 v2.6.0
 	github.com/gobwas/glob v0.2.3 // indirect
 	github.com/gocolly/colly v1.2.0
 	github.com/golang/protobuf v1.5.2 // indirect
