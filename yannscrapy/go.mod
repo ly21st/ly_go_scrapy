@@ -21,6 +21,7 @@ require (
 	github.com/jinzhu/gorm v1.9.16
 	github.com/kennygrant/sanitize v1.2.4 // indirect
 	github.com/natefinch/lumberjack v2.0.0+incompatible
+	github.com/pkg/errors v0.8.1
 	github.com/saintfish/chardet v0.0.0-20120816061221-3af4cd4741ca // indirect
 	github.com/smartystreets/goconvey v1.6.4 // indirect
 	github.com/swaggo/files v0.0.0-20210815190702-a29dd2bc99b2

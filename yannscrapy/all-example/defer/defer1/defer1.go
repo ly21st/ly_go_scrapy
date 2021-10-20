@@ -4,7 +4,7 @@ import "fmt"
 
 func main() {
 	a := f()
-	fmt.Println(a)
+	fmt.Printf("a=%v\n", a)
 }
 
 func f() (result int) {
